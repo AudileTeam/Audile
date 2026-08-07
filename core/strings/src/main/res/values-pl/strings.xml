@@ -310,4 +310,10 @@
     <string name="export_export">Eksportuj</string>
     <string name="export_in_progress">Eksportowanie…</string>
     <string name="export_csv_result_success">Plik CSV został pomyślnie utworzony!</string>
+    <string name="app_shortcut_show_floating_button_short">Przycisk</string>
+    <string name="app_shortcut_show_floating_button_long">Pływający przycisk</string>
+    <string name="pref_title_floating_button">Pływający przycisk</string>
+    <string name="qr_code">Kod QR</string>
+    <string name="track_info_title_format_isrc">%s:</string>
+    <string name="about_pref_title_donation">Datek</string>
 </resources>
