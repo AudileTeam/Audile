@@ -52,7 +52,7 @@
     <string name="result_message_recognition_scheduled">Die Audioaufnahme wurde gespeichert. Wenn du wieder Online bist, wird die App versuchen den Song zu identifizieren</string>
     <string name="result_title_recording_error">Aufnahmefehler</string>
     <string name="result_message_recording_error">Ein Fehler trat während der Audioaufnahme auf</string>
-    <string name="result_title_bad_network_response">Ungültige Netzwerkantwort</string>
+    <string name="result_title_bad_network_response">Netzwerkanfrage fehlgeschlagen</string>
     <string name="result_message_bad_network_response">Ein Fehler trat während der Internetanfrage auf</string>
     <string name="result_title_auth_error">Authentifizierungsfehler</string>
     <string name="result_message_auth_error">Bitte überprüfe deine Anmeldedaten des ausgewählten Erkennungsdienstes und versuche es erneut</string>
@@ -149,7 +149,7 @@
     <string name="audio_capture_mode_device">Geräte-Audio</string>
     <string name="pref_subtitle_fallback_policy">Wähle alternative Aktionen nach nicht erfolgreichem Erkennungen</string>
     <string name="fallback_policy_dialog_title">Alternativregel</string>
-    <string name="fallback_action_save_recording_and_retry">Speichere die Aufnahme und starte weiteren Versuch</string>
+    <string name="fallback_action_save_recording_and_retry">Speichere die Aufnahme und starte einen weiteren Versuch</string>
     <string name="fallback_action_save_recording">Speichere die Aufnahme</string>
     <string name="fallback_action_ignore">Ignorieren</string>
     <string name="fallback_trigger_bad_connection">Schlechte Internetverbindung</string>
@@ -216,7 +216,7 @@
     <string name="copied">Kopiert</string>
     <string name="permissions">Berechtigungen</string>
     <string name="permission_rationale_record_audio">Um Musikerkennung durchzuführen, braucht diese App Zugriff zu deinem Mikrofon.</string>
-    <string name="empty_recognition_queue_subtitle">Im Offline–Modus oder bei Fehlern kann eine Erkennung entsprechend der gewählten Alternativmöglichkeit zum Warten angehängt werden</string>
+    <string name="empty_recognition_queue_subtitle">Im Offline–Modus oder bei Fehlern kann eine Erkennung entsprechend der gewählten Alternativmöglichkeit zur Warteschlange angehängt werden</string>
     <string name="recognition_action_rename">Umbenennen</string>
     <string name="select_all">Alles auswählen</string>
     <string name="delete_recognitions_title">Lösche Erkennungen</string>
@@ -237,7 +237,7 @@
     <string name="recognition_provider_dialog_message">Wähle den Erkennungs-Anbieter:</string>
     <string name="fallback_trigger_no_matches_found">Keine Übereinstimmungen gefunden</string>
     <string name="recognition_provider_dialog_title">Anbieter</string>
-    <string name="audd_help_dialog_message">AudD ist ein kostenpflichtiger Dienst, welcher eine Möglichkeit zur Probezeit von 14 Tagen bietet. Um den Dienst zu nutzen, musst du ein Nutzerkonto erstellen und deinen privaten API-Schlüssel erhalten. <![CDATA[<a href="%1$s">Melde dich an</a>]]> falls du noch keinen hast.</string>
+    <string name="audd_help_dialog_message">AudD ist ein kostenpflichtiger Dienst, welcher eine Probezeitraum von 14 Tagen bietet. Um den Dienst zu nutzen, musst du ein Nutzerkonto erstellen und deinen privaten API-Schlüssel erhalten. <![CDATA[<a href="%1$s">Melde dich an</a>]]> falls du noch keinen hast.</string>
     <string name="acr_cloud_help_dialog_message">ACRCloud ist ein kostenpflichtiger Dienst, welcher eine Probezeit und limitiertes Nutzen zu Entwicklungszwecken bietet. Um diesen Dienst zu nutze, musst du ein Nutzerkonto erstellen und ein Projekt registrieren. Solltest du auf irgendwelche Probleme stoßen, schaue dir bitte <![CDATA[<a href="%1$s">diesen Leitfaden</a>]]> an.</string>
     <string name="acr_cloud_help_dialog_step3">Wähle eine Audio-Engine. Die Option \"Audio fingerprinting\" ist die präziseste für die gewöhnliche Nutzung</string>
     <string name="theme_mode_follow_system">System folgen</string>
@@ -324,9 +324,13 @@
     <string name="export_track_field_favorite">Favorit</string>
     <string name="export_track_field_artwork_link">Albums-Cover</string>
     <string name="export_export">Export</string>
-    <string name="export_in_progress">Exportieren..</string>
+    <string name="export_in_progress">Exportieren…</string>
     <string name="export_csv_result_success">CSV-Datei erfolgreich erstellt!</string>
     <string name="about_pref_title_donation">Spende</string>
     <string name="about_pref_subtitle_donation">Das Projekt unterstützen</string>
     <string name="notification_title_match_found">Übereinstimmung gefunden!</string>
+    <string name="pref_subtitle_floating_button">Einen schwebenden Button über andere Apps für schnellen Zugriff auf Erkennung anzeigen</string>
+    <string name="export_only_favorites_tracks">Nur Favoriten exportieren</string>
+    <string name="export_write_csv_header">CSV-Kopfzeile einbeziehen</string>
+    <string name="about_pref_donation_message">Diese App ist völlig kostenlos. Sie kommt ohne Werbung oder andere Formen der Monetarisierung. Um die laufende Entwicklung zu unterstützen oder einfach Dank zu sagen, wird gerne eine Spende angenommen. Vielen Dank für Ihre Unterstützung!</string>
 </resources>
