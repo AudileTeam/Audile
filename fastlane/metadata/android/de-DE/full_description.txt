@@ -1,0 +1,10 @@
+<b>Audile</b> ist eine Open-Source-Musikerkennungs-App, die Ihnen helfen kann, schnell und genau einen Musiktitel zu identifizieren, der in Ihrer Nähe spielt.
+Die App integriert AudD, ACRCloud und Shazam zur Songidentifikation und verwendet Odesli, um zusätzliche plattformspezifische Titellinks abzurufen.
+
+<b>Funktionen:</b>
+
+<b>Erkennung</b> - Mit Audile können Sie die Songerkennung mit einem Klick ausführen. Wenn es keine Internetverbindung gibt, speichert die App die Aufnahme, und der Erkennungsprozess wird wieder aufgenommen, wenn Sie wieder online sind. Sie können das Standardverhalten für erfolglose Erkennung (kein Internet, keine Übereinstimmung, anderer Fehler) über die Präferenzen anpassen.
+<b>Hintergrundnutzung</b> - Verwenden Sie die App nahtlos aus der Benachrichtigung, dem Home-Bildschirm-Widget, dem schwebenden Button, oder den Schnelleinstellungen. Verwalten Sie den Erkennungsprozess und erhalten Sie Titel-Informationen, ohne die App zu starten.
+<b>Über Titel</b> - Nach erfolgreicher Erkennung informiert die App über den Titel, einschließlich Name, Künstler, Album, Veröffentlichungsjahr, Artwork, Texte und Links zum Titel auf populären Musik-Diensten.
+<b>Bibliothek</b> - Alle erkannten Titel werden in der App-Bibliothek gespeichert. Sie können die Liedliste filtern, eine Favoritensammlung erstellen, Titel suchen oder Titel löschen.
+<b>Präferenzen</b> - Die App bietet verschiedene Optionen, um ihr Verhalten und Aussehen anzupassen, die vom Einstellungen-Bildschirm zugänglich sind.
