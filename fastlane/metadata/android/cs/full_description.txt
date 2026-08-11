@@ -1,10 +1,10 @@
-<b>Audile</b> je open-source aplikace pro rozpoznávání hudby, která vám pomůže rychle a přesně identifikovat hudební skladbu přehrávanou ve vašem okolí.
-Aplikace integruje služby AudD, ACRCloud a Shazam k identifikaci písní a používá službu Odesli k získání dalších odkazů na skladby specifických pro platformu.
+<b>Audile</b> je open-source aplikace pro rozpoznávání hudby, která vám pomůže rychle a přesně identifikovat skladbu hrající ve vašem okolí.
+Aplikace integruje služby AudD, ACRCloud a Shazam pro identifikaci písní a používá Odesli k získání dalších odkazů na specifické platformy.
 
 <b>Funkce:</b>
 
-<b>Rozpoznávání</b> - Audile umožňuje rozpoznávat skladby jedním klepnutím. Aplikace uloží nahrávku, pokud není k dispozici internet, a proces rozpoznávání se provede, jakmile se vrátíte online. Výchozí chování při neúspěšném rozpoznávání (bez internetu, bez shody, další neúspěch) můžete přizpůsobit prostřednictvím předvoleb.
-<b>Použití na pozadí</b> - Aplikaci můžete používat plynule z nabídky oznámení, widgetu na domovské stránce nebo dlaždice rychlých nastavení. Spravujte proces rozpoznávání a získejte informace o stopě bez spuštění aplikace.
-<b>Informace o skladbě</b> - v případě úspěšného rozpoznání se zobrazí informace o skladbě, například název, interpret, album a rok vydání, obal, odkazy na tuto skladbu v populárních hudebních službách a text skladby.
-<b>Knihovna</b> - všechny rozpoznané skladby jsou uloženy v knihovně aplikace. Seznam skladeb můžete filtrovat, vytvářet kolekci oblíbených skladeb, vyhledávat skladby nebo je odstraňovat.
-<b>Předvolby</b> - aplikace má řadu možností pro přizpůsobení svého chování a vzhledu, které najdete v nastavení.
+<b>Rozpoznávání</b> – Audile vám umožňuje provádět rozpoznávání skladeb jedním kliknutím. Pokud není k dispozici připojení k internetu, aplikace záznam uloží a proces rozpoznávání se obnoví, jakmile se znovu připojíte. Výchozí chování při neúspěšném rozpoznání (žádný internet, žádná shoda, jiné selhání) si můžete přizpůsobit v předvolbách.
+<b>Používání na pozadí</b> – Používejte aplikaci plynule z oznamovacího panelu, widgetu na domovské obrazovce, plovoucího tlačítka nebo dlaždice rychlého nastavení. Spravujte proces rozpoznávání a získávejte informace o skladbách, aniž byste aplikaci museli spouštět.
+<b>Informace o skladbě</b> – Po úspěšném rozpoznání aplikace poskytne informace o skladbě, včetně názvu, umělce, alba, roku vydání, přebalu, textu a odkazů na skladbu v populárních hudebních službách.
+<b>Knihovna</b> – Všechny rozpoznané skladby se ukládají do knihovny aplikace. Seznam skladeb můžete filtrovat, vytvořit si sbírku oblíbených, vyhledávat ve skladbách nebo skladby mazat.
+<b>Předvolby</b> – Aplikace nabízí různé možnosti přizpůsobení svého chování a vzhledu, které jsou přístupné z obrazovky nastavení.
