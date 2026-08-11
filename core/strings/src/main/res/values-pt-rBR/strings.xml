@@ -76,7 +76,7 @@
     <string name="result_title_unknown_error">Erro desconhecido</string>
     <!-- Library screen -->
     <string name="library">Biblioteca</string>
-    <string name="empty_library_title">Nenhuma faixa identificada</string>
+    <string name="empty_library_title">Nenhuma música identificada</string>
     <string name="empty_library_subtitle">Suas faixas favoritas e recentemente reconhecidas aparecerão aqui</string>
     <string name="library_menu_mark_all_tracks_as_viewed">Marcar todas como visualizadas</string>
     <!--    This label must be no longer than 5 characters, otherwise leave it without translation or replace it with "+1"-->
@@ -98,7 +98,7 @@
     <string name="library_search">Pesquisar faixa</string>
     <string name="library_search_hint">Pesquisar faixa…</string>
     <string name="no_tracks_match_filter">Nenhuma faixa foi encontrada com os filtros selecionados</string>
-    <string name="no_tracks_match_search">Nenhuma faixa encontrada foi com as condições de pesquisa</string>
+    <string name="no_tracks_match_search">Nenhuma faixa foi encontrada com as condições de pesquisa</string>
     <string name="delete_tracks_title">Apagar faixas</string>
     <string name="delete_tracks_message">Tem certeza que deseja apagar as faixas selecionadas? Este processo não pode ser desfeito.</string>
     <!-- Queue screen -->
@@ -131,7 +131,7 @@
     <string name="unmark_track_as_favorite">Remover dos favoritos</string>
     <string name="show_track">Mostrar faixa</string>
     <string name="show_lyrics">Mostrar letras</string>
-    <string name="web_search">Pesquisa web</string>
+    <string name="web_search">Pesquisa na web</string>
     <string name="web">Web</string>
     <string name="search">Pesquisar</string>
     <string name="search_for">Pesquisar por</string>
@@ -185,7 +185,7 @@
     <string name="recognition_provider_dialog_format_auth">Autenticação %s:</string>
     <string name="audd_help_dialog_message">O AudD é um serviço pago que oferece um período de teste grátis de 14 dias. Para usar este serviço, você precisa criar uma conta e obter seu token de API privado. <![CDATA[<a href="%1$s">Registre-se</a>]]> se você ainda não tiver um.</string>
     <string name="audd_help_dialog_message_empty_token">Você pode usar testar o serviço para propósitos de teste sem fornecer o token, mas saiba que isso limitará o número de reconhecimentos diários.</string>
-    <string name="acr_cloud_help_dialog_message">ACRCloud é um serviço pago que oferece a opção de um período de teste grátis e uso limitado para motivos de desenvolvimento. Para usar este serviço, você precisa criar uma conta e cadastrar um projeto. Se você ter alguma dificuldade, consulte <![CDATA[<a href="%1$s">este guia</a>]]>.</string>
+    <string name="acr_cloud_help_dialog_message">ACRCloud é um serviço pago que oferece a opção de um período de teste grátis e uso limitado para motivos de desenvolvimento. Para usar este serviço, você precisa criar uma conta e cadastrar um projeto. Se você tiver alguma dificuldade, consulte <![CDATA[<a href="%1$s">este guia</a>]]>.</string>
     <string name="acr_cloud_help_dialog_steps_title">Preste atenção nestes passos:</string>
     <string name="acr_cloud_help_dialog_step1">Selecione a região geográfica mais perto de você para minimizar latência da internet</string>
     <string name="acr_cloud_help_dialog_step2">Configure a fonte de áudio para \"Áudio gravado\"</string>
@@ -218,7 +218,7 @@
     <string name="vibration_feedback_dialog_vibrate_on_tap">Vibrar ao toque</string>
     <string name="vibration_feedback_dialog_vibrate_on_result">Vibrar ao obter resultado</string>
     <string name="pref_title_about_app">Sobre</string>
-    <string name="about_pref_group_powered_by">Feito possível por</string>
+    <string name="about_pref_group_powered_by">Feito por</string>
     <string name="about_purpose_recognition_service">Fornece identificação de faixas e metadados primários</string>
     <string name="about_purpose_track_links_service">Fornece links adicionais de faixa de plataformas específicas</string>
     <string name="about_pref_title_github_repo">Repositório do GitHub</string>
@@ -261,7 +261,7 @@
     <string name="about_pref_subtitle_license">O Audile é licenciado sob a GNU GPLv3 ou posterior</string>
     <string name="about_pref_title_third_licenses">Licenças de terceiros</string>
     <string name="crash_dialog_title">O Audile falhou</string>
-    <string name="crash_dialog_message">Um erro inesperado ocorreu, fazendo com o que o app parasse. Você gostaria de enviar um relatório de erros via e-mail para ajudar nos a resolver o problema?</string>
+    <string name="crash_dialog_message">Um erro inesperado ocorreu, fazendo com o que o app parasse. Você gostaria de enviar um relatório de erros via e-mail para nos ajudar a resolver o problema?</string>
     <string name="crash_dialog_comment_prompt">Você pode adicionar informações extras aqui:</string>
     <string name="crash_dialog_button_send">Enviar</string>
     <string name="crash_dialog_button_cancel">Cancelar</string>
@@ -340,4 +340,13 @@
     <string name="pref_title_prerecording_buffer">Buffer pré-gravação</string>
     <string name="pref_subtitle_prerecording_buffer">Gravar um buffer de áudio curto enquanto o app está aberto para reconhecimento mais rápido</string>
     <string name="button_retry_recognition_hint">Segure para repetir o reconhecimento</string>
+    <string name="app_shortcut_show_floating_button_short">Botão</string>
+    <string name="app_shortcut_show_floating_button_long">Botão flutuante</string>
+    <string name="qr_code">Código QR</string>
+    <string name="file_manager_not_found_toast">Gerenciador de arquivos não encontrado</string>
+    <string name="pref_title_floating_button">Botão flutuante</string>
+    <string name="pref_subtitle_floating_button">Sobrepor um botão flutuante em outros aplicativos para acesso rápido ao reconhecimento</string>
+    <string name="about_pref_title_donation">Donativo</string>
+    <string name="about_pref_subtitle_donation">Apoie o projeto</string>
+    <string name="about_pref_donation_message">Este aplicativo é totalmente gratuito. Ele vem sem quaisquer anúncios ou outras formas de monetização comercial. Para apoiar o desenvolvimento contínuo ou simplesmente agradecer, considere fazer um donativo. Obrigado pelo vosso apoio!</string>
 </resources>
