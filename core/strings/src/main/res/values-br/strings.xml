@@ -10,7 +10,7 @@
     <string name="widget_listening_subtitle_extra_time">O klask ur wech c\'hoazh</string>
     <string name="recognition_widget_description">Anaout ur ganaouenn dindan ur c\'hlik</string>
     <string name="notification_tap_to_recognize">Pouezit evit anaout</string>
-    <string name="notification_tap_to_recognize_subtitle">Anaout ar sonerezh e arloadoù all</string>
+    <string name="notification_tap_to_recognize_subtitle">Anaout ar sonerezh e ne vern peseurt arload all digor</string>
     <string name="notification_listening">O selaou</string>
     <string name="notification_listening_subtitle">Gortozit mar plij</string>
     <string name="notification_listening_subtitle_extra_time">O klask ur wech c\'hoazh</string>
@@ -209,4 +209,5 @@
     <string name="pref_title_restore">Adsevel</string>
     <string name="restore_dialog_button_restore">Adsevel</string>
     <string name="backup_entry_preferences">Arventennoù</string>
+    <string name="app_shortcut_show_floating_button_short">Bouton</string>
 </resources>
