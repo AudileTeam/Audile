@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="main_screen_tap_to_recognize">انقر للتعرف</string>
-    <string name="main_screen_listening">يجري الاستماع</string>
-    <string name="main_screen_listening_extra_time">المحاولة مرة أخرى</string>
+    <string name="main_screen_listening">الاستماع جارٍ</string>
+    <string name="main_screen_listening_extra_time">لنحاول مرةً أخرى</string>
     <string name="widget_tap_to_recognize">انقر للتعرف</string>
     <string name="widget_tap_to_try_again">انقر للمحاولة مرة أخرى</string>
     <string name="widget_listening">يجري الاستماع</string>
