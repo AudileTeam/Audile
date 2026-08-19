@@ -81,7 +81,7 @@
     <string name="result_title_auth_error">Ошибка аутентификации</string>
     <string name="result_message_auth_error">Пожалуйста, проверьте ваши учетные данные для выбранного сервиса распознавания и повторите попытку</string>
     <string name="result_title_service_usage_limited">Достигнут лимит запросов</string>
-    <string name="result_message_service_usage_limited">Использование вами сервиса достигло лимита. Пожалуйста, проверьте свой план или повторите попытку позже</string>
+    <string name="result_message_service_usage_limited">Вы исчерпали лимит запросов. Пожалуйста, проверьте свой тарифный план или повторите попытку позже</string>
     <string name="result_title_internal_error">Внутренняя ошибка</string>
     <string name="result_message_internal_error">Произошла внутренняя ошибка</string>
     <string name="result_title_unknown_error">Неизвестная ошибка</string>
@@ -90,7 +90,7 @@
     <string name="empty_library_title">Нет распознанных треков</string>
     <string name="empty_library_subtitle">Здесь будут отображаться недавно распознанные и избранные треки</string>
     <string name="library_menu_mark_all_tracks_as_viewed">Отметить все как просмотренные</string>
-    <string name="format_amount_of_new_tracks">Новыe треки: %s</string>
+    <string name="format_amount_of_new_tracks">Новые треки: %s</string>
     <string name="filters">Фильтры</string>
     <string name="filter_favorites">Избранные</string>
     <string name="filter_all">Все</string>
@@ -166,8 +166,8 @@
     <string name="share_music_services_links">Ссылки на музыкальные сервисы</string>
     <string name="track_not_found_title">Трек не найден</string>
     <string name="track_not_found_message">Что-то пошло не так, возможно, трек был удален или неправильно изменен</string>
-    <string name="lyrics_start_autoscroll">Запустить авто прокрутку</string>
-    <string name="lyrics_stop_autoscroll">Остановить авто прокрутку</string>
+    <string name="lyrics_start_autoscroll">Запустить автопрокрутку</string>
+    <string name="lyrics_stop_autoscroll">Остановить автопрокрутку</string>
     <string name="text_style">Стиль текста</string>
     <string name="font_size">Размер шрифта</string>
     <string name="font_size_small">Маленький</string>
