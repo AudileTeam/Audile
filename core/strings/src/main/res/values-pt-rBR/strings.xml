@@ -40,7 +40,7 @@
     <string name="copied">Copiado</string>
     <string name="share">Compartilhar</string>
     <string name="web_browser_not_found_toast">Navegador web não encontrado</string>
-    <string name="cannot_share_toast">Não foi possível encontrar nenhum app para compartilhar</string>
+    <string name="cannot_share_toast">Não foi possível encontrar nenhum app para compartilhar isso</string>
     <string name="help">Ajuda</string>
     <string name="show_more">Mostrar mais</string>
     <string name="show_less">Mostrar menos</string>
