@@ -222,7 +222,7 @@
     <string name="music_services_links_dialog">Selecteer de muziekdiensten waarvoor je webkoppelingen wilt zien (indien beschikbaar):</string>
     <string name="pref_group_misc">Overig</string>
     <string name="pref_title_vibration_feedback">Trillingen</string>
-    <string name="vibration_feedback_dialog_title">Trilling</string>
+    <string name="vibration_feedback_dialog_title">Trillen</string>
     <string name="vibration_feedback_dialog_message">Trillingsfeedback configureren voor bepaalde acties:</string>
     <string name="vibration_feedback_dialog_vibrate_on_tap">Trillen bij tikken</string>
     <string name="vibration_feedback_dialog_vibrate_on_result">Trillen bij resultaat</string>
