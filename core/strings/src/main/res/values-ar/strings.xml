@@ -333,5 +333,4 @@
     <string name="about_pref_title_donation">التبرع</string>
     <string name="about_pref_subtitle_donation">ادعم المشروع</string>
     <string name="about_pref_donation_message">هذا التطبيق مجاني تمامًا، ولا يحتوي على أي إعلانات أو أي شكل من أشكال الربح التجاري. لدعم التطوير المستمر أو لمجرد التعبير عن الشكر، يُرجى التبرع. شكرًا لدعمكم!</string>
-    <string name="reorder">إعادة ترتيب</string>
 </resources>
