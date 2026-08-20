@@ -390,4 +390,5 @@
     <string name="audd_sign_up_url" translatable="false">https://dashboard.audd.io/</string>
     <string name="audd_terms_url" translatable="false">https://audd.io/terms/</string>
     <string name="acrcloud_project_guide_url" translatable="false">https://docs.acrcloud.com/tutorials/recognize-music/</string>
+    <string name="reorder">Reorder</string>
 </resources>

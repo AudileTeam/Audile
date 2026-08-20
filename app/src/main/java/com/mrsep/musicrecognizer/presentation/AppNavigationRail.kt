@@ -40,7 +40,7 @@ fun AppNavigationRail(
                                 if (selected) destinationEntry.selectedIconResId
                                 else destinationEntry.unselectedIconResId
                             ),
-                            contentDescription = stringResource(destinationEntry.titleResId)
+                            contentDescription = null
                         )
                     }
                 },

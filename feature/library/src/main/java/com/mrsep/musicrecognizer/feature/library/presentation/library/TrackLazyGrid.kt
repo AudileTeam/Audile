@@ -21,6 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import coil3.compose.AsyncImage
 import com.mrsep.musicrecognizer.core.ui.components.MultiSelectionState
 import com.mrsep.musicrecognizer.core.ui.util.forwardingPainter
@@ -88,6 +92,10 @@ private fun TrackLazyGridItem(
             .fillMaxSize()
             .clip(shape)
             .drawBehind { drawRect(color = containerColor) }
+            .semantics(mergeDescendants = true) {
+                role = Role.Button
+                this.selected = selected
+            }
             .combinedClickable(
                 interactionSource = null,
                 indication = LocalIndication.current,

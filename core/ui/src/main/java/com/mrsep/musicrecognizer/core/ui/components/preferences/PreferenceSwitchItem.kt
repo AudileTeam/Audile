@@ -1,6 +1,7 @@
 package com.mrsep.musicrecognizer.core.ui.components.preferences
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -24,9 +25,11 @@ fun PreferenceSwitchItem(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 80.dp)
-            .clickable(
-                onClick = onClick,
-                enabled = enabled
+            .toggleable(
+                value = checked,
+                enabled = enabled,
+                role = Role.Switch,
+                onValueChange = { onClick() }
             )
             .padding(16.dp)
     ) {

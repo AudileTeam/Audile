@@ -1,7 +1,8 @@
 package com.mrsep.musicrecognizer.feature.backup.presentation
 
 import android.content.Context
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -199,13 +200,16 @@ internal fun BackupEntryCheckBox(
         modifier = Modifier
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.medium)
-            .clickable(onClick = onClick),
+            .toggleable(
+                value = checked,
+                role = Role.Checkbox,
+                onValueChange = { onClick() }
+            ),
         verticalAlignment = Alignment.CenterVertically,
-
-        ) {
+    ) {
         Checkbox(
             checked = checked,
-            onCheckedChange = { onClick() }
+            onCheckedChange = null
         )
         Column(
             modifier = Modifier.weight(1f)

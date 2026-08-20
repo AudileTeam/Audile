@@ -1,7 +1,7 @@
 package com.mrsep.musicrecognizer.feature.track.presentation.lyrics
 
 import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
@@ -12,6 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import com.mrsep.musicrecognizer.core.domain.preferences.FontSize
 import com.mrsep.musicrecognizer.core.domain.preferences.LyricsStyle
@@ -50,6 +53,8 @@ internal fun LyricsStyleBottomSheet(
                 Text(text = style.fontSize.title())
             }
             Spacer(Modifier.height(8.dp))
+            val fontSizeDesc = stringResource(StringsR.string.font_size)
+            val fontSizeState = style.fontSize.title()
             Slider(
                 value = style.fontSize.ordinal.toFloat(),
                 onValueChange = { sliderValue ->
@@ -58,7 +63,12 @@ internal fun LyricsStyleBottomSheet(
                 },
                 valueRange = 0f..3f,
                 steps = 2,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .semantics {
+                        contentDescription = fontSizeDesc
+                        stateDescription = fontSizeState
+                    }
             )
             Spacer(Modifier.height(8.dp))
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -102,12 +112,13 @@ private fun BottomBarSwitch(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
-            .clickable(
+            .toggleable(
+                value = checked,
                 interactionSource = null,
                 indication = LocalIndication.current,
                 enabled = enabled,
                 role = Role.Switch,
-                onClick = onClick
+                onValueChange = { onClick() }
             )
             .padding(horizontal = 16.dp)
     ) {
@@ -117,7 +128,7 @@ private fun BottomBarSwitch(
         )
         Switch(
             checked = checked,
-            onCheckedChange = { onClick() },
+            onCheckedChange = null,
             enabled = enabled
         )
     }

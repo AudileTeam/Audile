@@ -10,6 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toUpperCase
@@ -161,6 +165,10 @@ private fun LibraryDropdownMenu(
         ) {
             DropdownMenuItem(
                 text = { Text(text = stringResource(StringsR.string.pref_title_use_grid_layout)) },
+                modifier = Modifier.semantics {
+                    role = Role.Checkbox
+                    selected = useGridLayout
+                },
                 onClick = { onChangeUseGridLayout(!useGridLayout) },
                 trailingIcon = {
                     Icon(
@@ -174,6 +182,10 @@ private fun LibraryDropdownMenu(
             )
             DropdownMenuItem(
                 text = { Text(text = stringResource(StringsR.string.pref_title_show_recognition_date)) },
+                modifier = Modifier.semantics {
+                    role = Role.Checkbox
+                    selected = showRecognitionDate
+                },
                 onClick = { onChangeShowRecognitionDate(!showRecognitionDate) },
                 trailingIcon = {
                     Icon(

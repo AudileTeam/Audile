@@ -39,7 +39,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.mrsep.musicrecognizer.core.ui.components.VinylRotating
@@ -170,6 +174,11 @@ private fun LyricsFloatingActionButtonWithTooltip(
         )
         val lyricsButtonExtraElevation by animateDpAsState(if (isLyricsAvailable) 2.dp else 1.dp)
         Box {
+            val lyricsStateDesc = when {
+                isLyricsLoading -> stringResource(StringsR.string.searching_for_lyrics)
+                !isLyricsAvailable -> stringResource(StringsR.string.no_lyrics_available)
+                else -> null
+            }
             FloatingActionButton(
                 onClick = {
                     if (isLyricsAvailable) {
@@ -178,6 +187,9 @@ private fun LyricsFloatingActionButtonWithTooltip(
                     } else {
                         scope.launch { tooltipState.show() }
                     }
+                },
+                modifier = Modifier.semantics {
+                    lyricsStateDesc?.let { stateDescription = it }
                 },
                 containerColor = MaterialTheme.colorScheme.tertiaryContainer
                     .copy(alpha = lyricsButtonAlpha)
@@ -247,14 +259,23 @@ private fun RetryRecognitionButtonWithTooltip(
             }
         },
     ) {
+        val retryActionLabel = stringResource(StringsR.string.button_retry_recognition)
         Box(
             modifier = modifier
                 .size(40.dp)
                 .clip(CircleShape)
+                .semantics {
+                    customActions = listOf(
+                        CustomAccessibilityAction(label = retryActionLabel) {
+                            onRetryRequested()
+                            true
+                        }
+                    )
+                }
                 .combinedClickable(
                     role = Role.Button,
                     onClickLabel = stringResource(StringsR.string.button_retry_recognition_hint),
-                    onLongClickLabel = stringResource(StringsR.string.button_retry_recognition),
+                    onLongClickLabel = retryActionLabel,
                     onClick = {
                         scope.launch { tooltipState.show() }
                     },

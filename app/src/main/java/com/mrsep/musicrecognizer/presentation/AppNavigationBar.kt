@@ -60,7 +60,7 @@ fun AppNavigationBar(
                                 if (selected) destinationEntry.selectedIconResId
                                 else destinationEntry.unselectedIconResId
                             ),
-                            contentDescription = stringResource(destinationEntry.titleResId)
+                            contentDescription = null
                         )
                     }
                 },
@@ -137,7 +137,7 @@ fun LibraryNavigationIcon(
                 if (selected) TopLevelDestination.Library.selectedIconResId
                 else TopLevelDestination.Library.unselectedIconResId
             ),
-            contentDescription = stringResource(TopLevelDestination.Library.titleResId)
+            contentDescription = null
         )
     }
 }

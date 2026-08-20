@@ -286,7 +286,7 @@ private fun CsvExportReadyContent(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(
                                 checked = selectable.selected,
-                                onCheckedChange = { onItemSelect() }
+                                onCheckedChange = null
                             )
                             if (selectable.field is TrackLinkField || selectable.field == TrackField.LINK_ARTWORK) {
                                 Icon(
@@ -312,7 +312,7 @@ private fun CsvExportReadyContent(
                             ) {
                                 Icon(
                                     painter = painterResource(UiR.drawable.outline_drag_handle_24),
-                                    contentDescription = "Reorder"
+                                    contentDescription = stringResource(StringsR.string.reorder)
                                 )
                             }
                         }

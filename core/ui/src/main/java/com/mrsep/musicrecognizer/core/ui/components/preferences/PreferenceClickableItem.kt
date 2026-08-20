@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -22,7 +23,7 @@ fun PreferenceClickableItem(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 80.dp)
-            .clickable { onItemClick() }
+            .clickable(enabled = enabled, role = Role.Button) { onItemClick() }
             .padding(16.dp)
             .alpha(if (enabled) 1f else 0.7f)
     ) {

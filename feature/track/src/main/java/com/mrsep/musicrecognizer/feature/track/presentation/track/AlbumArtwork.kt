@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
@@ -104,6 +105,8 @@ internal fun AlbumArtwork(
                 if (onLoadedArtworkClick != null) {
                     Modifier.clickable(
                         enabled = painterState is AsyncImagePainter.State.Success,
+                        role = Role.Button,
+                        onClickLabel = stringResource(StringsR.string.artwork),
                         onClick = onLoadedArtworkClick
                     )
                 } else {

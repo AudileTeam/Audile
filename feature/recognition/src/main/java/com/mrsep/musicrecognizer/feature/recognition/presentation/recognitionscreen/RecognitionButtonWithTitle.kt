@@ -14,7 +14,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -61,8 +63,8 @@ internal fun RecognitionButtonWithTitle(
                 ),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .clearAndSetSemantics { }
                     .fillMaxWidth()
+                    .semantics { liveRegion = LiveRegionMode.Polite }
                     .padding(bottom = 40.dp)
             )
         }
@@ -166,7 +168,7 @@ private fun BasicRecognitionButton(
                     else StringsR.string.action_recognize
                 ),
                 onLongClick = onLongClick.takeIf { !activated },
-                onLongClickLabel = stringResource(StringsR.string.action_recognize).takeIf { !activated },
+                onLongClickLabel = stringResource(StringsR.string.audio_source_dialog_button_long_press_mode_title).takeIf { !activated },
                 role = Role.Button
             ),
         shape = CircleShape,
