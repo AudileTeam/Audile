@@ -333,4 +333,9 @@
     <string name="about_pref_subtitle_donation">Toeta meie projekti</string>
     <string name="about_pref_donation_message">See rakendus on saadaval täiesti tasuta. Selles ei ole reklaame ega muid kommertslikke tulude teenimise viise. Jätkuva arendustöö toetamiseks või lihtsalt tänuavalduseks võid kaaluda sobiliku rahalise toetuse saatmist meile. Täname toetuse eest!</string>
     <string name="file_manager_not_found_toast">Ei leidunud failihaldurit</string>
+    <string name="reorder">Muuda järjestust</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d on valitud</item>
+        <item quantity="other">%d on valitud</item>
+    </plurals>
 </resources>
