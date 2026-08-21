@@ -341,4 +341,11 @@
     <string name="about_pref_subtitle_donation">Podpořte projekt</string>
     <string name="about_pref_donation_message">Tato aplikace je kompletně zdarma. Je bez reklam a dalších způsobů komerční monetizace. Pro podpoření dalšího vývoje nebo jednoduchého poděkování prosím zvažte podpoření projektu. Děkujeme za vaši podporu!</string>
     <string name="file_manager_not_found_toast">Nepodařilo se najít správce souborů</string>
+    <string name="reorder">Změnit pořadí</string>
+    <plurals name="items_selected">
+        <item quantity="one">Vybrán %d</item>
+        <item quantity="few">Vybrány %d</item>
+        <item quantity="many">Vybráno %d</item>
+        <item quantity="other">Vybráno %d</item>
+    </plurals>
 </resources>
