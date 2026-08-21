@@ -333,4 +333,9 @@
     <string name="about_pref_subtitle_donation">Ondersteun het project</string>
     <string name="about_pref_donation_message">Deze app is volledig gratis. Geen advertenties of andere vormen van commerciële inkomsten. Om verdere ontwikkeling te steunen of gewoon om je dankbaarheid te tonen, kun je overwegen een donatie te doen. Bedankt voor je steun!</string>
     <string name="file_manager_not_found_toast">Kan geen bestandsbeheer vinden</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d geselecteerd</item>
+        <item quantity="other">%d geselecteerd</item>
+    </plurals>
+    <string name="reorder">Hersorteren</string>
 </resources>
