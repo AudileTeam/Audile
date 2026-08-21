@@ -345,4 +345,11 @@
     <string name="audio_source_dialog_alt_method_bullet_1">Не требует разрешения на трансляцию экрана и обходит ограничения приложений на запись звука</string>
     <string name="audio_source_dialog_alt_method_bullet_2">Поддерживается всеми версиями Android</string>
     <string name="audio_source_dialog_alt_method_bullet_3">Качество звука хуже, и этот способ может не работать на вашем устройстве</string>
+    <string name="reorder">Изменить порядок</string>
+    <plurals name="items_selected">
+        <item quantity="one">Выбран %d</item>
+        <item quantity="few">Выбрано %d</item>
+        <item quantity="many">Выбрано %d</item>
+        <item quantity="other">Выбрано %d</item>
+    </plurals>
 </resources>
