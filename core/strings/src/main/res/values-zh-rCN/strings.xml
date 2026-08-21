@@ -333,4 +333,8 @@
     <string name="about_pref_subtitle_donation">支持项目</string>
     <string name="about_pref_donation_message">本应用完全免费，没有任何广告或其他形式的商业变现。要支持持续开发或表示感谢，请考虑捐赠。感谢您的支持！</string>
     <string name="file_manager_not_found_toast">找不到文件管理器</string>
+    <string name="reorder">调整顺序</string>
+    <plurals name="items_selected">
+        <item quantity="other">选中了 %d 项</item>
+    </plurals>
 </resources>
