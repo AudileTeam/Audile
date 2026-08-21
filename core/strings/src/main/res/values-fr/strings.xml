@@ -341,4 +341,10 @@
     <string name="about_pref_subtitle_donation">Soutenez le projet</string>
     <string name="about_pref_donation_message">Cette application est entièrement gratuite. Elle ne contient aucune publicité ni aucune autre forme de monétisation commerciale. Pour soutenir son développement continu ou simplement pour nous remercier, n\'hésitez pas à faire un don. Merci pour votre soutien !</string>
     <string name="file_manager_not_found_toast">Impossible de trouver le gestionnaire de fichiers</string>
+    <string name="reorder">Réorganiser</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d sélectionné</item>
+        <item quantity="many">%d sélectionnés</item>
+        <item quantity="other">%d sélectionnés</item>
+    </plurals>
 </resources>
