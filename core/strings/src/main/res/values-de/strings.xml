@@ -333,4 +333,9 @@
     <string name="export_only_favorites_tracks">Nur Favoriten exportieren</string>
     <string name="export_write_csv_header">CSV-Kopfzeile einbeziehen</string>
     <string name="about_pref_donation_message">Diese App ist völlig kostenlos. Sie kommt ohne Werbung oder andere Formen der Monetarisierung. Um die laufende Entwicklung zu unterstützen oder einfach Dank zu sagen, wird gerne eine Spende angenommen. Vielen Dank für Ihre Unterstützung!</string>
+    <string name="reorder">Neu ordnen</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
+    </plurals>
 </resources>
