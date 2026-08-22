@@ -333,4 +333,11 @@
     <string name="about_pref_subtitle_donation">Підтримати проєкт</string>
     <string name="about_pref_donation_message">Цей застосунок повністю безплатний. У ньому немає реклами чи інших форм комерційної монетизації. Щоби підтримати подальшу розробку або просто подякувати, ви можете зробити пожертву. Дякуємо за вашу підтримку!</string>
     <string name="file_manager_not_found_toast">Не вдалося знайти файловий менеджер</string>
+    <string name="reorder">Змінити порядок</string>
+    <plurals name="items_selected">
+        <item quantity="one">Вибрано %d</item>
+        <item quantity="few">Вибрано %d</item>
+        <item quantity="many">Вибрано %d</item>
+        <item quantity="other">Вибрано %d</item>
+    </plurals>
 </resources>
