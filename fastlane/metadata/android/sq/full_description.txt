@@ -1,0 +1,10 @@
+<b>Audile</b> është një aplikacion për njohjen e muzikës me burim të hapur që mund t'ju ndihmojë të identifikoni shpejt dhe saktë një pjesë muzikore që luhet pranë jush.
+Aplikacioni integron AudD, ACRCloud dhe Shazam për identifikimin e këngëve dhe përdor Odesli për të marrë lidhje shtesë të këngëve specifike për platformën.
+
+<b>Veçoritë:</b>
+
+<b>Njohja</b> - Audile ju lejon të kryeni njohjen e këngës me një klikim. Aplikacioni do ta ruajë regjistrimin nëse nuk ka lidhje interneti dhe procesi i njohjes do të rifillojë kur të ktheheni në linjë. Ju mund të personalizoni sjelljen e paracaktuar për njohje të pasuksesshme (pa internet, pa ndeshje, një dështim tjetër) nëpërmjet preferencave.
+<b>Përdorimi në sfond</b> - Përdorni aplikacionin pa probleme nga sirtari i njoftimeve, miniaplikacioni i ekranit bazë, butoni lundrues ose pllaka e cilësimeve të shpejta. Menaxhoni procesin e njohjes dhe merrni informacione për gjurmët pa nisur aplikacionin.
+<b>Rreth këngës</b> - Pas njohjes me sukses, aplikacioni ofron informacione për këngën, duke përfshirë titullin, artistin, albumin, vitin e publikimit, veprat artistike, tekstet dhe lidhjet me këngën në shërbimet e njohura muzikore.
+<b>Biblioteka</b> - Të gjitha pjesët e njohura ruhen në bibliotekën e aplikacionit. Mund të filtroni listën e këngëve, të krijoni një koleksion të preferuarave, të kërkoni për këngë ose të fshini këngë.
+<b>Preferencat</b> - Aplikacioni ofron opsione të ndryshme për të personalizuar sjelljen dhe pamjen e tij, të aksesueshme nga ekrani i cilësimeve.
