@@ -340,4 +340,8 @@
         <item quantity="many">Вибрано %d</item>
         <item quantity="other">Вибрано %d</item>
     </plurals>
+    <string name="result_title_no_sound_detected">Звук відсутній</string>
+    <string name="result_message_no_sound_detected_microphone">Переконайтеся, що поблизу достатньо голосно лунає музика, а потім спробуйте ще раз</string>
+    <string name="result_message_no_sound_detected_device">Переконайтеся, що на вашому пристрої відтворюється музика, а потім спробуйте ще раз</string>
+    <string name="internal_audio_capture_may_be_blocked">Деякі застосунки можуть забороняти запис власного звуку. Спробуйте відтворити музику через динамік, обравши мікрофон як джерело звуку.</string>
 </resources>
