@@ -338,4 +338,8 @@
         <item quantity="one">%d on valitud</item>
         <item quantity="other">%d on valitud</item>
     </plurals>
+    <string name="result_title_no_sound_detected">Heli tuvastamine ei õnnestu</string>
+    <string name="result_message_no_sound_detected_microphone">Palun kontrolli, et muusika mängiks lähikonnas piisavalt valjult ja proovi siis uuesti</string>
+    <string name="result_message_no_sound_detected_device">Palun kontrolli, et muusika oleks esitamisel sinu seadmes ja proovi siis uuesti</string>
+    <string name="internal_audio_capture_may_be_blocked">Mõned rakendused võivad piirata oma sisemise heli hõivet või salvestamist. Proovi esitada muusikat valjusti ja lülita heliallikaks mikrofon.</string>
 </resources>
