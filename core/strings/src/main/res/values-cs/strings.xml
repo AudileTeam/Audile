@@ -348,4 +348,8 @@
         <item quantity="many">Vybráno %d</item>
         <item quantity="other">Vybráno %d</item>
     </plurals>
+    <string name="result_title_no_sound_detected">Nebyl detekován žádný zvuk</string>
+    <string name="result_message_no_sound_detected_microphone">Ujistěte se, že hudba hraje dostatečně nahlas a poté to zkuste znovu</string>
+    <string name="result_message_no_sound_detected_device">Ujistěte se, že na vašem zařízení hraje hudba a poté to zkuste znovu</string>
+    <string name="internal_audio_capture_may_be_blocked">Některé aplikace mohou omezit záznam jejich interního zvuku. Zkuste nahlas přehrát hudbu a přepnout zdroj zvuku na mikrofon.</string>
 </resources>
