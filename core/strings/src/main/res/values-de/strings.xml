@@ -200,7 +200,7 @@
     <string name="notification_channel_name_scheduled_result">Song-Ergebnisse geplanter Erkennungen</string>
     <string name="notification_channel_desc_scheduled_result">Zeigt die Ergebnisse der Erkennung von Songs an, die offline oder in anderen Fällen geplant wurden</string>
     <string name="crash_dialog_title">Audile ist abgestürzt</string>
-    <string name="crash_dialog_message">Ein unerwarteter Fehler ist aufgetreten, welcher zum stoppen der App führte. Möchtest du eine Fehlermeldung per Email senden, um zu Helfen das Problem zu lösen?</string>
+    <string name="crash_dialog_message">Ein unerwarteter Fehler ist aufgetreten, welcher zum stoppen der App führte. Möchtest du eine Fehlermeldung per E-Mail senden, um zu Helfen das Problem zu lösen?</string>
     <string name="crash_dialog_button_cancel">Abbrechen</string>
     <string name="main_screen_tap_to_recognize">Zum Erkennen antippen</string>
     <string name="widget_tap_to_recognize">Zum Erkennen antippen</string>
