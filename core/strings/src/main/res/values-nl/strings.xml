@@ -338,4 +338,8 @@
         <item quantity="other">%d geselecteerd</item>
     </plurals>
     <string name="reorder">Hersorteren</string>
+    <string name="result_title_no_sound_detected">Geen geluid gedetecteerd</string>
+    <string name="result_message_no_sound_detected_microphone">Zorg ervoor dat muziek in de buurt luid genoeg speelt en probeer opnieuw</string>
+    <string name="result_message_no_sound_detected_device">Zorg ervoor dat er muziek wordt afgespeeld op je apparaat en probeer opnieuw</string>
+    <string name="internal_audio_capture_may_be_blocked">Sommige apps beperken mogelijk de opname van hun interne audio. Probeer muziek hardop af te spelen en stel de audiobron op microfoon in.</string>
 </resources>
