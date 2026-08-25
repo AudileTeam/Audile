@@ -337,4 +337,8 @@
     <plurals name="items_selected">
         <item quantity="other">选中了 %d 项</item>
     </plurals>
+    <string name="result_title_no_sound_detected">未检测到声音</string>
+    <string name="result_message_no_sound_detected_microphone">请确保音乐在附近播放的声音足够大，然后重试</string>
+    <string name="result_message_no_sound_detected_device">请确保音乐正在你的设备上播放，然后重试</string>
+    <string name="internal_audio_capture_may_be_blocked">一些应用可能限制捕获它们的内部音频。试着把音乐大声外放并切换音频源到麦克风。</string>
 </resources>
