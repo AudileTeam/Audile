@@ -252,7 +252,7 @@
     <string name="about_pref_subtitle_privacy_policy">En savoir plus sur la manière dont l\'application traite vos données</string>
     <string name="about_pref_title_license">Licence</string>
     <string name="crash_dialog_title">Audile a planté</string>
-    <string name="crash_dialog_message">Une erreur inattendue s\'est produite, entraînant l\'arrêt de l\'application. Souhaitez-vous envoyer le rapport de bogue par e-mail afin de nous aider à résoudre ce problème ?</string>
+    <string name="crash_dialog_message">Une erreur inattendue s\'est produite entraînant l\'arrêt de l\'application. Souhaitez-vous envoyer le rapport de bogue par courriel afin de nous aider à résoudre ce problème ?</string>
     <string name="crash_dialog_button_send">Envoyer</string>
     <string name="audio_source_dialog_default_mode_title">Défaut</string>
     <string name="audio_source_dialog_default_mode_message">Sélectionnez la source audio à utiliser par défaut, sauf indication contraire :</string>
@@ -347,4 +347,8 @@
         <item quantity="many">%d sélectionnés</item>
         <item quantity="other">%d sélectionnés</item>
     </plurals>
+    <string name="result_title_no_sound_detected">Aucun son détecté</string>
+    <string name="result_message_no_sound_detected_microphone">Veuillez vous assurer que le volume de la musique est assez fort, puis réessayer</string>
+    <string name="result_message_no_sound_detected_device">Veuillez vous assurer que la musique joue bien sur votre appareil, puis réessayer</string>
+    <string name="internal_audio_capture_may_be_blocked">Certaines applications peuvent restreindre la capture de leur audio interne. Essayez de jouer de la musique au haut-parleur et de changer la source audio au microphone.</string>
 </resources>
