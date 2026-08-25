@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="main_screen_tap_to_recognize">തിരിച്ചറിയാൻ ടാപ്പ് ചെയ്യുക</string>
+    <string name="main_screen_listening">കേൾക്കുന്നു</string>
+    <string name="main_screen_listening_extra_time">ഒരിക്കൽ കൂടി ശ്രമിക്കുന്നു</string>
 </resources>
