@@ -333,4 +333,12 @@
     <string name="toast_failed_delete_incomplete_backup_file">不完全なバックアップファイルを削除できませんでした</string>
     <string name="notification_title_match_found">一致する曲が見つかりました！</string>
     <string name="file_manager_not_found_toast">ファイルマネージャーが見つかりませんでした</string>
+    <plurals name="items_selected">
+        <item quantity="other">%dつ選択</item>
+    </plurals>
+    <string name="reorder">並べ替え</string>
+    <string name="result_title_no_sound_detected">音が検出されませんでした</string>
+    <string name="result_message_no_sound_detected_microphone">音楽が十分に大きな音量で流れていることの確認の上、もう一度試してください</string>
+    <string name="result_message_no_sound_detected_device">デバイスから音楽が再生されていることの確認の上、もう一度試してください</string>
+    <string name="internal_audio_capture_may_be_blocked">一部のアプリでは、アプリ内部の音声の録音に制限がかけられている場合があります。音楽を大音量で再生し、音源をマイクに切り替えてみてください。</string>
 </resources>
