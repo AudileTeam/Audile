@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="main_screen_tap_to_recognize">انقر للتعرّف</string>
-    <string name="main_screen_listening">الاستماع جارٍ</string>
-    <string name="main_screen_listening_extra_time">لنحاول مرّةً أخرى</string>
+    <string name="main_screen_listening">يجري الاستماع</string>
+    <string name="main_screen_listening_extra_time">تجري المحاولة مرّةً أخرى</string>
     <string name="widget_tap_to_recognize">انقر للتعرّف</string>
     <string name="widget_tap_to_try_again">انقر للمحاولة مرّةً أخرى</string>
-    <string name="widget_listening">الاستماع جارٍ</string>
+    <string name="widget_listening">يجري الاستماع</string>
     <string name="widget_listening_subtitle">يُرجى الانتظار</string>
-    <string name="widget_listening_subtitle_extra_time">لنحاول مرّةً أخرى</string>
+    <string name="widget_listening_subtitle_extra_time">تجري المحاولة مرّةً أخرى</string>
     <string name="recognition_widget_description">تعرَّف إلى الأغنية بنقرةٍ واحدة</string>
     <string name="notification_tap_to_recognize">انقر للتعرّف</string>
     <string name="notification_tap_to_recognize_subtitle">تعرَّف إلى الموسيقى في أثناء فتح أيّ تطبيق</string>
-    <string name="notification_listening">الاستماع جارٍ</string>
-    <string name="notification_listening_subtitle">برجاء الانتظار</string>
-    <string name="notification_listening_subtitle_extra_time">لنحاول مرّةً أخرى</string>
+    <string name="notification_listening">يجري الاستماع</string>
+    <string name="notification_listening_subtitle">يُرجى الانتظار</string>
+    <string name="notification_listening_subtitle_extra_time">تجري المحاولة مرّةً أخرى</string>
     <string name="quick_tile_recognize">تعرَّف على الأغنية</string>
     <string name="quick_tile_cancel_recognition">ألغِ التعرّف</string>
     <string name="action_recognize">تعرَّف</string>
