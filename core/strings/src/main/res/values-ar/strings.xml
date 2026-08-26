@@ -8,16 +8,16 @@
     <string name="widget_listening">الاستماع جارٍ</string>
     <string name="widget_listening_subtitle">يُرجى الانتظار</string>
     <string name="widget_listening_subtitle_extra_time">لنحاول مرّةً أخرى</string>
-    <string name="recognition_widget_description">تعرَّف على الأغنية بنقرةٍ واحدة</string>
+    <string name="recognition_widget_description">تعرَّف إلى الأغنية بنقرةٍ واحدة</string>
     <string name="notification_tap_to_recognize">انقر للتعرّف</string>
-    <string name="notification_tap_to_recognize_subtitle">تعرَّف على الموسيقى في أثناء فتح أيّ تطبيق</string>
+    <string name="notification_tap_to_recognize_subtitle">تعرَّف إلى الموسيقى في أثناء فتح أيّ تطبيق</string>
     <string name="notification_listening">الاستماع جارٍ</string>
-    <string name="notification_listening_subtitle">الرجاء الانتظار</string>
-    <string name="notification_listening_subtitle_extra_time">المحاولة مرة أخرى</string>
-    <string name="quick_tile_recognize">التعرف على الأغنية</string>
-    <string name="quick_tile_cancel_recognition">إلغاء التعرف</string>
-    <string name="action_recognize">التعرف</string>
-    <string name="action_cancel_recognition">إلغاء التعرف</string>
+    <string name="notification_listening_subtitle">برجاء الانتظار</string>
+    <string name="notification_listening_subtitle_extra_time">لنحاول مرّةً أخرى</string>
+    <string name="quick_tile_recognize">تعرَّف على الأغنية</string>
+    <string name="quick_tile_cancel_recognition">ألغِ التعرّف</string>
+    <string name="action_recognize">تعرَّف</string>
+    <string name="action_cancel_recognition">‌ألغِ التعرّف</string>
     <string name="app_shortcut_recognize_short">التعرف</string>
     <string name="app_shortcut_recognize_long">التعرف في الخلفية</string>
     <string name="app_shortcut_open_and_recognize_short">الفتح والتعرف</string>
@@ -342,4 +342,8 @@
         <item quantity="many">تمّ اختيار %d عنصر</item>
         <item quantity="other">تمّ اختيار %d عنصر</item>
     </plurals>
+    <string name="result_title_no_sound_detected">لم يتم رصد أي صوت</string>
+    <string name="result_message_no_sound_detected_microphone">يرجى التأكد من تشغيل الموسيقى بصوت عالٍ بما يكفي في مكان قريب، ثم حاول مرة أخرى</string>
+    <string name="result_message_no_sound_detected_device">يرجى التأكد من تشغيل الموسيقى على جهازك، ثم حاول مرةً أخرى</string>
+    <string name="internal_audio_capture_may_be_blocked">قد تقيّد بعض التطبيقات تسجيل الصوت الداخلي. جرّب تشغيل الموسيقى بصوتٍ عالٍ ثمّ تحويل مصدر الصوت إلى الميكروفون.</string>
 </resources>
