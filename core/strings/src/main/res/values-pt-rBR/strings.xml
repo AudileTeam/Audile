@@ -349,4 +349,9 @@
     <string name="about_pref_title_donation">Donativo</string>
     <string name="about_pref_subtitle_donation">Apoie o projeto</string>
     <string name="about_pref_donation_message">Este aplicativo é totalmente gratuito. Ele vem sem quaisquer anúncios ou outras formas de monetização comercial. Para apoiar o desenvolvimento contínuo ou simplesmente agradecer, considere fazer um donativo. Obrigado pelo vosso apoio!</string>
+    <string name="internal_audio_capture_may_be_blocked">Alguns aplicativos podem restringir a captura de áudio interno. Tente reproduzir a música em viva voz e mudar a fonte de áudio para o microfone.</string>
+    <string name="result_message_no_sound_detected_device">Por favor, certifique-se de que a música está tocando no seu dispositivo e tente novamente</string>
+    <string name="result_message_no_sound_detected_microphone">Por favor, certifique-se de que a música está tocando alto o suficiente nas proximidades e tente novamente</string>
+    <string name="result_title_no_sound_detected">Nenhum som detectado</string>
+    <string name="reorder">Reordenar</string>
 </resources>
