@@ -42,7 +42,7 @@
     <string name="copied">Disalin</string>
     <string name="share">Bagikan</string>
     <string name="web_browser_not_found_toast">Browser web tidak ditemukan</string>
-    <string name="cannot_share_toast">Tidak dapat menemukan aplikasi untuk berbagi</string>
+    <string name="cannot_share_toast">Tidak dapat menemukan aplikasi apa pun untuk berbagi ini</string>
     <string name="help">Bantuan</string>
     <string name="show_more">Tampilkan lebih banyak</string>
     <string name="show_less">Tampilkan lebih sedikit</string>
@@ -321,4 +321,24 @@
     <string name="crash_dialog_comment_prompt">Anda dapat menambahkan informasi tambahan di sini:</string>
     <string name="crash_dialog_button_send">Kirim</string>
     <string name="crash_dialog_button_cancel">Batal</string>
+    <string name="app_shortcut_show_floating_button_short">Tombol</string>
+    <string name="app_shortcut_show_floating_button_long">Tombol melayang</string>
+    <string name="qr_code">Kode QR</string>
+    <string name="file_manager_not_found_toast">Tidak dapat menemukan manajer file</string>
+    <string name="reorder">Ubah urutan</string>
+    <string name="button_retry_recognition_hint">Tahan untuk mencoba ulang pengenalan</string>
+    <string name="result_title_no_sound_detected">Tidak ada suara yang terdeteksi</string>
+    <string name="result_message_no_sound_detected_microphone">Pastikan musik diputar cukup keras di sekitar, lalu coba lagi</string>
+    <string name="result_message_no_sound_detected_device">Pastikan musik diputar di perangkat Anda, lalu coba lagi</string>
+    <string name="internal_audio_capture_may_be_blocked">Beberapa aplikasi mungkin membatasi pengambilan audio internalnya. Coba putar musik dengan keras dan alihkan sumber audio ke mikrofon.</string>
+    <plurals name="items_selected">
+        <item quantity="other">%d dipilih</item>
+    </plurals>
+    <string name="pref_title_prerecording_buffer">Buffer prarekaman</string>
+    <string name="pref_subtitle_prerecording_buffer">Rekam buffer audio singkat saat aplikasi terbuka untuk pengenalan lebih cepat</string>
+    <string name="pref_title_floating_button">Tombol melayang</string>
+    <string name="pref_subtitle_floating_button">Tampilkan tombol melayang di atas aplikasi lain untuk akses cepat ke pengenalan</string>
+    <string name="about_pref_title_donation">Donasi</string>
+    <string name="about_pref_subtitle_donation">Dukung proyek ini</string>
+    <string name="about_pref_donation_message">Aplikasi ini sepenuhnya gratis. Aplikasi ini hadir tanpa iklan apa pun atau bentuk monetisasi komersial lainnya. Untuk mendukung pengembangan berkelanjutan atau sekadar mengucapkan terima kasih, pertimbangkan untuk berdonasi. Terima kasih atas dukungan Anda!</string>
 </resources>
