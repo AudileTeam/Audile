@@ -337,5 +337,10 @@
     <plurals name="items_selected">
         <item quantity="one">%d seleccionado</item>
         <item quantity="many">%d seleccionados</item>
+        <item quantity="other">%d seleccionados</item>
     </plurals>
+    <string name="result_title_no_sound_detected">No se detecta ningún sonido</string>
+    <string name="result_message_no_sound_detected_microphone">Por favor, sube el volumen de la música, e inténtalo de nuevo</string>
+    <string name="result_message_no_sound_detected_device">Por favor, asegúrate de que la música se reproduce en tu dispositivo e inténtalo de nuevo</string>
+    <string name="internal_audio_capture_may_be_blocked">Algunas aplicaciones pueden restringir la captura interna de audio. Prueba a reproducir la música a volumen alto y ajusta la fuente de audio al micrófono.</string>
 </resources>
