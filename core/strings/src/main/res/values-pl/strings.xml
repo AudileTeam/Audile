@@ -19,7 +19,7 @@
     <string name="recognition_widget_description">Rozpoznaj utwór jednym kliknięciem</string>
     <string name="widget_listening_subtitle_extra_time">Próbuję jeszcze raz</string>
     <string name="notification_tap_to_recognize">Kliknij żeby rozpoznać</string>
-    <string name="notification_tap_to_recognize_subtitle">Zidentyfikuj muzykę podczas gdy jakakolwiek aplikacja jest otwarta</string>
+    <string name="notification_tap_to_recognize_subtitle">Rozpoznawanie muzyki przy otwartej dowolnej aplikacji</string>
     <string name="notification_listening">Słuchanie</string>
     <string name="notification_listening_subtitle_extra_time">Próbuję jeszcze raz</string>
     <string name="quick_tile_recognize">Rozpoznaj utwór</string>
@@ -46,7 +46,7 @@
     <string name="copied">Skopiowano</string>
     <string name="share">Udostępnij</string>
     <string name="web_browser_not_found_toast">Nie znaleziono przeglądarki</string>
-    <string name="cannot_share_toast">Nie można znaleźć aplikacji do udostępnienia</string>
+    <string name="cannot_share_toast">Nie można znaleźć aplikacji do udostępnienia tego</string>
     <string name="help">Pomoc</string>
     <string name="show_more">Pokaż więcej</string>
     <string name="permissions">Uprawnienia</string>
@@ -66,7 +66,7 @@
     <string name="result_message_recognition_scheduled">Próbka dźwiękowa została zapisana, gdy ponownie połączysz się z internetem, aplikacja spróbuje zidentyfikować ten utwór.</string>
     <string name="result_title_recording_error">Błąd nagrywania</string>
     <string name="result_message_recording_error">Wystąpił błąd podczas nagrywania dźwięku</string>
-    <string name="result_title_bad_network_response">Słaba jakość połączenia</string>
+    <string name="result_title_bad_network_response">Połączenie z siecią nie udane</string>
     <string name="result_message_bad_network_response">Wystąpił błąd podczas wysyłania żądania internetowego</string>
     <string name="result_title_auth_error">Błąd uwierzytelniania</string>
     <string name="result_message_auth_error">Sprawdź swoje dane logowania do wybranej usługi rozpoznającej audio i spróbuj ponownie</string>
@@ -198,7 +198,7 @@
     <string name="acr_cloud_help_dialog_message">ACRCloud to płatna usługa, która oferuje możliwość skorzystania z bezpłatnego okresu próbnego oraz ograniczonego dostępu do funkcji w celach deweloperskich. Aby korzystać z tej usługi, należy założyć konto i zarejestrować projekt. W razie jakichkolwiek trudności prosimy zapoznać się z <![CDATA[<a href="%1$s">tym przewodnikiem</a>]]>.</string>
     <string name="acr_cloud_help_dialog_steps_title">Proszę zwrócić uwagę na poniższe kroki:</string>
     <string name="acr_cloud_help_dialog_step1">Wybierz region geograficzny najbliższy Twojej lokalizacji, aby zminimalizować opóźnienia w sieci</string>
-    <string name="acr_cloud_help_dialog_step2">Ustaw źródło dźwięku jako „Nagrany dźwięk”</string>
+    <string name="acr_cloud_help_dialog_step2">Ustaw źródło dźwięku na „Nagrany dźwięk”</string>
     <string name="acr_cloud_help_dialog_step3">Wybierz preferowany silnik audio. Opcja „Rozpoznawanie dźwięku” zapewnia największą dokładność w typowych zastosowaniach</string>
     <string name="acr_cloud_help_dialog_step4">Zaznacz wszystkie pola dotyczące integracji z systemami identyfikacji innych dostawców</string>
     <string name="pref_group_notifications">Powiadomienia</string>
@@ -316,4 +316,32 @@
     <string name="qr_code">Kod QR</string>
     <string name="track_info_title_format_isrc">%s:</string>
     <string name="about_pref_title_donation">Datek</string>
+    <string name="file_manager_not_found_toast">Nie znaleziono menedżera plików</string>
+    <string name="reorder">Zmień kolejność</string>
+    <string name="button_retry_recognition_hint">Przytrzymaj, aby ponowić rozpoznanie</string>
+    <string name="result_title_no_sound_detected">Nie wykryto dźwięku</string>
+    <string name="result_message_no_sound_detected_microphone">Upewnij się, że muzyka w pobliżu jest wystarczająco głośna, a następnie spróbuj ponownie</string>
+    <string name="result_message_no_sound_detected_device">Upewnij się, że na Twoim urządzeniu odtwarzana jest muzyka, a następnie spróbuj ponownie</string>
+    <string name="internal_audio_capture_may_be_blocked">Niektóre aplikacje mogą ograniczać możliwość przechwytywania dźwięku wewnętrznego. Spróbuj włączyć muzykę na głos i przełączyć źródło dźwięku na mikrofon.</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d wybrany</item>
+        <item quantity="few">%d wybrane</item>
+        <item quantity="many">%d wybranych</item>
+        <item quantity="other">%d wybranych</item>
+    </plurals>
+    <string name="audio_source_dialog_device_audio_limited">Aplikacja ma ograniczoną obsługę nagrywania dźwięku z urządzenia w systemie Android 9 i wcześniejszych</string>
+    <string name="audio_source_dialog_methods">Aplikacja obsługuje dwa sposoby nagrywania dźwięku z urządzenia:</string>
+    <string name="audio_source_dialog_screen_casting_bullet_1">Ta metoda zapewnia najlepszą jakość dźwięku i działa na wszystkich urządzeniach z systemem Android 10 i nowszym</string>
+    <string name="audio_source_dialog_screen_casting_bullet_2">Niektóre aplikacje mogą blokować przechwytywanie dźwięku ze względu na politykę prywatności takim, wtedy Audile nie zarejestruje żadnego dźwięku</string>
+    <string name="audio_source_dialog_alt_method_title">2. Metoda alternatywna</string>
+    <string name="audio_source_dialog_alt_method_bullet_1">Nie wymaga uprawnień do przesyłania ekranu i omija ograniczenia przechwytywania dźwięku nałożone przez inne aplikacje</string>
+    <string name="audio_source_dialog_screen_casting_title">1. Przesyłanie ekranu (metoda główna)</string>
+    <string name="audio_source_dialog_alt_method_bullet_2">Obsługiwane we wszystkich wersjach Androida</string>
+    <string name="audio_source_dialog_alt_method_bullet_3">Jakość dźwięku jest niższa i ta metoda może nie działać na niektórych urządzeniach</string>
+    <string name="pref_title_prerecording_buffer">Bufor nagrywania wstępnego</string>
+    <string name="pref_subtitle_prerecording_buffer">Nagraj krótki bufor audio, gdy aplikacja jest otwarta, aby umożliwić szybsze rozpoznanie</string>
+    <string name="pref_subtitle_floating_button">Wyświetlaj pływający przycisk nad innymi aplikacjami, aby uzyskać szybki dostęp do rozpoznawania</string>
+    <string name="about_pref_subtitle_donation">Wesprzyj projekt</string>
+    <string name="about_pref_donation_message">Ta aplikacja jest całkowicie darmowa. Nie zawiera reklam ani innych form monetyzacji komercyjnej. Aby wesprzeć dalszy rozwój lub po prostu podziękować, rozważ przekazanie darowizny. Dziękujemy za wsparcie!</string>
+    <string name="notification_title_match_found">Znaleziono dopasowanie!</string>
 </resources>
