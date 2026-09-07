@@ -333,4 +333,13 @@
     <string name="about_pref_subtitle_donation">Apoia o proxecto</string>
     <string name="about_pref_donation_message">Esta app é totalmente gratuíta. Non ten publicidade nin outras formas de financiamento comercial. Considera facer unha doazón para apoiar o desenvolvemento ou simplemente como agradecemento. Grazas pola túa axuda!</string>
     <string name="file_manager_not_found_toast">Non se atopa o xestor de ficheiros</string>
+    <string name="reorder">Reordear</string>
+    <string name="result_title_no_sound_detected">Non se detectou son</string>
+    <string name="result_message_no_sound_detected_microphone">Comproba que a música se reproduce con suficiente volume e volve a intentalo</string>
+    <string name="result_message_no_sound_detected_device">Comproba que a música se está reproducindo no teu dispositivo e volve a intentalo</string>
+    <string name="internal_audio_capture_may_be_blocked">Algunhas aplicacións limitan a captura do seu audio interno. Intenta reproducir a música con maior volume e cambia a orixe do son ao micrófono.</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d seleccionado</item>
+        <item quantity="other">%d seleccionados</item>
+    </plurals>
 </resources>
