@@ -341,4 +341,5 @@
     <string name="result_message_no_sound_detected_microphone">请确保音乐在附近播放的声音足够大，然后重试</string>
     <string name="result_message_no_sound_detected_device">请确保音乐正在你的设备上播放，然后重试</string>
     <string name="internal_audio_capture_may_be_blocked">一些应用可能限制捕获它们的内部音频。试着把音乐大声外放并切换音频源到麦克风。</string>
+    <string name="pref_title_auto_delete_sample_on_match">找到匹配时自动删除录制文件</string>
 </resources>
