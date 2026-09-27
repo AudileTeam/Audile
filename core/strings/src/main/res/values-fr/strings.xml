@@ -351,4 +351,5 @@
     <string name="result_message_no_sound_detected_microphone">Veuillez vous assurer que le volume de la musique est assez fort, puis réessayer</string>
     <string name="result_message_no_sound_detected_device">Veuillez vous assurer que la musique joue bien sur votre appareil, puis réessayer</string>
     <string name="internal_audio_capture_may_be_blocked">Certaines applications peuvent restreindre la capture de leur audio interne. Essayez de jouer de la musique au haut-parleur et de changer la source audio au microphone.</string>
+    <string name="pref_title_auto_delete_sample_on_match">Supprimer automatiquement l\'enregistrement lorsqu\'une correspondance est détectée</string>
 </resources>
