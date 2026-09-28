@@ -342,4 +342,5 @@
     <string name="result_message_no_sound_detected_microphone">Bitte stelle sicher, dass in der Nähe Musik laut genug läuft, und versuche es erneut</string>
     <string name="result_message_no_sound_detected_device">Bitte stelle sicher, dass Musik auf deinem Gerät läuft, und versuche es erneut</string>
     <string name="internal_audio_capture_may_be_blocked">Einige Apps schränken das Aufnehmen ihres internen Audios ein. Versuche, die Musik laut abzuspielen und die Audioquelle auf das Mikrofon umzustellen.</string>
+    <string name="pref_title_auto_delete_sample_on_match">Aufzeichnung automatisch löschen, sobald eine Übereinstimmung gefunden wird</string>
 </resources>
