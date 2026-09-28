@@ -342,4 +342,14 @@
     <string name="about_pref_subtitle_donation">Projeyi destekleyin</string>
     <string name="about_pref_donation_message">Bu uygulama tamamen ücretsizdir. İçinde reklam veya başka herhangi bir ticari gelir kaynağı yoktur. Uygulamanın geliştirilmesine destek olmak veya yalnızca teşekkür etmek isterseniz, bağış yapmayı düşünebilirsiniz. Desteğiniz için teşekkür ederiz!</string>
     <string name="file_manager_not_found_toast">Dosya yöneticisi bulunamadı</string>
+    <string name="reorder">Yeniden sırala</string>
+    <string name="result_title_no_sound_detected">Ses algılanmadı</string>
+    <string name="result_message_no_sound_detected_microphone">Lütfen yanında yeterince yüksek sesle müzik çaldığından emin olun, ardından yeniden deneyin</string>
+    <string name="result_message_no_sound_detected_device">Lütfen aygıtınızda müzik çalıp çalmadığına bakın, ardından yeniden deneyin</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d seçildi</item>
+        <item quantity="other">%d seçildi</item>
+    </plurals>
+    <string name="pref_title_auto_delete_sample_on_match">Eşleşme bulunduğunda kaydı otomatik olarak sil</string>
+    <string name="internal_audio_capture_may_be_blocked">Bazı uygulamalar ses yakalamayı kısıtlayabilir. Yüksek sesle müzik çalmayı ve ses kaynağını mikrofona geçirmeyi deneyin.</string>
 </resources>
