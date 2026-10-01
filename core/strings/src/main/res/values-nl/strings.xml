@@ -273,7 +273,7 @@
     <string name="backup_entry_picker_title">Selecteer gegevens om een back-up van te maken:</string>
     <string name="restore_entry_picker_title">Selecteer gegevens om te herstellen:</string>
     <string name="backup_estimating_size">Appgegevensgrootte schatten…</string>
-    <string name="backup_in_progress">Back-up maken…</string>
+    <string name="backup_in_progress">Een back-up maken…</string>
     <string name="backup_result_success">Back-up succesvol gemaakt!</string>
     <string name="restore_erase_warning">Bij het herstellen worden de huidige gegevens gewist en vervangen door de inhoud van de back-up. Deze actie kan niet ongedaan worden gemaakt. Maak een back-up van je gegevens voordat je verdergaat.</string>
     <string name="restore_info_restart">De app wordt opnieuw opgestart nadat het herstel is voltooid.</string>
@@ -343,4 +343,34 @@
     <string name="result_message_no_sound_detected_device">Zorg ervoor dat er muziek wordt afgespeeld op je apparaat en probeer opnieuw</string>
     <string name="internal_audio_capture_may_be_blocked">Sommige apps beperken mogelijk de opname van hun interne audio. Probeer muziek hardop af te spelen en stel de audiobron op microfoon in.</string>
     <string name="pref_title_auto_delete_sample_on_match">Opname automatisch verwijderen wanneer een overeenkomst is gevonden</string>
+    <string name="backup_unencrypted_message">Back-upbestanden zijn niet versleuteld. Bewaar ze op een veilige plek.</string>
+    <string name="pref_group_auto_backup">Automatische back-up</string>
+    <string name="pref_title_auto_backup">Automatische back-up</string>
+    <string name="pref_subtitle_auto_backup">Regelmatig een back-up maken in een map naar keuze</string>
+    <string name="pref_title_backup_location">Back-uplocatie</string>
+    <string name="pref_subtitle_backup_location">Back-up wordt bewaard in: %s</string>
+    <string name="pref_title_backup_frequency">Back-upfrequentie</string>
+    <string name="pref_subtitle_backup_frequency_one">Iedere dag</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">Iedere %d dag</item>
+        <item quantity="other">Iedere %d dagen</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Back-upfrequentie</string>
+    <string name="pref_title_backup_retention">Back-ups om te bewaren</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">Laatste %d back-up</item>
+        <item quantity="other">Laatste %d back-ups</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Alles bewaren</string>
+    <string name="backup_retention_dialog_title">Back-ups om te bewaren</string>
+    <string name="auto_backup_status_last_success">Laatste back-up: %s</string>
+    <string name="auto_backup_status_last_failure">Laatste poging mislukt: %s</string>
+    <string name="auto_backup_status_scheduled">Een back-up is ingeroosterd</string>
+    <string name="notification_channel_name_backup">Back-up</string>
+    <string name="notification_channel_desc_backup">Status van automatische back-ups</string>
+    <string name="auto_backup_notification_title">Automatische back-up mislukt</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Automatische back-up stond uit</string>
+    <string name="auto_backup_error_access_denied">Geen toestemming om naar de back-upmap te schrijven, kies de map opnieuw</string>
+    <string name="auto_backup_error_file_not_found">Kon back-upbestand niet aanmaken in de geselecteerde map</string>
+    <string name="auto_backup_error_unhandled">Er is een onverwachte fout opgetreden. Controleer of er voldoende schijfruimte beschikbaar is en of de map nog steeds toegankelijk is</string>
 </resources>
