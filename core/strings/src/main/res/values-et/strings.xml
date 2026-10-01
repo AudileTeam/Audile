@@ -273,7 +273,7 @@
     <string name="backup_entry_picker_title">Vali varundatavad andmed:</string>
     <string name="restore_entry_picker_title">Vali taastatavad andmed:</string>
     <string name="backup_estimating_size">Hindan rakenduse andmemahtu…</string>
-    <string name="backup_in_progress">Koostan varukoopiat…</string>
+    <string name="backup_in_progress">Loon varukoopiat…</string>
     <string name="backup_result_success">Varukoopia tegemine õnnestus!</string>
     <string name="restore_erase_warning">Taastamisel kustutatakse senised andmed ja asendatakse nad varukoopia sisuga. Seda tegevust ei saa tagasi pöörata. Enne jätkamist kontrolli, et kõik oluline on varundatud.</string>
     <string name="restore_info_restart">Peale taastamise lõppemist käivitub rakendus uuesti.</string>
@@ -343,4 +343,34 @@
     <string name="result_message_no_sound_detected_device">Palun kontrolli, et muusika oleks esitamisel sinu seadmes ja proovi siis uuesti</string>
     <string name="internal_audio_capture_may_be_blocked">Mõned rakendused võivad piirata oma sisemise heli hõivet või salvestamist. Proovi esitada muusikat valjusti ja lülita heliallikaks mikrofon.</string>
     <string name="pref_title_auto_delete_sample_on_match">Tuvastusvaste leidumisel kustuta salvestis automaatselt</string>
+    <string name="backup_unencrypted_message">Varukoopia failid pole krüptitud. Palun hoia neid privaatselt ja turvaliselt.</string>
+    <string name="pref_group_auto_backup">Automaatne varundus</string>
+    <string name="pref_title_auto_backup">Kasuta automaatset varundust</string>
+    <string name="pref_subtitle_auto_backup">Tee aeg-ajalt varukoopia sinu valitud kausta</string>
+    <string name="pref_title_backup_location">Varukoopia asukoht</string>
+    <string name="pref_subtitle_backup_location">Varukoopia salvestub siia: %s</string>
+    <string name="pref_title_backup_frequency">Varunduse sagedus</string>
+    <string name="pref_subtitle_backup_frequency_one">Kord päevas</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">Iga %d päeva järel</item>
+        <item quantity="other">Iga %d päeva järel</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Varunduse sagedus</string>
+    <string name="pref_title_backup_retention">Säilitatavaid varukoopiaid</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">%d viimane varukoopia</item>
+        <item quantity="other">%d viimast varukoopiat</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Säilita kõik</string>
+    <string name="backup_retention_dialog_title">Säilitatavaid varukoopiaid</string>
+    <string name="auto_backup_status_last_success">Viimane varukoopia: %s</string>
+    <string name="auto_backup_status_last_failure">Viimane ebaõnnestunud varundus: %s</string>
+    <string name="auto_backup_status_scheduled">Varundamine on ajastatud</string>
+    <string name="notification_channel_name_backup">Varundus</string>
+    <string name="notification_channel_desc_backup">Automaatse varunduse olek</string>
+    <string name="auto_backup_notification_title">Automaatne varundamine ei õnnestunud</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Automaatne varundus on lülitatud välja</string>
+    <string name="auto_backup_error_access_denied">Puudub õigus kirjutada varunduskausta, palun vali kausta uuesti</string>
+    <string name="auto_backup_error_file_not_found">Varukoopia loomine valitud kausta ei õnnestunud</string>
+    <string name="auto_backup_error_unhandled">Tekkis ootamatu viga, palun kontrolli, kas vaba andmeruumi jagub ja varunduse kaust on jätkuvalt saadaval</string>
 </resources>
