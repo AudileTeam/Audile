@@ -342,4 +342,32 @@
     <string name="result_message_no_sound_detected_device">请确保音乐正在你的设备上播放，然后重试</string>
     <string name="internal_audio_capture_may_be_blocked">一些应用可能限制捕获它们的内部音频。试着把音乐大声外放并切换音频源到麦克风。</string>
     <string name="pref_title_auto_delete_sample_on_match">找到匹配时自动删除录制文件</string>
+    <string name="backup_unencrypted_message">备份文件未加密。在私密地点存放它们。</string>
+    <string name="pref_group_auto_backup">自动备份</string>
+    <string name="pref_title_auto_backup">自动备份</string>
+    <string name="pref_subtitle_auto_backup">定期保存备份到你选择的文件夹</string>
+    <string name="pref_title_backup_location">备份位置</string>
+    <string name="pref_subtitle_backup_location">备份将被存储在：%s</string>
+    <string name="pref_title_backup_frequency">备份频率</string>
+    <string name="pref_subtitle_backup_frequency_one">每天</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="other">每 %d 天</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">备份频率</string>
+    <string name="pref_title_backup_retention">要保留的备份</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="other">最近 %d 个备份</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">保留全部</string>
+    <string name="backup_retention_dialog_title">要保留的备份</string>
+    <string name="auto_backup_status_last_success">上次备份：%s</string>
+    <string name="auto_backup_status_last_failure">上次备份尝试失败：%s</string>
+    <string name="auto_backup_status_scheduled">已安排好备份时间</string>
+    <string name="notification_channel_name_backup">备份</string>
+    <string name="notification_channel_desc_backup">自动备份状态</string>
+    <string name="auto_backup_notification_title">自动备份失败</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">关闭了自动备份</string>
+    <string name="auto_backup_error_access_denied">没有写入备份文件夹的权限，再次选择文件夹</string>
+    <string name="auto_backup_error_file_not_found">无法在所选文件夹中创建备份文件</string>
+    <string name="auto_backup_error_unhandled">发生了未预料错误，检查未使用空间是否足够以及备份文件夹是否仍可用</string>
 </resources>
