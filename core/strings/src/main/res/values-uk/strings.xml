@@ -344,4 +344,39 @@
     <string name="result_message_no_sound_detected_microphone">Переконайтеся, що поблизу достатньо голосно лунає музика, а потім спробуйте ще раз</string>
     <string name="result_message_no_sound_detected_device">Переконайтеся, що на вашому пристрої відтворюється музика, а потім спробуйте ще раз</string>
     <string name="internal_audio_capture_may_be_blocked">Деякі застосунки можуть забороняти запис власного звуку. Спробуйте відтворити музику через динамік, обравши мікрофон як джерело звуку.</string>
+    <string name="pref_title_auto_delete_sample_on_match">Автоматично видаляти запис, коли буде знайдено збіг</string>
+    <string name="backup_unencrypted_message">Резервні копії не зашифровані. Зберігайте їх у приватному місці.</string>
+    <string name="pref_group_auto_backup">Автоматичне резервне копіювання</string>
+    <string name="pref_title_auto_backup">Автоматинян резервне копіювання</string>
+    <string name="pref_subtitle_auto_backup">Періодично зберігати резервну копію в теку на ваш вибір</string>
+    <string name="pref_title_backup_location">Розташування резервної копії</string>
+    <string name="pref_subtitle_backup_location">Резервну копію буде збережено тут: %s</string>
+    <string name="pref_title_backup_frequency">Частота резервного копіювання</string>
+    <string name="pref_subtitle_backup_frequency_one">Кожного дня</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">Кожен %d день</item>
+        <item quantity="few">Кожні %d дні</item>
+        <item quantity="many">Кожні %d днів</item>
+        <item quantity="other">Кожні %d днів</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Частота резервного копіювання</string>
+    <string name="pref_title_backup_retention">Резервні копії, які потрібно зберегти</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">Остання %d резервна копія</item>
+        <item quantity="few">Останні %d резервні копії</item>
+        <item quantity="many">Останні %d резервних копій</item>
+        <item quantity="other">Останні %d резервних копій</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Зберегти все</string>
+    <string name="backup_retention_dialog_title">Резервні копії, які потрібно зберегти</string>
+    <string name="auto_backup_status_last_success">Остання резервна копія: %s</string>
+    <string name="auto_backup_status_last_failure">Попередня спроба не вдалася: %s</string>
+    <string name="auto_backup_status_scheduled">Заплановано резервне копіювання</string>
+    <string name="notification_channel_name_backup">Резервна копія</string>
+    <string name="notification_channel_desc_backup">Стан автоматичного резервного копіювання</string>
+    <string name="auto_backup_notification_title">Не вдалося створити автоматичну резервну копію</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Автоматичне резервне копіювання вимкнено</string>
+    <string name="auto_backup_error_access_denied">Немає дозволу на запис до теки резервного копіювання. Виберіть її ще раз</string>
+    <string name="auto_backup_error_file_not_found">Не вдалося створити файл резервної копії у вибраній теці</string>
+    <string name="auto_backup_error_unhandled">Сталася неочікувана помилка. Перевірте, чи достатньо вільного місця та чи доступна тека</string>
 </resources>
