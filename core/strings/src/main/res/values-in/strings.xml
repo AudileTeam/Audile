@@ -341,4 +341,33 @@
     <string name="about_pref_title_donation">Donasi</string>
     <string name="about_pref_subtitle_donation">Dukung proyek ini</string>
     <string name="about_pref_donation_message">Aplikasi ini sepenuhnya gratis. Aplikasi ini hadir tanpa iklan apa pun atau bentuk monetisasi komersial lainnya. Untuk mendukung pengembangan berkelanjutan atau sekadar mengucapkan terima kasih, pertimbangkan untuk berdonasi. Terima kasih atas dukungan Anda!</string>
+    <string name="pref_title_auto_delete_sample_on_match">Hapus rekaman secara otomatis saat kecocokan ditemukan</string>
+    <string name="backup_unencrypted_message">Berkas cadangan tidak dienkripsi. Simpan di lokasi pribadi.</string>
+    <string name="pref_group_auto_backup">Pencadangan otomatis</string>
+    <string name="pref_title_auto_backup">Pencadangan otomatis</string>
+    <string name="pref_subtitle_auto_backup">Simpan cadangan secara berkala ke folder pilihan Anda</string>
+    <string name="pref_title_backup_location">Lokasi cadangan</string>
+    <string name="pref_subtitle_backup_location">Cadangan akan disimpan di: %s</string>
+    <string name="pref_title_backup_frequency">Frekuensi pencadangan</string>
+    <string name="pref_subtitle_backup_frequency_one">Setiap hari</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="other">Setiap %d hari</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Frekuensi pencadangan</string>
+    <string name="pref_title_backup_retention">Cadangan yang disimpan</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="other">%d cadangan terakhir</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Simpan semua</string>
+    <string name="backup_retention_dialog_title">Cadangan yang disimpan</string>
+    <string name="auto_backup_status_last_success">Cadangan terakhir: %s</string>
+    <string name="auto_backup_status_last_failure">Upaya terakhir gagal: %s</string>
+    <string name="auto_backup_status_scheduled">Pencadangan telah dijadwalkan</string>
+    <string name="notification_channel_name_backup">Cadangkan</string>
+    <string name="notification_channel_desc_backup">Status pencadangan otomatis</string>
+    <string name="auto_backup_notification_title">Pencadangan otomatis gagal</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Pencadangan otomatis telah dinonaktifkan</string>
+    <string name="auto_backup_error_access_denied">Tidak memiliki izin untuk menulis ke folder cadangan, pilih kembali folder tersebut</string>
+    <string name="auto_backup_error_file_not_found">Tidak dapat membuat berkas cadangan di folder yang dipilih</string>
+    <string name="auto_backup_error_unhandled">Terjadi kesalahan tak terduga, periksa ruang kosong dan pastikan folder masih tersedia</string>
 </resources>
