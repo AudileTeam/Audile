@@ -281,7 +281,7 @@
     <string name="toast_no_file_selected">Keine Datei ausgewählt</string>
     <string name="backup_entry_data">Datenbank und Audio-Beispiele</string>
     <string name="backup_entry_preferences">Einstellungen</string>
-    <string name="backup_in_progress">Sicherung wird erstellt…</string>
+    <string name="backup_in_progress">Eine Sicherung wird erstellt…</string>
     <string name="backup_result_success">Sicherung erfolgreich erstellt!</string>
     <string name="restore_erase_warning">Durch die Wiederherstellung werden die aktuellen Daten gelöscht und durch den Inhalt der Sicherung ersetzt. Dieser Vorgang kann nicht rückgängig gemacht werden. Sichere alle wichtigen Daten, bevor du fortfährst.</string>
     <string name="restore_info_restart">Die App wird nach Abschluss der Wiederherstellung neu gestartet.</string>
@@ -343,4 +343,23 @@
     <string name="result_message_no_sound_detected_device">Bitte stelle sicher, dass Musik auf deinem Gerät läuft, und versuche es erneut</string>
     <string name="internal_audio_capture_may_be_blocked">Einige Apps schränken das Aufnehmen ihres internen Audios ein. Versuche, die Musik laut abzuspielen und die Audioquelle auf das Mikrofon umzustellen.</string>
     <string name="pref_title_auto_delete_sample_on_match">Aufzeichnung automatisch löschen, sobald eine Übereinstimmung gefunden wird</string>
+    <string name="backup_unencrypted_message">Backup-Dateien sind unverschlüsselt. Halten Sie sie in einer privaten Lage.</string>
+    <string name="pref_group_auto_backup">Automatisches Backup</string>
+    <string name="pref_title_auto_backup">Automatisches Backup</string>
+    <string name="pref_subtitle_auto_backup">Speichere regelmäßig ein Backup in einem Ordner Ihrer Wahl</string>
+    <string name="pref_title_backup_location">Speicherort</string>
+    <string name="pref_subtitle_backup_location">Backup wird gespeichert in: %s</string>
+    <string name="pref_title_backup_frequency">Backup-Frequenz</string>
+    <string name="pref_subtitle_backup_frequency_one">Jeden Tag</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">Jeden Tag</item>
+        <item quantity="other">Alle %d Tage</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Backup-Frequenz</string>
+    <string name="pref_title_backup_retention">Zu behaltene Backups</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">Letztes Backups</item>
+        <item quantity="other">Letzte %d Backups</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Alle behalten</string>
 </resources>
