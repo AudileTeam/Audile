@@ -343,23 +343,34 @@
     <string name="result_message_no_sound_detected_device">Bitte stelle sicher, dass Musik auf deinem Gerät läuft, und versuche es erneut</string>
     <string name="internal_audio_capture_may_be_blocked">Einige Apps schränken das Aufnehmen ihres internen Audios ein. Versuche, die Musik laut abzuspielen und die Audioquelle auf das Mikrofon umzustellen.</string>
     <string name="pref_title_auto_delete_sample_on_match">Aufzeichnung automatisch löschen, sobald eine Übereinstimmung gefunden wird</string>
-    <string name="backup_unencrypted_message">Backup-Dateien sind unverschlüsselt. Halten Sie sie in einer privaten Lage.</string>
-    <string name="pref_group_auto_backup">Automatisches Backup</string>
-    <string name="pref_title_auto_backup">Automatisches Backup</string>
-    <string name="pref_subtitle_auto_backup">Speichere regelmäßig ein Backup in einem Ordner Ihrer Wahl</string>
+    <string name="backup_unencrypted_message">Sicherung-Dateien sind unverschlüsselt. Halten Sie sie in einer privaten Lage.</string>
+    <string name="pref_group_auto_backup">Automatische Sicherung</string>
+    <string name="pref_title_auto_backup">Automatisches Sicherung</string>
+    <string name="pref_subtitle_auto_backup">Speichere regelmäßig eine Sicherung in einem Ordner Ihrer Wahl</string>
     <string name="pref_title_backup_location">Speicherort</string>
-    <string name="pref_subtitle_backup_location">Backup wird gespeichert in: %s</string>
-    <string name="pref_title_backup_frequency">Backup-Frequenz</string>
+    <string name="pref_subtitle_backup_location">Sicherung wird gespeichert in: %s</string>
+    <string name="pref_title_backup_frequency">Sicherungsfrequenz</string>
     <string name="pref_subtitle_backup_frequency_one">Jeden Tag</string>
     <plurals name="pref_subtitle_backup_frequency">
         <item quantity="one">Jeden Tag</item>
         <item quantity="other">Alle %d Tage</item>
     </plurals>
-    <string name="backup_frequency_dialog_title">Backup-Frequenz</string>
-    <string name="pref_title_backup_retention">Zu behaltene Backups</string>
+    <string name="backup_frequency_dialog_title">Sicherungsfrequenz</string>
+    <string name="pref_title_backup_retention">Zu behaltene Sicherungen</string>
     <plurals name="pref_subtitle_backup_retention">
-        <item quantity="one">Letztes Backups</item>
-        <item quantity="other">Letzte %d Backups</item>
+        <item quantity="one">Letzte Sicherung</item>
+        <item quantity="other">Letzte %d Sicherungen</item>
     </plurals>
     <string name="pref_subtitle_backup_retention_unlimited">Alle behalten</string>
+    <string name="backup_retention_dialog_title">Zu behaltene Sicherung</string>
+    <string name="auto_backup_status_last_success">Letzte Sicherung: %s</string>
+    <string name="auto_backup_status_last_failure">Letzter Versuch fehlgeschlagenen: %s</string>
+    <string name="auto_backup_status_scheduled">Eine Sicherung ist geplant</string>
+    <string name="notification_channel_name_backup">Sicherung</string>
+    <string name="notification_channel_desc_backup">Status der automatischen Sicherungen</string>
+    <string name="auto_backup_notification_title">Automatische Sicherung fehlgeschlagen</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Automatische Sicherung wurde ausgeschaltet</string>
+    <string name="auto_backup_error_unhandled">Ein unerwarteter Fehler ist aufgetreten, überprüfen Sie den freien Speicherplatz und stellen Sie sicher, dass der Ordner noch verfügbar ist</string>
+    <string name="auto_backup_error_access_denied">Keine Schreibberechtigung für den Sicherungsordner – bitte Ordner erneut wählen</string>
+    <string name="auto_backup_error_file_not_found">Die Sicherungsdatei konnte nicht im ausgewählten Ordner erstellt werden</string>
 </resources>
