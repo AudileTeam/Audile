@@ -289,7 +289,7 @@
     <string name="backup_entry_picker_title">Selecione os dados para fazer backup:</string>
     <string name="restore_entry_picker_title">Selecione os dados para restaurar:</string>
     <string name="backup_estimating_size">Estimando o tamanho dos dados do app…</string>
-    <string name="backup_in_progress">Criando o backup…</string>
+    <string name="backup_in_progress">Criando um backup…</string>
     <string name="backup_result_success">Backup criado com sucesso!</string>
     <string name="restore_erase_warning">Ao restaurar, os dados existentes serão apagados e substituídos com os conteúdos do backup. Isso não pode ser desfeito. Faça backup de quaisquer dados importantes antes de continuar.</string>
     <string name="restore_info_restart">O app reiniciará na conclusão da restauração.</string>
@@ -359,4 +359,37 @@
         <item quantity="many">%d selecionados</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
+    <string name="pref_title_auto_delete_sample_on_match">Apagar gravação automaticamente ao encontrar uma correspondência</string>
+    <string name="backup_unencrypted_message">Os arquivos de backup não são criptografados. Guarde-os em uma localização privada.</string>
+    <string name="pref_group_auto_backup">Backup automático</string>
+    <string name="pref_title_auto_backup">Backup automático</string>
+    <string name="pref_subtitle_auto_backup">Salve um backup periodicamente em uma pasta de sua escolha</string>
+    <string name="pref_title_backup_location">Localização de backup</string>
+    <string name="pref_subtitle_backup_location">O backup será armazenado em: %s</string>
+    <string name="pref_title_backup_frequency">Frequência do backup</string>
+    <string name="pref_subtitle_backup_frequency_one">Todo dia</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">A cada %d dia</item>
+        <item quantity="many">A cada %d de dias</item>
+        <item quantity="other">A cada %d dias</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Frequência do backup</string>
+    <string name="pref_title_backup_retention">Quantos backups manter</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">Último %d backup</item>
+        <item quantity="many">Últimos %d de backups</item>
+        <item quantity="other">Últimos %d backups</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Manter todos</string>
+    <string name="backup_retention_dialog_title">Backups a manter</string>
+    <string name="auto_backup_status_last_success">Último backup: %s</string>
+    <string name="auto_backup_status_last_failure">Última tentativa falhou: %s</string>
+    <string name="auto_backup_status_scheduled">Um backup foi agendado</string>
+    <string name="notification_channel_name_backup">Backup</string>
+    <string name="notification_channel_desc_backup">Estado dos backups automáticos</string>
+    <string name="auto_backup_notification_title">Falha no backup automático</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Backup automático foi desativado</string>
+    <string name="auto_backup_error_access_denied">Não há permissão para gravar na pasta de backup, escolha a pasta novamente</string>
+    <string name="auto_backup_error_file_not_found">Não foi possível criar o arquivo de backup na pasta selecionada</string>
+    <string name="auto_backup_error_unhandled">Ocorreu um erro inesperado, confira o espaço disponível e se a pasta ainda está disponível</string>
 </resources>
