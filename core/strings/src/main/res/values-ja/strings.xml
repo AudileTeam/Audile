@@ -341,4 +341,28 @@
     <string name="result_message_no_sound_detected_microphone">音楽が十分に大きな音量で流れていることの確認の上、もう一度試してください</string>
     <string name="result_message_no_sound_detected_device">デバイスから音楽が再生されていることの確認の上、もう一度試してください</string>
     <string name="internal_audio_capture_may_be_blocked">一部のアプリでは、アプリ内部の音声の録音に制限がかけられている場合があります。音楽を大音量で再生し、音源をマイクに切り替えてみてください。</string>
+    <string name="pref_title_auto_delete_sample_on_match">認識できてから、自動的に録音データを削除する</string>
+    <string name="backup_unencrypted_message">バックアップファイルが暗号化されていません。安全な場所に格納してください。</string>
+    <string name="pref_group_auto_backup">自動バックアップ</string>
+    <string name="pref_title_auto_backup">自動バックアップ</string>
+    <string name="pref_subtitle_backup_frequency_one">毎日</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="other">%d日ごと</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">バックアップ周期</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="other">最新の%dつのバックアップ</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">全て</string>
+    <string name="notification_channel_name_backup">バックアップ</string>
+    <string name="notification_channel_desc_backup">自動バックアップの状態</string>
+    <string name="auto_backup_notification_title">自動バックアップが失敗しました</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">自動バックアップが無効にされていました</string>
+    <string name="pref_title_backup_frequency">バックアップの周期</string>
+    <string name="pref_subtitle_auto_backup">選択したフォルダに定期的にバックアップを保存する</string>
+    <string name="pref_title_backup_location">バックアップ先</string>
+    <string name="pref_subtitle_backup_location">%sでバックアップを収納します</string>
+    <string name="pref_title_backup_retention">バックアップの保存期間</string>
+    <string name="backup_retention_dialog_title">バックアップの保存期間</string>
+    <string name="auto_backup_status_last_success">最新のバックアップ：%s</string>
 </resources>

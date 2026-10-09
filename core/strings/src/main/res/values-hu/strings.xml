@@ -244,7 +244,7 @@
     <string name="backup_entry_picker_title">Adatok kiválasztása mentéshez:</string>
     <string name="restore_entry_picker_title">Adatok kiválasztása visszaállításhoz:</string>
     <string name="backup_estimating_size">Alkalmazásadatok méretének becslése…</string>
-    <string name="backup_in_progress">Biztonsági mentés kreálása…</string>
+    <string name="backup_in_progress">Biztonsági mentés létrehozása…</string>
     <string name="backup_result_success">Biztonsági mentés sikeresen létrehozva!</string>
     <string name="restore_erase_warning">A visszaállítás felülírja a jelenlegi adatokat a mentés tartalmával. Ezt a lépést nem lehet visszavonni, ezért készíts biztonsági mentést minden fontos adatodról, mielőtt folytatnád.</string>
     <string name="restore_info_restart">Az alkalmazás újraindul a visszaállítás befejezése után.</string>
@@ -342,4 +342,35 @@
     <string name="about_pref_title_donation">Adományozás</string>
     <string name="about_pref_subtitle_donation">Támogasd a projektet</string>
     <string name="about_pref_donation_message">Ez az alkalmazás teljesen ingyenes. Nincsenek benne reklámok, sem más kereskedelmi bevételi forma. Ha szeretnéd támogatni a további fejlesztést, vagy csak köszönetet mondani, fontold meg az adományozást. Köszönöm a támogatást!</string>
+    <string name="pref_title_auto_delete_sample_on_match">Felvétel automatikus törlése találat esetén</string>
+    <string name="backup_unencrypted_message">A biztonsági mentések nincsenek titkosítva. Tárold őket privát helyen.</string>
+    <string name="pref_group_auto_backup">Automatikus mentés</string>
+    <string name="pref_title_auto_backup">Automatikus mentés</string>
+    <string name="pref_subtitle_auto_backup">Rendszeres biztonsági mentés egy általad választott mappába</string>
+    <string name="pref_title_backup_location">Mentés helye</string>
+    <string name="pref_subtitle_backup_location">Biztonsági mentés helye: %s</string>
+    <string name="pref_title_backup_frequency">Biztonsági mentés gyakorisága</string>
+    <string name="pref_subtitle_backup_frequency_one">Naponta</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">%d naponta</item>
+        <item quantity="other">%d naponta</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Biztonsági mentés gyakorisága</string>
+    <string name="pref_title_backup_retention">Megőrzendő mentések száma</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">Legutóbbi %d biztonsági mentés</item>
+        <item quantity="other">Legutóbbi %d biztonsági mentés</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Összes megtartása</string>
+    <string name="backup_retention_dialog_title">Megőrzendő mentések száma</string>
+    <string name="auto_backup_status_last_success">Utolsó biztonsági mentés ideje: %s</string>
+    <string name="auto_backup_status_last_failure">Legutóbbi sikertelen próbálkozás : %s</string>
+    <string name="auto_backup_status_scheduled">Biztonsági mentés ütemezve</string>
+    <string name="notification_channel_name_backup">Biztonsági mentés</string>
+    <string name="notification_channel_desc_backup">Automatikus biztonsági mentések állapota</string>
+    <string name="auto_backup_notification_title">Automatikus biztonsági mentés sikertelen volt</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">Automatikus biztonsági mentés ki lett kapcsolva</string>
+    <string name="auto_backup_error_access_denied">Nincs írási jogosultság a mentési mappához, válaszd ki újra a mappát</string>
+    <string name="auto_backup_error_file_not_found">Nem sikerült létrehozni a biztonsági mentést a kiválasztott mappában</string>
+    <string name="auto_backup_error_unhandled">Váratlan hiba történt. Ellenőrizd, van-e elég szabad hely, és elérhető-e még a mappa</string>
 </resources>

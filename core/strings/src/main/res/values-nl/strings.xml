@@ -347,22 +347,22 @@
     <string name="pref_group_auto_backup">Automatische back-up</string>
     <string name="pref_title_auto_backup">Automatische back-up</string>
     <string name="pref_subtitle_auto_backup">Regelmatig een back-up maken in een map naar keuze</string>
-    <string name="pref_title_backup_location">Back-uplocatie</string>
+    <string name="pref_title_backup_location">Locatie</string>
     <string name="pref_subtitle_backup_location">Back-up wordt bewaard in: %s</string>
-    <string name="pref_title_backup_frequency">Back-upfrequentie</string>
+    <string name="pref_title_backup_frequency">Frequentie</string>
     <string name="pref_subtitle_backup_frequency_one">Iedere dag</string>
     <plurals name="pref_subtitle_backup_frequency">
         <item quantity="one">Iedere %d dag</item>
         <item quantity="other">Iedere %d dagen</item>
     </plurals>
     <string name="backup_frequency_dialog_title">Back-upfrequentie</string>
-    <string name="pref_title_backup_retention">Back-ups om te bewaren</string>
+    <string name="pref_title_backup_retention">Back-ups bewaren</string>
     <plurals name="pref_subtitle_backup_retention">
         <item quantity="one">Laatste %d back-up</item>
         <item quantity="other">Laatste %d back-ups</item>
     </plurals>
     <string name="pref_subtitle_backup_retention_unlimited">Alles bewaren</string>
-    <string name="backup_retention_dialog_title">Back-ups om te bewaren</string>
+    <string name="backup_retention_dialog_title">Back-ups bewaren</string>
     <string name="auto_backup_status_last_success">Laatste back-up: %s</string>
     <string name="auto_backup_status_last_failure">Laatste poging mislukt: %s</string>
     <string name="auto_backup_status_scheduled">Een back-up is ingeroosterd</string>

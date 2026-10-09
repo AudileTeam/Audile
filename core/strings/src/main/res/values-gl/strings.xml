@@ -342,4 +342,35 @@
         <item quantity="one">%d seleccionado</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
+    <string name="pref_title_auto_delete_sample_on_match">Auto-eliminar a gravación se identifica con éxito</string>
+    <string name="backup_unencrypted_message">Os ficheiros de apoio non están cifrados. Gárdaos nun lugar privado.</string>
+    <string name="pref_group_auto_backup">Copia de apoio automática</string>
+    <string name="pref_title_auto_backup">Copia de apoio automática</string>
+    <string name="pref_subtitle_auto_backup">Fai unha copia de xeito periódico no cartafol que elixas</string>
+    <string name="pref_title_backup_location">Localización da copia</string>
+    <string name="pref_subtitle_backup_location">Vaise gardar a copia en: %s</string>
+    <string name="pref_title_backup_frequency">Frecuencia da copia</string>
+    <string name="pref_subtitle_backup_frequency_one">Todos os días</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">Cada día</item>
+        <item quantity="other">Cada %d días</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">Frecuencia da copia</string>
+    <string name="pref_title_backup_retention">Versións a manter</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">A última copia</item>
+        <item quantity="other">As últimas %d copias</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">Mantelas todas</string>
+    <string name="backup_retention_dialog_title">Copias a manter</string>
+    <string name="auto_backup_status_last_success">Última copia: %s</string>
+    <string name="auto_backup_status_last_failure">O último intento fallou: %s</string>
+    <string name="auto_backup_status_scheduled">Hai unha copia programada</string>
+    <string name="notification_channel_name_backup">Copia de apoio</string>
+    <string name="notification_channel_desc_backup">Estado das copias automáticas</string>
+    <string name="auto_backup_notification_title">Fallou a copia de apoio automática</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">A copia de apoio automática está desactivada</string>
+    <string name="auto_backup_error_access_denied">Non hai permiso para escribir no cartafol para a copia, elixe outro cartafol</string>
+    <string name="auto_backup_error_file_not_found">Non se puido crear a copia de apoio no cartafol seleccionado</string>
+    <string name="auto_backup_error_unhandled">Houbo un fallo non agardado, comproba o espazo libre e que o cartafol sexa accesible</string>
 </resources>

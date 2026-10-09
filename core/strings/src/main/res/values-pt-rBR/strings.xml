@@ -254,7 +254,7 @@
     <string name="restore_dialog_title">Restaurar</string>
     <string name="restore_dialog_button_restore">Restaurar</string>
     <string name="about_pref_subtitle_github_repo">Código-fonte, problemas e outras informações</string>
-    <string name="about_pref_subtitle_privacy_policy">Aprenda mais como sobre o app lida com seus dados</string>
+    <string name="about_pref_subtitle_privacy_policy">Aprenda mais sobre como o app lida com seus dados</string>
     <string name="about_pref_title_license">Licença</string>
     <string name="about_pref_subtitle_third_licenses">Licenças de bibliotecas de terceiros que o Audile usa</string>
     <string name="result_title_recognition_saved">Reconhecimento salvo</string>
