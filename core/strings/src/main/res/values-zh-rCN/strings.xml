@@ -369,4 +369,8 @@
     <string name="auto_backup_error_access_denied">没有写入备份文件夹的权限，再次选择文件夹</string>
     <string name="auto_backup_error_file_not_found">无法在所选文件夹中创建备份文件</string>
     <string name="auto_backup_error_unhandled">发生了未预料错误，检查未使用空间是否足够以及备份文件夹是否仍可用</string>
+    <string name="recognition_status_retry">重试计划好的识别任务</string>
+    <string name="recognition_queue_offline_paused">没有互联网时队列暂停</string>
+    <string name="recognition_queue_low_battery_paused">电量不足时队列暂停</string>
+    <string name="recognition_queue_low_battery_allow">允许这一次</string>
 </resources>

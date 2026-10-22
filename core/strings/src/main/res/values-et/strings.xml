@@ -372,4 +372,8 @@
     <string name="auto_backup_error_access_denied">Puudub õigus kirjutada varunduskausta, palun vali kausta uuesti</string>
     <string name="auto_backup_error_file_not_found">Varukoopia loomine valitud kausta ei õnnestunud</string>
     <string name="auto_backup_error_unhandled">Tekkis ootamatu viga, palun kontrolli, kas vaba andmeruumi jagub ja varunduse kaust on jätkuvalt saadaval</string>
+    <string name="recognition_status_retry">Korda ajastatut uuesti</string>
+    <string name="recognition_queue_offline_paused">Kuni internetiühendust pole, on tööde järjekord ootel</string>
+    <string name="recognition_queue_low_battery_paused">Kuni aku täituvus on kehvapoolne, on tööde järjekord ootel</string>
+    <string name="recognition_queue_low_battery_allow">Luba see üks kord</string>
 </resources>

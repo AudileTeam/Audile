@@ -372,4 +372,6 @@
     <string name="auto_backup_error_unhandled">Ein unerwarteter Fehler ist aufgetreten, überprüfe den freien Speicherplatz und stelle sicher, dass der Ordner noch verfügbar ist</string>
     <string name="auto_backup_error_access_denied">Keine Schreibberechtigung für den Sicherungsordner – bitte Ordner erneut wählen</string>
     <string name="auto_backup_error_file_not_found">Die Sicherungsdatei konnte nicht im ausgewählten Ordner erstellt werden</string>
+    <string name="recognition_status_retry">Weiterer Versuch geplant</string>
+    <string name="recognition_queue_low_battery_allow">Dieses Mal zulassen</string>
 </resources>

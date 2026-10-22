@@ -242,7 +242,7 @@
     <string name="backup_entry_picker_title">حدد البيانات المُراد نسخها احتياطيًّا:</string>
     <string name="restore_entry_picker_title">حدد البيانات المراد استعادتها:</string>
     <string name="backup_estimating_size">تقدير حجم بيانات التطبيق جارٍ…</string>
-    <string name="backup_in_progress">إنشاء نسخة احتياطية جارٍ…</string>
+    <string name="backup_in_progress">يجري إنشاء نسخة احتياطية…</string>
     <string name="backup_result_success">تم إنشاء النسخة الاحتياطية بنجاح!</string>
     <string name="restore_erase_warning">ستؤدي عملية الاستعادة إلى مسح البيانات الحالية واستبدالها بمحتويات النسخة الاحتياطية. لا يمكن التراجع عن هذا الإجراء. لذا، يرجى نسخ أي بيانات مهمة احتياطيًّا قبل المتابعة.</string>
     <string name="restore_info_restart">سيتم إعادة تشغيل التطبيق بعد اكتمال عملية الاستعادة.</string>
@@ -346,4 +346,16 @@
     <string name="result_message_no_sound_detected_device">يرجى التأكد من تشغيل الموسيقى على جهازك، ثم حاول مرةً أخرى</string>
     <string name="internal_audio_capture_may_be_blocked">قد تقيّد بعض التطبيقات تسجيل الصوت الداخلي. جرّب تشغيل الموسيقى بصوتٍ عالٍ ثمّ تحويل مصدر الصوت إلى الميكروفون.</string>
     <string name="pref_title_auto_delete_sample_on_match">يحذف التسجيل تلقائيًّا عند العثور على تطابق</string>
+    <string name="recognition_status_retry">تمت جدولة إعادة المحاولة</string>
+    <string name="recognition_queue_offline_paused">توقَف قائمة الانتظار مؤقّتًا في حالة عدم وجود اتصال بالإنترنت</string>
+    <string name="recognition_queue_low_battery_paused">توقَف قائمة الانتظار مؤقّتًا عندما تكون البطارية منخفضة</string>
+    <string name="recognition_queue_low_battery_allow">اسمح هذه المرّة</string>
+    <string name="backup_unencrypted_message">ملفات النسخ الاحتياطي غير مُشفَّرة. احتفظ بها في مكان خاص.</string>
+    <string name="pref_group_auto_backup">النسخ الاحتياطي التلقائي</string>
+    <string name="pref_title_auto_backup">النسخ الاحتياطي التلقائي</string>
+    <string name="pref_subtitle_auto_backup">احفظ نسخة احتياطية بشكل دوري في مُجلَّد تختاره</string>
+    <string name="pref_title_backup_location">موقع النسخ الاحتياطي</string>
+    <string name="pref_subtitle_backup_location">ستُخزَّن النسخة الاحتياطية في: %s</string>
+    <string name="pref_title_backup_frequency">مُعدَّل النسخ الاحتياطي</string>
+    <string name="pref_subtitle_backup_frequency_one">كل يوم</string>
 </resources>

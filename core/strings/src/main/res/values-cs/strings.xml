@@ -386,4 +386,8 @@
     <string name="auto_backup_error_access_denied">Chybějící oprávnění k zápisu do složky se zálohami, zvolte složku znovu</string>
     <string name="auto_backup_error_file_not_found">Ve zvolené složce se nepodařilo vytvořit soubor zálohy</string>
     <string name="auto_backup_error_unhandled">Došlo k neočekávané chybě, zkontrolujte volné místo a zda je složka stále dostupná</string>
+    <string name="recognition_status_retry">Znovu zkusit naplánované</string>
+    <string name="recognition_queue_offline_paused">Bez internetu je fronta pozastavena</string>
+    <string name="recognition_queue_low_battery_paused">Při nízké baterii je fronta pozastavena</string>
+    <string name="recognition_queue_low_battery_allow">Tentokrát povolit</string>
 </resources>

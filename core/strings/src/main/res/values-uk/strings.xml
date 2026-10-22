@@ -378,4 +378,8 @@
     <string name="auto_backup_error_access_denied">Немає дозволу на запис до теки резервного копіювання. Виберіть її ще раз</string>
     <string name="auto_backup_error_file_not_found">Не вдалося створити файл резервної копії у вибраній теці</string>
     <string name="auto_backup_error_unhandled">Сталася неочікувана помилка. Перевірте, чи достатньо вільного місця та чи доступна тека</string>
+    <string name="recognition_status_retry">Повтор заплановано</string>
+    <string name="recognition_queue_offline_paused">Черга призупиняється, поки немає мережі</string>
+    <string name="recognition_queue_low_battery_paused">Черга призупиняється, коли рівень заряду акумулятора низький</string>
+    <string name="recognition_queue_low_battery_allow">Дозволити цього разу</string>
 </resources>

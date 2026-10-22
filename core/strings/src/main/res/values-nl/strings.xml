@@ -372,4 +372,8 @@
     <string name="auto_backup_error_access_denied">Geen toestemming om naar de back-upmap te schrijven, kies de map opnieuw</string>
     <string name="auto_backup_error_file_not_found">Kon back-upbestand niet aanmaken in de geselecteerde map</string>
     <string name="auto_backup_error_unhandled">Er is een onverwachte fout opgetreden. Controleer of er voldoende schijfruimte beschikbaar is en of de map nog steeds toegankelijk is</string>
+    <string name="recognition_queue_offline_paused">Wachtrij is gepauzeerd als er geen internet is</string>
+    <string name="recognition_queue_low_battery_paused">Wachtrij is gepauzeerd als batterijniveau laag is</string>
+    <string name="recognition_queue_low_battery_allow">Deze keer toestaan</string>
+    <string name="recognition_status_retry">Opnieuw proberen ingeroosterd</string>
 </resources>
