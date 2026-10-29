@@ -60,7 +60,7 @@ android {
     androidResources {
         generateLocaleConfig = true
         // Excluded unfinished translations: "az", "br", "ca", "el", "fa", "gu", "ml", "ro", "sq", "vi"
-        localeFilters += listOf("en", "ar", "cs", "de", "es", "et", "fr", "gl", "hu", "in", "it", "iw", "ja", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "tr", "uk", "zh-rCN")
+        localeFilters += listOf("en", "ar", "cs", "de", "es", "et", "fr", "gl", "hu", "in", "it", "iw", "ja", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sv", "tr", "uk", "zh-rCN")
     }
     dependenciesInfo {
         includeInApk = false
