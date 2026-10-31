@@ -19,6 +19,7 @@
     <string name="notification_listening_subtitle_extra_time">Trying one more time</string>
     <string name="quick_tile_recognize">Recognize song</string>
     <string name="quick_tile_cancel_recognition">Cancel recognition</string>
+    <string name="quick_tile_auto_recognition">Auto recognition</string>
     <string name="action_recognize">Recognize</string>
     <string name="action_cancel_recognition">Cancel recognition</string>
     <!-- App shortcuts. If there's enough space, the launcher displays _long version instead of _short. Short should be limited to 10 chars. Long should be limited to 25 chars.-->
@@ -389,6 +390,27 @@
     <string name="notification_channel_desc_background_result">Shows song results when the app is minimized or you’re not on the recognition screen</string>
     <string name="notification_channel_name_scheduled_result">Song results of scheduled recognitions</string>
     <string name="notification_channel_desc_scheduled_result">Shows song results of recognitions that were scheduled offline or in other cases</string>
+    <string name="notification_channel_name_auto_recognition_status">Auto recognition</string>
+    <string name="notification_channel_desc_auto_recognition_status">Status of auto recognition</string>
+    <string name="notification_channel_name_auto_recognition_result">Song results found by auto recognition</string>
+    <string name="notification_channel_desc_auto_recognition_result">Shows songs found by auto recognition</string>
+
+    <string name="notification_auto_recognition_status_title_on">Auto recognition is on</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Continuously identifies music around you</string>
+    <string name="notification_auto_recognition_status_title_off">Auto recognition is off</string>
+    <string name="notification_auto_recognition_status_waiting_network">Waiting for a network connection</string>
+    <string name="notification_auto_recognition_status_low_battery">Paused while the battery is low</string>
+    <string name="notification_auto_recognition_status_during_call">Paused during a call</string>
+    <string name="notification_auto_recognition_status_time_limit">Session time limit reached</string>
+    <!-- %1$s is the track title, %2$s is the artist -->
+    <string name="notification_auto_recognition_now_playing">Now playing %1$s by %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">%d song found</item>
+        <item quantity="other">%d songs found</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Turn off</string>
+    <string name="notification_auto_recognition_action_turn_on">Turn on</string>
+    <string name="auto_recognition_battery_unrestricted_required">Auto recognition needs this app\'s battery usage set to "Unrestricted"</string>
 
     <string name="crash_dialog_title">Audile has crashed</string>
     <string name="crash_dialog_message">An unexpected error has occurred, causing the app to stop. Would you like to email the bug report to help fix the issue\?</string>

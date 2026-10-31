@@ -17,6 +17,7 @@
     <string name="notification_listening_subtitle_extra_time">Пробуем еще раз</string>
     <string name="quick_tile_recognize">Распознать песню</string>
     <string name="quick_tile_cancel_recognition">Отменить распознавание</string>
+    <string name="quick_tile_auto_recognition">Автораспознавание</string>
     <string name="action_recognize">Распознать</string>
     <string name="action_cancel_recognition">Отменить распознавание</string>
     <!-- App shortcuts. If there's enough space, the launcher displays _long version instead of _short. Short should be limited to 10 chars. Long should be limited to 25 chars.-->
@@ -364,6 +365,30 @@
     <string name="notification_channel_desc_control">Позволяет управлять процессом распознавания</string>
     <string name="notification_channel_name_scheduled_result">Результаты запланированных распознаваний</string>
     <string name="notification_channel_desc_scheduled_result">Показывает результаты распознаваний, запланированных в режиме офлайн или в других случаях</string>
+    <string name="notification_channel_name_auto_recognition_status">Автораспознавание</string>
+    <string name="notification_channel_desc_auto_recognition_status">Статус автораспознавания</string>
+    <string name="notification_channel_name_auto_recognition_result">Результаты автораспознавания</string>
+    <string name="notification_channel_desc_auto_recognition_result">Показывает песни, найденные автораспознаванием</string>
+
+    <string name="notification_auto_recognition_status_title_on">Автораспознавание включено</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Непрерывно распознаёт музыку вокруг вас</string>
+    <string name="notification_auto_recognition_status_title_off">Автораспознавание выключено</string>
+    <string name="notification_auto_recognition_status_waiting_network">Ожидание подключения к сети</string>
+    <string name="notification_auto_recognition_status_low_battery">На паузе, пока батарея разряжена</string>
+    <string name="notification_auto_recognition_status_during_call">На паузе во время звонка</string>
+    <string name="notification_auto_recognition_status_time_limit">Лимит времени сессии истёк</string>
+    <!-- %1$s — название, %2$s — исполнитель -->
+    <string name="notification_auto_recognition_now_playing">Сейчас играет %1$s - %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">Найдена %d песня</item>
+        <item quantity="few">Найдены %d песни</item>
+        <item quantity="many">Найдено %d песен</item>
+        <item quantity="other">Найдено %d песен</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Выключить</string>
+    <string name="notification_auto_recognition_action_turn_on">Включить</string>
+    <string name="auto_recognition_battery_unrestricted_required">Автораспознаванию требуется разрешение на использование батареи "Без ограничений"</string>
+
     <string name="crash_dialog_title">Произошел сбой Audile</string>
     <string name="crash_dialog_message">Непредвиденная ошибка привела к остановке приложения. Хотите отправить письмо с подробным отчетом, чтобы помочь исправить эту ошибку\?</string>
     <string name="crash_dialog_comment_prompt">Здесь вы можете добавить дополнительную информацию:</string>
