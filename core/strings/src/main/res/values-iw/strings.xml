@@ -332,4 +332,51 @@
     <string name="about_pref_title_donation">תרומה</string>
     <string name="about_pref_subtitle_donation">לתמוך בפרוייקט</string>
     <string name="about_pref_donation_message">היישומון הזה חינמי לגמרי. הוא מגיע ללא פרסומות או סוגים אחרים של פרסום ממומן. על מנת לתמוך בפיתוח המתמשך או פשוט להגיד תודה, קחו בחשבון לתת תרומה. תודה על התמיכה!</string>
+    <string name="reorder">סידור מחדש</string>
+    <string name="result_title_no_sound_detected">לא זוהה צליל</string>
+    <string name="result_message_no_sound_detected_microphone">נא לוודא שהמוזיקה מושמעת בווליום גבוה מספיק בקרבת מקום, ואז נסו שוב</string>
+    <string name="result_message_no_sound_detected_device">נא לוודא שהמוזיקה מושמעת מתוך המכשיר שלך, ואז נסה שוב</string>
+    <string name="internal_audio_capture_may_be_blocked">ייתכן שמכשירים מסויימים יגבילו לכידה של השמע הפנימי שלהם. נסה להשמיע מוזיקה בקול ולהחליף את מקור השמע למיקרופון.</string>
+    <string name="recognition_status_retry">ניסוי בשנית מתוזמן</string>
+    <string name="recognition_queue_offline_paused">התור נעצר כשאין אינטרנט</string>
+    <string name="recognition_queue_low_battery_paused">התור נעצר כשהסוללה נמוכה</string>
+    <string name="recognition_queue_low_battery_allow">אפשר הפעם</string>
+    <plurals name="items_selected">
+        <item quantity="one">%d נבחר</item>
+        <item quantity="two">%d נבחרו</item>
+        <item quantity="other">%d נבחרו</item>
+    </plurals>
+    <string name="pref_title_auto_delete_sample_on_match">מחיקה אוטומטית של ההקלטה כשנמצאה התאמה</string>
+    <string name="backup_unencrypted_message">קובצי גיבוי לא מוצפנים. שמור אותם במיקום פרטי.</string>
+    <string name="pref_group_auto_backup">גיבוי אוטומטי</string>
+    <string name="pref_title_auto_backup">גיבוי אוטומטי</string>
+    <string name="pref_subtitle_auto_backup">שמירת גיבוי בתיקייה לבחירתך מזמן לזמן</string>
+    <string name="pref_title_backup_location">מיקום גיבוי</string>
+    <string name="pref_subtitle_backup_location">הגיבוי יאוחסן ב: %s</string>
+    <string name="pref_title_backup_frequency">תכיפות גיבוי</string>
+    <string name="pref_subtitle_backup_frequency_one">כל יום</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="one">פעם ביום</item>
+        <item quantity="two">כל יומיים</item>
+        <item quantity="other">כל %d ימים</item>
+    </plurals>
+    <string name="backup_frequency_dialog_title">תכיפות גיבוי</string>
+    <string name="pref_title_backup_retention">גיבויים לשמירה</string>
+    <plurals name="pref_subtitle_backup_retention">
+        <item quantity="one">גיבוי אחרון</item>
+        <item quantity="two">%d גיבויים אחרונים</item>
+        <item quantity="other">%d גיבויים אחרונים</item>
+    </plurals>
+    <string name="pref_subtitle_backup_retention_unlimited">שמור הכל</string>
+    <string name="backup_retention_dialog_title">גיבויים לשמירה</string>
+    <string name="auto_backup_status_last_success">גיבוי אחרון: %s</string>
+    <string name="auto_backup_status_last_failure">נסיון אחרון נכשל: %s</string>
+    <string name="auto_backup_status_scheduled">גיבוי מתוכנן</string>
+    <string name="notification_channel_name_backup">גיבוי</string>
+    <string name="notification_channel_desc_backup">מצב גיבויים אוטומטיים</string>
+    <string name="auto_backup_notification_title">גיבוי אוטומטי נכשל</string>
+    <string name="auto_backup_notification_auto_backup_was_turned_off">גיבוי אוטומטי כבוי</string>
+    <string name="auto_backup_error_access_denied">אין הרשאת כתיבה לתיקיית הגיבוי, בחר את התיקייה בשנית</string>
+    <string name="auto_backup_error_file_not_found">לא ניתן ליצור את קובץ הגיבוי בתיקייה שנבחרה</string>
+    <string name="auto_backup_error_unhandled">שגיאה בלתי צפויה התרחשה, וודא מקום פנוי ושהתיקיה עדיין זמינה</string>
 </resources>

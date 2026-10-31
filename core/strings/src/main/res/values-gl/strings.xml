@@ -372,4 +372,8 @@
     <string name="auto_backup_error_access_denied">Non hai permiso para escribir no cartafol para a copia, elixe outro cartafol</string>
     <string name="auto_backup_error_file_not_found">Non se puido crear a copia de apoio no cartafol seleccionado</string>
     <string name="auto_backup_error_unhandled">Houbo un fallo non agardado, comproba o espazo libre e que o cartafol sexa accesible</string>
+    <string name="recognition_status_retry">Reintetar as programadas</string>
+    <string name="recognition_queue_offline_paused">A cola está en pausa mentras non hai conexión a internet</string>
+    <string name="recognition_queue_low_battery_paused">A cola está en pausa mentras queda pouca batería</string>
+    <string name="recognition_queue_low_battery_allow">Permitir esta vez</string>
 </resources>

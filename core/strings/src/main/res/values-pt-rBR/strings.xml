@@ -391,4 +391,8 @@
     <string name="auto_backup_error_access_denied">Não há permissão para gravar na pasta de backup, escolha a pasta novamente</string>
     <string name="auto_backup_error_file_not_found">Não foi possível criar o arquivo de backup na pasta selecionada</string>
     <string name="auto_backup_error_unhandled">Ocorreu um erro inesperado, confira o espaço disponível e se a pasta ainda está disponível</string>
+    <string name="recognition_status_retry">Repetir agendado</string>
+    <string name="recognition_queue_offline_paused">A fila está pausada enquanto não há internet</string>
+    <string name="recognition_queue_low_battery_paused">A fila está pausada enquanto a bateria está fraca</string>
+    <string name="recognition_queue_low_battery_allow">Permitir desta vez</string>
 </resources>

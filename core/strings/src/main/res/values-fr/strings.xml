@@ -383,4 +383,8 @@
     <string name="auto_backup_error_file_not_found">La création du fichier de sauvegarde dans le dossier sélectionné a échoué</string>
     <string name="auto_backup_error_access_denied">Accès en écriture au dossier de sauvegarde non autorisé, sélectionnez un autre dossier</string>
     <string name="auto_backup_error_unhandled">Une erreur inattendue s\'est produise, vérifiez l\'espace libre disponible et assurez-vous que le dossier est accessible</string>
+    <string name="recognition_status_retry">Nouvelle tentative prévue</string>
+    <string name="recognition_queue_offline_paused">La file d\'attente est mise en pause tant qu\'il n\'y a pas de connexion Internet</string>
+    <string name="recognition_queue_low_battery_paused">La file d\'attente est mise en pause lorsque la batterie est faible</string>
+    <string name="recognition_queue_low_battery_allow">Autoriser cette fois</string>
 </resources>
