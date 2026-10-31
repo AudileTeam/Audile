@@ -375,5 +375,5 @@
     <string name="recognition_status_retry">Weiterer Versuch geplant</string>
     <string name="recognition_queue_low_battery_allow">Dieses Mal zulassen</string>
     <string name="recognition_queue_offline_paused">Die Warteschlange ist pausiert, solange kein Zugang zum Internet besteht</string>
-    <string name="recognition_queue_low_battery_paused">Die Warteschlange ist pausiert, solange der Energiesparmodus aktiviert ist</string>
+    <string name="recognition_queue_low_battery_paused">Die Warteschlange ist pausiert, solange der Akkustand niedrig ist</string>
 </resources>
