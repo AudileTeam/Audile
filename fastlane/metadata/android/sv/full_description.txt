@@ -1,0 +1,10 @@
+<b>Audile</b> är en app med öppen källkod för musikigenkänning som hjälper dig att snabbt och pålitligt identifiera musik som spelas runt omkring dig.
+Appen integrerar tjänsterna AudD, ACRCloud och Shazam för att identifiera låtar, och använder Odesli för att hämta ytterligare plattformsspecifika länkar till låtarna.
+
+<b>Funktioner:</b>
+
+<b>Identifiering</b> – Med Audile kan du identifiera låtar med ett enda klick. Appen sparar inspelningen om internetanslutning saknas och identifieringsprocessen återupptas i så fall när du är online igen. Du kan anpassa hur appen ska agera vid misslyckad identifiering (t.ex. vid avsaknad av internet, inga träffar eller andra fel) i appens inställningar.
+<b>Användning i bakgrunden</b> – Använd appen smidigt via aviseringsfältet, widgeten på hemskärmen, den flytande knappen eller snabbinställningarna. Hantera identifieringsprocessen och få information om låten direkt utan att behöva öppna appen.
+<b>Information om låten</b> – När en låt har identifierats visar appen information såsom titel, artist, album, utgivningsår, skivomslag, låttext och länkar till låten på populära musiktjänster.
+<b>Bibliotek</b> – Alla identifierade låtar sparas i appens bibliotek. Du kan filtrera listan, skapa en samling med favoriter, söka efter låtar eller ta bort låtar.
+<b>Inställningar</b> – Audile erbjuder många olika alternativ för att anpassa beteende och utseende; dessa hittar du i appens inställningar.
