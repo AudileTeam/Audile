@@ -373,4 +373,23 @@
     <string name="recognition_queue_offline_paused">没有互联网时队列暂停</string>
     <string name="recognition_queue_low_battery_paused">电量不足时队列暂停</string>
     <string name="recognition_queue_low_battery_allow">允许这一次</string>
+    <string name="quick_tile_auto_recognition">自动识别</string>
+    <string name="notification_channel_name_auto_recognition_status">自动识别</string>
+    <string name="notification_channel_desc_auto_recognition_status">自动识别状态</string>
+    <string name="notification_channel_name_auto_recognition_result">自动识别找到的歌曲结果</string>
+    <string name="notification_channel_desc_auto_recognition_result">识别自动识别找到的歌曲</string>
+    <string name="notification_auto_recognition_status_title_on">自动识别开启</string>
+    <string name="notification_auto_recognition_status_subtitle_on">持续识别你周围的音乐</string>
+    <string name="notification_auto_recognition_status_title_off">自动识别关闭</string>
+    <string name="notification_auto_recognition_status_waiting_network">正在等待网络连接</string>
+    <string name="notification_auto_recognition_status_low_battery">电量低时暂停</string>
+    <string name="notification_auto_recognition_status_during_call">通话期间暂停</string>
+    <string name="notification_auto_recognition_status_time_limit">达到了会话时间限制</string>
+    <string name="notification_auto_recognition_now_playing">正在播放 %2$s 的 %1$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="other">找到了 %d 首歌</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">关闭</string>
+    <string name="notification_auto_recognition_action_turn_on">打开</string>
+    <string name="auto_recognition_battery_unrestricted_required">自动识别需要将本应用的电池使用设为无限制</string>
 </resources>
