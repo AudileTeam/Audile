@@ -395,4 +395,7 @@
     <string name="recognition_queue_offline_paused">A fila está pausada enquanto não há internet</string>
     <string name="recognition_queue_low_battery_paused">A fila está pausada enquanto a bateria está fraca</string>
     <string name="recognition_queue_low_battery_allow">Permitir desta vez</string>
+    <string name="quick_tile_auto_recognition">Reconhecimento automático</string>
+    <string name="notification_channel_name_auto_recognition_status">Reconhecimento automático</string>
+    <string name="notification_channel_desc_auto_recognition_status">Estado do reconhecimento automático</string>
 </resources>
