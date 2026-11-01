@@ -376,4 +376,24 @@
     <string name="recognition_queue_low_battery_paused">Wachtrij is gepauzeerd als batterijniveau laag is</string>
     <string name="recognition_queue_low_battery_allow">Deze keer toestaan</string>
     <string name="recognition_status_retry">Opnieuw proberen ingeroosterd</string>
+    <string name="quick_tile_auto_recognition">Automatische herkenning</string>
+    <string name="notification_channel_name_auto_recognition_status">Automatisch herkennen</string>
+    <string name="notification_channel_desc_auto_recognition_status">Status van automatische herkenning</string>
+    <string name="notification_channel_name_auto_recognition_result">Resultaten gevonden door automatische herkenning</string>
+    <string name="notification_channel_desc_auto_recognition_result">Toon nummers gevonden door automatische herkenning</string>
+    <string name="notification_auto_recognition_status_title_on">Automatische herkenning staat aan</string>
+    <string name="notification_auto_recognition_status_title_off">Automatische herkenning staat uit</string>
+    <string name="notification_auto_recognition_status_waiting_network">Wachten op een netwerkverbinding</string>
+    <string name="notification_auto_recognition_status_low_battery">Gepauzeerd waneer batterij bijna leeg is</string>
+    <string name="notification_auto_recognition_status_during_call">Gepauzeerd tijdens een telefoongesprek</string>
+    <string name="notification_auto_recognition_status_time_limit">Sessietijdlimiet is bereikt</string>
+    <string name="notification_auto_recognition_now_playing">Nu aan het afspelen: %1$s van %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">%d nummer gevonden</item>
+        <item quantity="other">%d nummers gevonden</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Uitschakelen</string>
+    <string name="notification_auto_recognition_action_turn_on">Inschakelen</string>
+    <string name="auto_recognition_battery_unrestricted_required">Automatische herkenning vereist dat het batterijgebruik van deze app is ingesteld op \'Onbeperkt\'</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Identificeert continu muziek in je omgeving</string>
 </resources>
