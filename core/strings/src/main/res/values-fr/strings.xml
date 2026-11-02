@@ -387,4 +387,25 @@
     <string name="recognition_queue_offline_paused">La file d\'attente est mise en pause tant qu\'il n\'y a pas de connexion Internet</string>
     <string name="recognition_queue_low_battery_paused">La file d\'attente est mise en pause lorsque la batterie est faible</string>
     <string name="recognition_queue_low_battery_allow">Autoriser cette fois</string>
+    <string name="quick_tile_auto_recognition">Reconnaissance automatique</string>
+    <string name="notification_channel_name_auto_recognition_status">Reconnaissance automatique</string>
+    <string name="notification_channel_desc_auto_recognition_status">État de la reconnaissance automatique</string>
+    <string name="notification_channel_name_auto_recognition_result">Résultats de chansons trouvés grâce à la reconnaissance automatique</string>
+    <string name="notification_channel_desc_auto_recognition_result">Affiche les morceaux détectés par reconnaissance automatique</string>
+    <string name="notification_auto_recognition_status_title_on">La reconnaissance automatique est activée</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Identifie en continu la musique qui vous entoure</string>
+    <string name="notification_auto_recognition_status_title_off">La reconnaissance automatique est désactivée</string>
+    <string name="notification_auto_recognition_status_waiting_network">En attente d\'une connexion réseau</string>
+    <string name="notification_auto_recognition_status_low_battery">Mise en pause lorsque la batterie est faible</string>
+    <string name="notification_auto_recognition_status_during_call">En pause pendant un appel</string>
+    <string name="notification_auto_recognition_status_time_limit">La durée maximale de la session est atteinte</string>
+    <string name="notification_auto_recognition_now_playing">En cours de lecture : %1$s de %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">%d titre trouvé</item>
+        <item quantity="many">%d titres trouvés</item>
+        <item quantity="other">%d titres trouvés</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Désactiver</string>
+    <string name="notification_auto_recognition_action_turn_on">Activer</string>
+    <string name="auto_recognition_battery_unrestricted_required">Pour que la reconnaissance automatique fonctionne, la consommation de batterie de cette application doit être réglée sur « Sans restriction ».</string>
 </resources>
