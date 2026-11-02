@@ -376,4 +376,24 @@
     <string name="recognition_queue_offline_paused">Kuni internetiühendust pole, on tööde järjekord ootel</string>
     <string name="recognition_queue_low_battery_paused">Kuni aku täituvus on kehvapoolne, on tööde järjekord ootel</string>
     <string name="recognition_queue_low_battery_allow">Luba see üks kord</string>
+    <string name="quick_tile_auto_recognition">Automaatne tuvastus</string>
+    <string name="notification_channel_name_auto_recognition_status">Automaatne tuvastus</string>
+    <string name="notification_channel_desc_auto_recognition_status">Automaatse tuvastuse olek</string>
+    <string name="notification_channel_name_auto_recognition_result">Automaatse tuvastusega leitud lood</string>
+    <string name="notification_channel_desc_auto_recognition_result">Näita automaatse tuvastusega leitud lugusid</string>
+    <string name="notification_auto_recognition_status_title_on">Automaatne tuvastus on lülitatud sisse</string>
+    <string name="notification_auto_recognition_status_title_off">Automaatne tuvastus on lülitatud välja</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Tuvasta pidevalt muusikat sinu ümber</string>
+    <string name="notification_auto_recognition_status_waiting_network">Ootan võrguühenduse loomist</string>
+    <string name="notification_auto_recognition_status_low_battery">Peatatud vähese akutäituvuse puhul</string>
+    <string name="notification_auto_recognition_status_during_call">Peatatud kõne ajaks</string>
+    <string name="notification_auto_recognition_status_time_limit">Sessiooni ajapiirang on käes</string>
+    <string name="notification_auto_recognition_now_playing">Hetkel on esitamisel: %1$s esitajalt %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">Leidus %d lugu</item>
+        <item quantity="other">Leidus %d lugu</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Lülita välja</string>
+    <string name="notification_auto_recognition_action_turn_on">Lülita sisse</string>
+    <string name="auto_recognition_battery_unrestricted_required">Automaatne tuvastus eeldab, et selle rakenduse akukasutusele pole piiranguid</string>
 </resources>
