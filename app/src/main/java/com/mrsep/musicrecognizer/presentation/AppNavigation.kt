@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -222,7 +224,19 @@ private fun NavGraphBuilder.barNavHost(
                     setPendingRecognitionRequest = setPendingRecognitionRequest,
                     outerNavController = outerNavController,
                     innerNavController = innerNavController,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .then(
+                            if (shouldShowNavRail) {
+                                Modifier.windowInsetsPadding(
+                                    WindowInsets.navigationBars.only(WindowInsetsSides.Bottom)
+                                )
+                            } else {
+                                Modifier.consumeWindowInsets(
+                                    WindowInsets.navigationBars.only(WindowInsetsSides.Bottom)
+                                )
+                            }
+                        ),
                 )
             }
             if (!shouldShowNavRail) {
