@@ -21,9 +21,9 @@ import com.mrsep.musicrecognizer.core.audio.audiorecord.prerecording.Prerecordin
 import com.mrsep.musicrecognizer.core.domain.recognition.AudioRecording
 import com.mrsep.musicrecognizer.core.domain.recognition.AudioRecordingSession
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecordingScheme
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.cancelChildren
@@ -75,6 +75,20 @@ internal class Mp4RecordingController(
     ): Job = launch(AudioEncoderDispatcher) {
         var codecRef: MediaCodec? = null
         val muxers: MutableMap<ScheduledRecording, Mp4MuxerWrapper> = mutableMapOf()
+
+        val schemeFinished = CompletableDeferred<Unit>()
+        var outputClosed = false
+        fun closeOutput(cause: Throwable?) {
+            if (outputClosed) return
+            outputClosed = true
+            channel.close(cause)
+            if (cause == null) {
+                schemeFinished.complete(Unit)
+            } else {
+                this@launch.cancel()
+            }
+        }
+
         try {
             val soundSourceParams = checkNotNull(soundSource.params)
             val codec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC)
@@ -172,8 +186,7 @@ internal class Mp4RecordingController(
                             val outputFile = runBlocking {
                                 audioRecordingDataSource.createNewFile(sessionId, RECORDING_FILE_EXT)
                             }.getOrElse { cause ->
-                                channel.close(cause)
-                                this@launch.cancel()
+                                closeOutput(cause)
                                 return
                             }
                             Mp4MuxerWrapper(
@@ -190,8 +203,7 @@ internal class Mp4RecordingController(
                             try {
                                 muxer.writeBuffer(outputBuffer, bufferInfo)
                             } catch (e: MuxerException) {
-                                channel.close(e)
-                                this@launch.cancel()
+                                closeOutput(e)
                                 return
                             }
                         } else {
@@ -215,12 +227,11 @@ internal class Mp4RecordingController(
                         }
                     }
                     codec.releaseOutputBuffer(bufferId, false)
-                    if (scheduledRecordings.size == emittedRecordingCount) channel.close()
+                    if (scheduledRecordings.size == emittedRecordingCount) closeOutput(null)
                 }
 
                 override fun onError(codec: MediaCodec, e: MediaCodec.CodecException) {
-                    channel.close(e)
-                    this@launch.cancel()
+                    closeOutput(e)
                 }
 
                 override fun onOutputFormatChanged(codec: MediaCodec, format: MediaFormat) {
@@ -232,7 +243,7 @@ internal class Mp4RecordingController(
             codec.configure(mediaFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
 //            checkFloatEncodingSupport()
             codec.start()
-            awaitCancellation()
+            schemeFinished.await() // awaitCancellation()
         } catch (e: Exception) {
             ensureActive()
             channel.close(e)
@@ -328,8 +339,8 @@ internal fun RecordingScheme.flatten() = buildList {
         )
     }
     var stepOffset = Duration.ZERO
-    for (step in steps) {
-        for (duration in step.recordings) {
+    for ((recordings) in steps) {
+        for (duration in recordings) {
             add(
                 ScheduledRecording(
                     presentationOffset = stepOffset,
@@ -338,7 +349,7 @@ internal fun RecordingScheme.flatten() = buildList {
                 )
             )
         }
-        stepOffset += step.recordings.last()
+        stepOffset += recordings.last()
     }
 }
 

@@ -28,6 +28,7 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transformWhile
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.File
@@ -75,14 +76,20 @@ internal class WavRecordingController(
 
             val scheduledRecordings = scheme.flatten()
             var emittedRecordingCount = 0
+            var schemeCompleted = false
 
             var streamStartTimestamp: Instant? = null
 
             soundSource.captureFlow(includeBuffered)
                 .buffer(Channel.UNLIMITED)
+                .transformWhile { chunk ->
+                    emit(chunk)
+                    !schemeCompleted
+                }
                 .collect { pcmChunkResult ->
                     val pcmChunk = pcmChunkResult.getOrElse { cause ->
                         channel.close(cause)
+                        schemeCompleted = true
                         this@launch.cancel()
                         return@collect
                     }
@@ -99,6 +106,7 @@ internal class WavRecordingController(
                                 audioRecordingDataSource.createNewFile(sessionId, RECORDING_FILE_EXT)
                             }.getOrElse { cause ->
                                 channel.close(cause)
+                                schemeCompleted = true
                                 this@launch.cancel()
                                 return@collect
                             }
@@ -116,6 +124,7 @@ internal class WavRecordingController(
                                 muxer.writeChunk(pcmChunk.data, pcmChunk.duration)
                             } catch (e: MuxerException) {
                                 channel.close(e)
+                                schemeCompleted = true
                                 this@launch.cancel()
                                 return@collect
                             }
@@ -140,7 +149,10 @@ internal class WavRecordingController(
                         }
                     }
 
-                    if (scheduledRecordings.size == emittedRecordingCount) channel.close()
+                    if (scheduledRecordings.size == emittedRecordingCount) {
+                        channel.close()
+                        schemeCompleted = true
+                    }
                 }
 
         } catch (e: Exception) {
