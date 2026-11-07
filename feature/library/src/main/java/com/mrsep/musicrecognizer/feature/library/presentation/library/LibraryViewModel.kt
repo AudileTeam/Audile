@@ -77,6 +77,12 @@ internal class LibraryViewModel @Inject constructor(
         }
     }
 
+    fun setAllViewed() {
+        viewModelScope.launch {
+            trackRepository.setAllViewed()
+        }
+    }
+
     fun setUseGrid(value: Boolean) {
         viewModelScope.launch {
             preferencesRepository.setUseGridForLibrary(value)

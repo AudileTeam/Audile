@@ -61,6 +61,12 @@ internal class TrackRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun setAllViewed() {
+        withStoreWrite {
+            trackDao.setAllViewed()
+        }
+    }
+
     override suspend fun setThemeSeedColor(trackId: String, color: Int?) {
         withStoreWrite {
             trackDao.setThemeSeedColor(trackId, color)

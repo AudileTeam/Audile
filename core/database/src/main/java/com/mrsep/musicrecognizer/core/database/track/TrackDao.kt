@@ -68,6 +68,9 @@ interface TrackDao {
     @Query("UPDATE track SET is_viewed = :isViewed WHERE id = :trackId AND is_viewed IS NOT :isViewed")
     suspend fun setViewed(trackId: String, isViewed: Boolean)
 
+    @Query("UPDATE track SET is_viewed = 1 WHERE is_viewed = 0")
+    suspend fun setAllViewed()
+
     @Query("UPDATE track SET theme_seed_color = :color WHERE id = :trackId AND theme_seed_color IS NOT :color")
     suspend fun setThemeSeedColor(trackId: String, color: Int?)
 

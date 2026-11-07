@@ -69,6 +69,7 @@ internal fun LibraryScreen(
                 onChangeUseGridLayout = viewModel::setUseGrid,
                 showRecognitionDate = uiState.showRecognitionDate,
                 onChangeShowRecognitionDate = viewModel::setShowRecognitionDate,
+                onSetAllViewed = viewModel::setAllViewed,
                 scrollBehavior = topBarBehaviour
             )
             Box(

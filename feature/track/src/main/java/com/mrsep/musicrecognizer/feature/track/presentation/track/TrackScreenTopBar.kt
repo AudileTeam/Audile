@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
@@ -78,7 +79,7 @@ internal fun TrackScreenTopBar(
                                 )
                             }
                         )
-                        HorizontalDivider()
+                        HorizontalDivider(Modifier.alpha(0.5f))
                         DropdownMenuItem(
                             text = { Text(text = stringResource(StringsR.string.delete)) },
                             onClick = {

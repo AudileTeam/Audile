@@ -21,6 +21,8 @@ interface TrackRepository {
 
     suspend fun setViewed(trackId: String, isViewed: Boolean)
 
+    suspend fun setAllViewed()
+
     suspend fun delete(trackIds: List<String>)
 
     suspend fun deleteAll()

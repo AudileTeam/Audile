@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -44,6 +45,7 @@ internal fun LibraryScreenTopBar(
     showRecognitionDate: Boolean,
     onChangeUseGridLayout: (Boolean) -> Unit,
     onChangeShowRecognitionDate: (Boolean) -> Unit,
+    onSetAllViewed: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier,
 ) {
@@ -130,6 +132,7 @@ internal fun LibraryScreenTopBar(
                             onChangeUseGridLayout = onChangeUseGridLayout,
                             showRecognitionDate = showRecognitionDate,
                             onChangeShowRecognitionDate = onChangeShowRecognitionDate,
+                            onSetAllViewed = onSetAllViewed,
                         )
                     }
 
@@ -163,6 +166,7 @@ private fun LibraryDropdownMenu(
     onChangeUseGridLayout: (Boolean) -> Unit,
     showRecognitionDate: Boolean,
     onChangeShowRecognitionDate: (Boolean) -> Unit,
+    onSetAllViewed: () -> Unit,
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
     Box(modifier = modifier) {
@@ -177,6 +181,14 @@ private fun LibraryDropdownMenu(
             onDismissRequest = { menuExpanded = false },
             shape = MaterialTheme.shapes.small,
         ) {
+            DropdownMenuItem(
+                text = { Text(text = stringResource(StringsR.string.library_menu_mark_all_tracks_as_viewed)) },
+                onClick = {
+                    menuExpanded = false
+                    onSetAllViewed()
+                },
+            )
+            HorizontalDivider(Modifier.alpha(0.25f))
             DropdownMenuItem(
                 text = { Text(text = stringResource(StringsR.string.pref_title_use_grid_layout)) },
                 onClick = { onChangeUseGridLayout(!useGridLayout) },
