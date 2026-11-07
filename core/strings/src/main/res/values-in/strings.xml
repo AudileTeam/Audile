@@ -369,4 +369,27 @@
     <string name="auto_backup_error_access_denied">Tidak memiliki izin untuk menulis ke folder cadangan, pilih kembali folder tersebut</string>
     <string name="auto_backup_error_file_not_found">Tidak dapat membuat berkas cadangan di folder yang dipilih</string>
     <string name="auto_backup_error_unhandled">Terjadi kesalahan tak terduga, periksa ruang kosong dan pastikan folder masih tersedia</string>
+    <string name="quick_tile_auto_recognition">Pengenalan otomatis</string>
+    <string name="recognition_status_retry">Percobaan ulang dijadwalkan</string>
+    <string name="recognition_queue_offline_paused">Antrean dijeda saat tidak ada koneksi internet</string>
+    <string name="recognition_queue_low_battery_paused">Antrean dijeda saat baterai lemah</string>
+    <string name="recognition_queue_low_battery_allow">Izinkan kali ini</string>
+    <string name="notification_channel_name_auto_recognition_status">Pengenalan otomatis</string>
+    <string name="notification_channel_desc_auto_recognition_status">Status pengenalan otomatis</string>
+    <string name="notification_channel_name_auto_recognition_result">Hasil lagu yang ditemukan melalui pengenalan otomatis</string>
+    <string name="notification_channel_desc_auto_recognition_result">Menampilkan lagu yang ditemukan melalui pengenalan otomatis</string>
+    <string name="notification_auto_recognition_status_title_on">Pengenalan otomatis aktif</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Mengidentifikasi musik di sekitar Anda secara terus-menerus</string>
+    <string name="notification_auto_recognition_status_title_off">Pengenalan otomatis nonaktif</string>
+    <string name="notification_auto_recognition_status_waiting_network">Menunggu koneksi jaringan</string>
+    <string name="notification_auto_recognition_status_low_battery">Dijeda saat baterai lemah</string>
+    <string name="notification_auto_recognition_status_during_call">Dijeda selama panggilan</string>
+    <string name="notification_auto_recognition_status_time_limit">Batas waktu sesi tercapai</string>
+    <string name="notification_auto_recognition_now_playing">Sedang memutar %1$s oleh %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="other">%d lagu ditemukan</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Nonaktifkan</string>
+    <string name="notification_auto_recognition_action_turn_on">Aktifkan</string>
+    <string name="auto_recognition_battery_unrestricted_required">Pengenalan otomatis memerlukan pengaturan penggunaan baterai aplikasi ini ke Tidak dibatasi</string>
 </resources>

@@ -390,4 +390,26 @@
     <string name="recognition_queue_offline_paused">Bez internetu je fronta pozastavena</string>
     <string name="recognition_queue_low_battery_paused">Při nízké baterii je fronta pozastavena</string>
     <string name="recognition_queue_low_battery_allow">Tentokrát povolit</string>
+    <string name="quick_tile_auto_recognition">Automatické rozpoznávání</string>
+    <string name="notification_channel_name_auto_recognition_status">Automatické rozpoznávání</string>
+    <string name="notification_channel_desc_auto_recognition_status">Stav automatického rozpoznávání</string>
+    <string name="notification_channel_name_auto_recognition_result">Výsledky skladeb nalezené automatickým rozpoznáváním</string>
+    <string name="notification_channel_desc_auto_recognition_result">Zobrazí skladby nalezené automatickým rozpoznáváním</string>
+    <string name="notification_auto_recognition_status_title_on">Automatické rozpoznávání je zapnuté</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Průběžně identifikuje hudbu z vašeho okolí</string>
+    <string name="notification_auto_recognition_status_title_off">Automatické rozpoznávání je vypnuté</string>
+    <string name="notification_auto_recognition_status_waiting_network">Čekání na připojení k síti</string>
+    <string name="notification_auto_recognition_status_low_battery">Pozastaveno z důvodu vybité baterie</string>
+    <string name="notification_auto_recognition_status_during_call">Pozastaveno během hovoru</string>
+    <string name="notification_auto_recognition_status_time_limit">Dosažen časový limit relace</string>
+    <string name="notification_auto_recognition_now_playing">Přehrávání %1$s od %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">Nalezena %d skladba</item>
+        <item quantity="few">Nalezeny %d skladby</item>
+        <item quantity="many">Nalezeno %d skladeb</item>
+        <item quantity="other">Nalezeno %d skladeb</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Vypnout</string>
+    <string name="notification_auto_recognition_action_turn_on">Zapnout</string>
+    <string name="auto_recognition_battery_unrestricted_required">Automatické rozpoznávání vyžaduje nastavení využití baterie touto aplikací na Neomezené</string>
 </resources>
