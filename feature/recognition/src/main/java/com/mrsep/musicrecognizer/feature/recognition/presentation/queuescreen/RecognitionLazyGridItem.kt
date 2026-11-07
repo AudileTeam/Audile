@@ -137,13 +137,7 @@ internal fun RecognitionLazyGridItem(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Text(
-                text = recognition.getStatusMessage(true),
-                style = MaterialTheme.typography.bodySmall,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            StatusChip(recognition = recognition)
             Spacer(Modifier.height(2.dp))
             if (showCreationDate) {
                 Text(

@@ -99,7 +99,6 @@ internal fun CsvExportFullScreenDialog(
                         is CsvExportUiState.Ready -> CsvExportReadyContent(
                             modifier = Modifier.fillMaxSize(),
                             exportState = exportState,
-                            onDismissClick = onDismissClick,
                             onExportClick = onExportClick,
                             onChangeExportState = onChangeExportState,
                         )
@@ -194,7 +193,6 @@ private fun CsvExportResultContent(
 private fun CsvExportReadyContent(
     modifier: Modifier = Modifier,
     exportState: CsvExportUiState.Ready,
-    onDismissClick: () -> Unit,
     onExportClick: () -> Unit,
     onChangeExportState: (CsvExportUiState.Ready) -> Unit,
 ) {
@@ -335,9 +333,6 @@ private fun CsvExportReadyContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.End)
         ) {
-            OutlinedButton(onClick = onDismissClick) {
-                Text(text = stringResource(StringsR.string.close))
-            }
             Button(onClick = onExportClick, enabled = !allDeselected) {
                 Text(text = stringResource(StringsR.string.export_export))
             }

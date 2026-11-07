@@ -309,14 +309,14 @@ class OdesliTrackLinksFetcher @Inject constructor(
     private fun getPriorityLinkForQuery(links: Map<MusicService, String>): Pair<MusicService, String>? {
         fun pick(service: MusicService) = links[service]?.let { service to it }
         return pick(MusicService.AppleMusic)
-            ?: pick(MusicService.Deezer)
             ?: pick(MusicService.Spotify)
             ?: pick(MusicService.AmazonMusic)
             ?: pick(MusicService.YoutubeMusic)
+            ?: pick(MusicService.Tidal)
             ?: pick(MusicService.Youtube)
+            ?: pick(MusicService.Deezer) // It doesn't work reliably with Deezer for some reason
             ?: pick(MusicService.Soundcloud)
             ?: pick(MusicService.YandexMusic)
-            ?: pick(MusicService.Tidal)
             ?: pick(MusicService.Pandora)
             ?: pick(MusicService.MusicBrainz)
             ?: pick(MusicService.Audiomack)

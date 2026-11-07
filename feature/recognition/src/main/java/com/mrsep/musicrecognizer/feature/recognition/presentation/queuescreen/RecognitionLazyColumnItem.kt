@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -35,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -146,14 +148,7 @@ internal fun RecognitionLazyColumnItem(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(0.95f)
             )
-            Text(
-                text = recognition.getStatusMessage(false),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(0.95f)
-            )
+            StatusChip(recognition = recognition)
             if (showCreationDate) {
                 Spacer(Modifier.weight(1f))
                 Text(
@@ -213,4 +208,36 @@ private fun RemoteRecognitionResultUi.statusTitle() = when (this) {
     RemoteRecognitionResultUi.NoMatches -> stringResource(StringsR.string.result_title_no_matches)
     RemoteRecognitionResultUi.NoSoundDetected -> stringResource(StringsR.string.result_title_no_sound_detected)
     is RemoteRecognitionResultUi.Success -> stringResource(StringsR.string.recognition_status_track_found)
+}
+
+@Composable
+internal fun StatusChip(
+    modifier: Modifier = Modifier,
+    recognition: EnqueuedRecognitionUi,
+) {
+    val scheme = MaterialTheme.colorScheme
+    val surface = scheme.surface
+    val chipContainerColor = when (recognition.status) {
+        RecognitionWorkStatus.RUNNING ->
+            scheme.tertiaryContainer.copy(alpha = 0.3f).compositeOver(surface)
+        RecognitionWorkStatus.IDLE if recognition.result is RemoteRecognitionResultUi.Success ->
+            scheme.primaryContainer.copy(alpha = 0.4f).compositeOver(surface)
+        else ->
+            scheme.secondaryContainer.copy(alpha = 0.4f).compositeOver(surface)
+    }
+    Text(
+        text = recognition.getStatusMessage(true),
+        style = MaterialTheme.typography.bodyMedium,
+        color = scheme.onSurface.copy(0.9f),
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier
+            .widthIn(max = 220.dp)
+            .padding(vertical = 2.dp)
+            .background(
+                color = chipContainerColor,
+                shape = MaterialTheme.shapes.small,
+            )
+            .padding(horizontal = 8.dp, vertical = 3.dp)
+    )
 }

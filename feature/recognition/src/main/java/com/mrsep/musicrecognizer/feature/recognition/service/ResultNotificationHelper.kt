@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat.checkSelfPermission
 import androidx.core.app.NotificationCompat
 import com.mrsep.musicrecognizer.core.domain.preferences.AudioCaptureMode
 import com.mrsep.musicrecognizer.core.domain.recognition.ResultNotificationManager
-import com.mrsep.musicrecognizer.core.domain.recognition.TrackMetadataFetchManager
 import com.mrsep.musicrecognizer.core.domain.recognition.model.EnqueuedRecognition
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionResult
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionTask
@@ -26,7 +25,6 @@ import com.mrsep.musicrecognizer.core.domain.track.model.Track
 import com.mrsep.musicrecognizer.core.common.DeeplinkRouter
 import com.mrsep.musicrecognizer.feature.recognition.service.ext.cachedNotificationArtwork
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.first
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -39,7 +37,6 @@ import com.mrsep.musicrecognizer.core.ui.R as UiR
 class ResultNotificationHelper @Inject constructor(
     @ApplicationContext private val appContext: Context,
     private val deeplinkRouter: DeeplinkRouter,
-    private val trackMetadataFetchManager: TrackMetadataFetchManager,
 ) : ResultNotificationManager {
 
     private val notificationManager = appContext
@@ -174,9 +171,6 @@ class ResultNotificationHelper @Inject constructor(
         }
         val contentTitle = appContext.getString(StringsR.string.notification_title_match_found)
         val contentText = "${track.title} - ${track.artist}"
-        val isLyricsFetcherRunning = trackMetadataFetchManager
-            .isLyricsFetcherEnqueuedOrRunning(track.id).first()
-
         val channelId = NOTIFICATION_CHANNEL_ID_DEFERRED_RESULT
         val groupKey = groupKeyForChannel(channelId)
         val notificationTag = track.id
@@ -207,7 +201,7 @@ class ResultNotificationHelper @Inject constructor(
             .setGroup(groupKey)
             .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
             .addTrackDeepLinkIntent(track.id)
-            .addOptionalShowLyricsButton(track, isLyricsFetcherRunning)
+            .addShowLyricsButton(track)
             .addShareButton(track.getSharedBody())
             .addTrackInfoToExtras(track)
             .build()
@@ -378,8 +372,6 @@ class ResultNotificationHelper @Inject constructor(
         channelId: String,
         track: Track,
     ): NotificationCompat.Builder {
-        val isLyricsFetcherRunning = trackMetadataFetchManager
-            .isLyricsFetcherEnqueuedOrRunning(track.id).first()
         return resultNotificationBuilder(channelId)
             .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
             .setPublicVersion(
@@ -396,7 +388,7 @@ class ResultNotificationHelper @Inject constructor(
             )
             .setLargeIconWithTrack(track.artworkThumbUrl, track.artworkUrl)
             .addTrackDeepLinkIntent(track.id)
-            .addOptionalShowLyricsButton(track, isLyricsFetcherRunning)
+            .addShowLyricsButton(track)
             .addShareButton(track.getSharedBody())
             .addTrackInfoToExtras(track)
     }
@@ -440,11 +432,7 @@ class ResultNotificationHelper @Inject constructor(
         return setContentIntent(pendingIntent)
     }
 
-    private fun NotificationCompat.Builder.addOptionalShowLyricsButton(
-        track: Track,
-        isLyricsFetcherRunning: Boolean,
-    ): NotificationCompat.Builder {
-        if (track.lyrics == null && !isLyricsFetcherRunning) return this
+    private fun NotificationCompat.Builder.addShowLyricsButton(track: Track): NotificationCompat.Builder {
         val deepLinkIntent = deeplinkRouter.getDeepLinkIntentToLyrics(track.id)
         val pendingIntent = createPendingIntentForDeeplink(deepLinkIntent)
         return addAction(
