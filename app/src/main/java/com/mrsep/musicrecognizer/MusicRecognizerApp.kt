@@ -140,6 +140,7 @@ class MusicRecognizerApp : Application(), SingletonImageLoader.Factory, Configur
         recognitionShortcut(),
         backgroundRecognitionShortcut(),
         showFloatingButtonShortcut(),
+        startAutoRecognitionShortcut(),
     )
         .also { check(it.size <= 4) { "The guideline recommends publishing only 4 distinct shortcuts" } }
         .take(ShortcutManagerCompat.getMaxShortcutCountPerActivity(this))
@@ -171,9 +172,16 @@ class MusicRecognizerApp : Application(), SingletonImageLoader.Factory, Configur
             .setShortLabel(getString(StringsR.string.app_shortcut_show_floating_button_short))
             .setLongLabel(getString(StringsR.string.app_shortcut_show_floating_button_long))
             .setIcon(IconCompat.createWithResource(this, R.drawable.ic_shortcut_recognize))
-            .setIntent(
-                RecognitionControlActivity.showFloatingButtonIntent(this)
-            )
+            .setIntent(RecognitionControlActivity.showFloatingButtonIntent(this))
+            .build()
+    }
+
+    private fun startAutoRecognitionShortcut(): ShortcutInfoCompat {
+        return ShortcutInfoCompat.Builder(this, SHORTCUT_ID_START_AUTO_RECOGNITION)
+            .setShortLabel(getString(StringsR.string.app_shortcut_start_auto_recognition_short))
+            .setLongLabel(getString(StringsR.string.app_shortcut_start_auto_recognition_long))
+            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_shortcut_auto_recognition))
+            .setIntent(RecognitionControlActivity.startAutoRecognitionIntent(this))
             .build()
     }
 
@@ -243,5 +251,6 @@ class MusicRecognizerApp : Application(), SingletonImageLoader.Factory, Configur
         private const val SHORTCUT_ID_OPEN_AND_RECOGNIZE = "RecognizeShortcutId"
         private const val SHORTCUT_ID_RECOGNIZE_IN_BACKGROUND = "RecognizeInBackgroundShortcutId"
         private const val SHORTCUT_ID_SHOW_FLOATING_BUTTON = "ShowFloatingButtonShortcutId"
+        private const val SHORTCUT_ID_START_AUTO_RECOGNITION = "StartAutoRecognitionShortcutId"
     }
 }

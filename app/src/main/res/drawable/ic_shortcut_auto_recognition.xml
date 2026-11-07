@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_shortcut_background" />
+    <item
+        android:drawable="@drawable/rounded_autorenew_rotated_24"
+        android:gravity="center" />
+</layer-list>
+
+<!--Follow the guidelines below-->
+<!--https://developer.android.com/develop/ui/views/launch/shortcuts/best-practices-->
+<!--https://commondatastorage.googleapis.com/androiddevelopers/shareables/design/app-shortcuts-design-guidelines.pdf-->

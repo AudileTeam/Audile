@@ -30,6 +30,8 @@
     <string name="app_shortcut_open_and_recognize_long">Open app and recognize</string>
     <string name="app_shortcut_show_floating_button_short">Button</string>
     <string name="app_shortcut_show_floating_button_long">Floating button</string>
+    <string name="app_shortcut_start_auto_recognition_short">Auto Recognition</string>
+    <string name="app_shortcut_start_auto_recognition_long">Auto Recognition</string>
     <!-- General use -->
     <string name="nav_back">Back</string>
     <string name="nav_forward">Forward</string>
