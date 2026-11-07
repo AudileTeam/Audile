@@ -2,7 +2,9 @@ package com.mrsep.musicrecognizer.feature.recognition.domain
 
 import com.mrsep.musicrecognizer.core.domain.preferences.FallbackAction
 import com.mrsep.musicrecognizer.core.domain.preferences.PreferencesRepository
+import com.mrsep.musicrecognizer.core.domain.preferences.RecognitionServiceConfig
 import com.mrsep.musicrecognizer.core.domain.preferences.ShazamConfig
+import com.mrsep.musicrecognizer.core.domain.preferences.UserPreferences
 import com.mrsep.musicrecognizer.core.domain.recognition.AudioRecording
 import com.mrsep.musicrecognizer.core.domain.recognition.AudioRecordingController
 import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionRepository
@@ -64,11 +66,7 @@ internal class RecognitionInteractorImpl @Inject constructor(
             _status.update { RecognitionStatus.Recognizing(false) }
             val userPreferences = preferencesRepository.userPreferencesFlow.first()
             val isFallbackRequired = userPreferences.fallbackPolicy.isFallbackRequired
-            val serviceConfig = when (userPreferences.currentRecognitionProvider) {
-                RecognitionProvider.Audd -> userPreferences.auddConfig
-                RecognitionProvider.AcrCloud -> userPreferences.acrCloudConfig
-                RecognitionProvider.Shazam -> ShazamConfig
-            }
+            val serviceConfig = userPreferences.recognitionServiceConfig()
             val recognitionService = recognitionServiceFactory.getService(serviceConfig)
             val recordingScheme = recognitionService.recordingScheme.takeIf { isFallbackRequired }
                 ?: recognitionService.recordingScheme.copy(fallback = null)
@@ -268,5 +266,13 @@ internal class RecognitionInteractorImpl @Inject constructor(
                 is CancellationException -> _status.update { RecognitionStatus.Ready }
             }
         }
+    }
+}
+
+internal fun UserPreferences.recognitionServiceConfig(): RecognitionServiceConfig {
+    return when (currentRecognitionProvider) {
+        RecognitionProvider.Audd -> auddConfig
+        RecognitionProvider.AcrCloud -> acrCloudConfig
+        RecognitionProvider.Shazam -> ShazamConfig
     }
 }

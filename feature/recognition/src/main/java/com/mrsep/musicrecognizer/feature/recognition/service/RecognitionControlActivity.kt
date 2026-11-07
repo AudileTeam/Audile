@@ -1,9 +1,11 @@
 package com.mrsep.musicrecognizer.feature.recognition.service
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.KeyguardManager
 import android.app.PendingIntent
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -23,9 +25,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import com.mrsep.musicrecognizer.core.common.DeeplinkRouter
 import com.mrsep.musicrecognizer.core.common.util.checkPermissionsGranted
 import com.mrsep.musicrecognizer.core.domain.preferences.AudioCaptureMode
 import com.mrsep.musicrecognizer.core.domain.preferences.PreferencesRepository
+import com.mrsep.musicrecognizer.core.domain.recognition.AutoRecognitionInteractor
+import com.mrsep.musicrecognizer.core.domain.recognition.model.AutoRecognitionState
 import com.mrsep.musicrecognizer.core.ui.isDarkUiMode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -47,6 +52,12 @@ class RecognitionControlActivity : ComponentActivity() {
     @Inject
     lateinit var preferencesRepository: PreferencesRepository
 
+    @Inject
+    lateinit var autoRecognitionInteractor: AutoRecognitionInteractor
+
+    @Inject
+    lateinit var deeplinkRouter: DeeplinkRouter
+
     private val mediaProjectionManager get() =
         getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
 
@@ -58,6 +69,9 @@ class RecognitionControlActivity : ComponentActivity() {
     private var intentHandled = false
     private var launchTransitionFinished = false
     private var pendingScreenCaptureConsent = false
+    private var awaitingBatteryExemption = false
+    // Set in onPause. The first onResume happens before the settings activity is shown.
+    private var batteryExemptionPromptPaused = false
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -105,6 +119,8 @@ class RecognitionControlActivity : ComponentActivity() {
             useAltDeviceSoundSource = getBoolean(KEY_ALT_DEVICE_SOURCE, false)
             intentHandled = getBoolean(KEY_INTENT_HANDLED, false)
             pendingScreenCaptureConsent = getBoolean(KEY_PENDING_SCREEN_CAPTURE_CONSENT, false)
+            awaitingBatteryExemption = getBoolean(KEY_AWAITING_BATTERY_EXEMPTION, false)
+            batteryExemptionPromptPaused = getBoolean(KEY_BATTERY_EXEMPTION_PROMPT_PAUSED, false)
         }
     }
 
@@ -117,6 +133,8 @@ class RecognitionControlActivity : ComponentActivity() {
             putBoolean(KEY_ALT_DEVICE_SOURCE, useAltDeviceSoundSource)
             putBoolean(KEY_INTENT_HANDLED, intentHandled)
             putBoolean(KEY_PENDING_SCREEN_CAPTURE_CONSENT, pendingScreenCaptureConsent)
+            putBoolean(KEY_AWAITING_BATTERY_EXEMPTION, awaitingBatteryExemption)
+            putBoolean(KEY_BATTERY_EXEMPTION_PROMPT_PAUSED, batteryExemptionPromptPaused)
         }
     }
 
@@ -130,12 +148,28 @@ class RecognitionControlActivity : ComponentActivity() {
             return
         }
         lifecycleScope.launch {
+            if (action == TileService.ACTION_QS_TILE_PREFERENCES) {
+                when (getClickedTileClassName(intent)) {
+                    OneTimeRecognitionTileService::class.java.name -> Unit
+                    AutoRecognitionTileService::class.java.name -> {
+                        openAutoRecognitionLongPress()
+                        return@launch
+                    }
+                    else -> {
+                        Log.e(TAG, "Unknown quick settings tile")
+                        finish()
+                        return@launch
+                    }
+                }
+            }
             if (action == ACTION_LAUNCH_RECOGNITION ||
                 action == ACTION_RETRY_RECOGNITION ||
-                action == TileService.ACTION_QS_TILE_PREFERENCES) {
+                action == TileService.ACTION_QS_TILE_PREFERENCES
+            ) {
                 loadCaptureModePreferences(action)
             }
             when (action) {
+                ACTION_START_AUTO_RECOGNITION,
                 ACTION_LAUNCH_RECOGNITION,
                 ACTION_RETRY_RECOGNITION,
                 TileService.ACTION_QS_TILE_PREFERENCES,
@@ -149,6 +183,22 @@ class RecognitionControlActivity : ComponentActivity() {
             }
         }
         intentHandled = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (awaitingBatteryExemption) batteryExemptionPromptPaused = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!awaitingBatteryExemption || !batteryExemptionPromptPaused || isFinishing) return
+        awaitingBatteryExemption = false
+        batteryExemptionPromptPaused = false
+        if (isIgnoringBatteryOptimizations()) {
+            AutoRecognitionService.start(applicationContext)
+        }
+        finish()
     }
 
     // API 35 QPR1+: MediaProjection consent no longer has FLAG_SHOW_WHEN_LOCKED
@@ -208,6 +258,9 @@ class RecognitionControlActivity : ComponentActivity() {
     }
 
     private fun onPermissionsGranted(action: String?) = when (action) {
+        ACTION_START_AUTO_RECOGNITION -> {
+            startAutoRecognitionIfExempt()
+        }
         TileService.ACTION_QS_TILE_PREFERENCES,
         ACTION_LAUNCH_RECOGNITION,
         ACTION_RETRY_RECOGNITION -> {
@@ -220,6 +273,38 @@ class RecognitionControlActivity : ComponentActivity() {
             Log.e(TAG, "Permissions granted for unknown action: $action")
             finish()
         }
+    }
+
+    private fun startAutoRecognitionIfExempt() {
+        if (isIgnoringBatteryOptimizations()) {
+            AutoRecognitionService.start(applicationContext)
+            finish()
+            return
+        }
+        requestBatteryExemption()
+    }
+
+    @SuppressLint("BatteryLife")
+    private fun requestBatteryExemption() {
+        val intents = listOf(
+            Intent(
+                Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                "package:$packageName".toUri(),
+            ),
+            Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS),
+        )
+        awaitingBatteryExemption = true
+        for (intent in intents) {
+            try {
+                startActivity(intent)
+                return
+            } catch (_: ActivityNotFoundException) {
+                Log.w(TAG, "Battery optimization intent not available: ${intent.action}")
+            }
+        }
+        awaitingBatteryExemption = false
+        Log.e(TAG, "Battery optimization settings are not available")
+        finish()
     }
 
     private fun onLaunchRecognition() {
@@ -356,6 +441,29 @@ class RecognitionControlActivity : ComponentActivity() {
             .show()
     }
 
+    private fun openAutoRecognitionLongPress() {
+        val trackId = (autoRecognitionInteractor.state.value as? AutoRecognitionState.Running)
+            ?.sessionTrackIds
+            ?.lastOrNull()
+        if (trackId == null) {
+            openApp()
+            return
+        }
+        startActivity(deeplinkRouter.getDeepLinkIntentToTrack(trackId))
+        finish()
+    }
+
+    private fun openApp() {
+        val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
+        if (launchIntent == null) {
+            Log.e(TAG, "Launcher activity not found")
+            finish()
+            return
+        }
+        startActivity(launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        finish()
+    }
+
     @Suppress("DEPRECATION")
     private fun enforceTransparentEdgeToEdge() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -381,10 +489,13 @@ class RecognitionControlActivity : ComponentActivity() {
         private const val ACTION_LAUNCH_RECOGNITION = "com.mrsep.musicrecognizer.control_activity.action.launch_recognition"
         private const val ACTION_RETRY_RECOGNITION = "com.mrsep.musicrecognizer.control_activity.action.retry_recognition"
         private const val ACTION_SHOW_FLOATING_BUTTON = "com.mrsep.musicrecognizer.control_activity.action.show_floating_button"
+        private const val ACTION_START_AUTO_RECOGNITION = "com.mrsep.musicrecognizer.control_activity.action.start_auto_recognition"
         private const val KEY_INTENT_HANDLED = "key_intent_handled"
         private const val KEY_REQUESTED_CAPTURE_MODE = "key_requested_capture_mode"
         private const val KEY_ALT_DEVICE_SOURCE = "key_alt_device_source"
         private const val KEY_PENDING_SCREEN_CAPTURE_CONSENT = "key_pending_screen_capture_consent"
+        private const val KEY_AWAITING_BATTERY_EXEMPTION = "key_awaiting_battery_exemption"
+        private const val KEY_BATTERY_EXEMPTION_PROMPT_PAUSED = "key_battery_exemption_prompt_paused"
         private const val EXTRA_AUDIO_CAPTURE_MODE = "extra_audio_capture_mode"
 
         fun getRequiredPermissionsForRecognition(): Array<String> {
@@ -451,6 +562,21 @@ class RecognitionControlActivity : ComponentActivity() {
                 0,
                 showFloatingButtonIntent(context),
                 PendingIntent.FLAG_IMMUTABLE
+            )
+        }
+
+        fun startAutoRecognitionIntent(context: Context): Intent {
+            return Intent(context, RecognitionControlActivity::class.java)
+                .setAction(ACTION_START_AUTO_RECOGNITION)
+                .addFlags(FLAG_ACTIVITY_NEW_TASK)
+        }
+
+        fun startAutoRecognitionPendingIntent(context: Context): PendingIntent {
+            return PendingIntent.getActivity(
+                context,
+                0,
+                startAutoRecognitionIntent(context),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
         }
     }

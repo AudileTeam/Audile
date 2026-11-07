@@ -46,6 +46,8 @@ internal class ShazamRecognitionService @Inject constructor(
         encodeSteps = false,
     )
 
+    override val autoRecognitionSampleDuration = 8.seconds
+
     override suspend fun recognize(sample: AudioSample): RemoteRecognitionResult {
         if (sample.duration > SAMPLE_DURATION_LIMIT) {
             Log.w(TAG, "It is discouraged to use samples longer than $SAMPLE_DURATION_LIMIT" +

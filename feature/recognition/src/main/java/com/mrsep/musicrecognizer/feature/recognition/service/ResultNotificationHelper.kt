@@ -10,7 +10,6 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_DENIED
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.service.notification.StatusBarNotification
@@ -24,9 +23,8 @@ import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionResult
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionTask
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RemoteRecognitionResult
 import com.mrsep.musicrecognizer.core.domain.track.model.Track
-import com.mrsep.musicrecognizer.core.ui.util.dpToPx
 import com.mrsep.musicrecognizer.core.common.DeeplinkRouter
-import com.mrsep.musicrecognizer.feature.recognition.service.ext.getCachedImageOrNull
+import com.mrsep.musicrecognizer.feature.recognition.service.ext.cachedNotificationArtwork
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 import java.time.Instant
@@ -69,40 +67,11 @@ class ResultNotificationHelper @Inject constructor(
         usedAudioCaptureMode: AudioCaptureMode,
     ) {
         var notificationTag: String? = null
-        val groupKey = groupKeyForChannel(channelId)
         val notificationBuilder = when (result) {
             is RecognitionResult.Error -> {
-                val (errorTitle, errorMessage) = when (result.remoteError) {
-                    RemoteRecognitionResult.Error.BadConnection -> {
-                        appContext.getString(StringsR.string.result_title_bad_connection) to
-                                appContext.getString(StringsR.string.result_message_bad_connection)
-                    }
-
-                    is RemoteRecognitionResult.Error.BadRecording -> {
-                        appContext.getString(StringsR.string.result_title_recording_error) to
-                                appContext.getString(StringsR.string.result_message_recording_error)
-                    }
-
-                    RemoteRecognitionResult.Error.ApiUsageLimited -> {
-                        appContext.getString(StringsR.string.result_title_service_usage_limited) to
-                                appContext.getString(StringsR.string.result_message_service_usage_limited)
-                    }
-
-                    RemoteRecognitionResult.Error.AuthError -> {
-                        appContext.getString(StringsR.string.result_title_auth_error) to
-                                appContext.getString(StringsR.string.result_message_auth_error)
-                    }
-
-                    is RemoteRecognitionResult.Error.HttpError -> {
-                        appContext.getString(StringsR.string.result_title_bad_network_response) to
-                                appContext.getString(StringsR.string.result_message_bad_network_response)
-                    }
-
-                    is RemoteRecognitionResult.Error.UnhandledError -> {
-                        appContext.getString(StringsR.string.result_title_internal_error) to
-                                appContext.getString(StringsR.string.result_message_internal_error)
-                    }
-                }
+                val (titleRes, messageRes) = result.remoteError.notificationTitleToMessageRes()
+                val errorTitle = appContext.getString(titleRes)
+                val errorMessage = appContext.getString(messageRes)
                 val bigText = result.recognitionTask.getMessage()?.let { scheduledTaskMessage ->
                     "$errorMessage\n$scheduledTaskMessage"
                 } ?: errorMessage
@@ -190,45 +159,11 @@ class ResultNotificationHelper @Inject constructor(
 
             is RecognitionResult.Success -> {
                 notificationTag = result.track.id
-                val isLyricsFetcherRunning = trackMetadataFetchManager
-                    .isLyricsFetcherEnqueuedOrRunning(result.track.id).first()
-                resultNotificationBuilder(channelId)
-                    .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
-                    .setPublicVersion(
-                        resultNotificationBuilder(channelId)
-                            .setContentTitle(appContext.getString(StringsR.string.notification_title_match_found))
-                            .build()
-                    )
-                    .setContentTitle(result.track.title)
-                    .setContentText(result.track.artist)
-                    .setStyle(
-                        NotificationCompat.BigTextStyle()
-                            .setBigContentTitle(result.track.title)
-                            .bigText(result.track.artist)
-                    )
-                    .setLargeIconWithTrack(result.track.artworkThumbUrl, result.track.artworkUrl)
-                    .addTrackDeepLinkIntent(result.track.id)
-                    .addOptionalShowLyricsButton(result.track, isLyricsFetcherRunning)
-                    .addShareButton(result.track.getSharedBody())
-                    .addTrackInfoToExtras(result.track)
+                trackMatchBuilder(channelId, result.track)
             }
         }
 
-        val notification = notificationBuilder.build()
-        val notificationId = resultNotificationIdForChannel(channelId)
-
-        // Notification posting is async, so consecutive notify() calls may briefly
-        // observe the group as empty even when a notification is already being sent.
-        // The only side effect in our case is an extra summary refresh.
-        // And we don't notify results so frequently.
-        val isGroupEmpty = isGroupEmpty(groupKey) // Check before notify
-        notificationManager.notify(notificationTag, notificationId, notification)
-
-        if (isGroupEmpty) {
-            val summaryNotification = buildResultsSummaryNotification(channelId)
-            val summaryNotificationId = summaryNotificationIdForGroup(groupKey)
-            notificationManager.notify(summaryNotificationId, summaryNotification)
-        }
+        postGrouped(channelId, notificationTag, notificationBuilder.build())
     }
 
     suspend fun notifyResult(enqueuedRecognition: EnqueuedRecognition) {
@@ -249,7 +184,7 @@ class ResultNotificationHelper @Inject constructor(
         val notification = NotificationCompat.Builder(appContext, channelId)
             .setSmallIcon(UiR.drawable.ic_notification_ready)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
-            .setOnlyAlertOnce(true)
+            .setOnlyAlertOnce(false)
             .setShowWhen(true)
             .setAutoCancel(true)
             .setOngoing(false)
@@ -277,20 +212,26 @@ class ResultNotificationHelper @Inject constructor(
             .addTrackInfoToExtras(track)
             .build()
 
-        val isGroupEmpty = isGroupEmpty(groupKey) // Check before notify
-        notificationManager.notify(notificationTag, NOTIFICATION_ID_DEFERRED_RESULT, notification)
+        postGrouped(channelId, notificationTag, notification)
+    }
 
-        if (isGroupEmpty) {
-            val summaryNotification = buildResultsSummaryNotification(channelId)
-            val summaryNotificationId = summaryNotificationIdForGroup(groupKey)
-            notificationManager.notify(summaryNotificationId, summaryNotification)
-        }
+    suspend fun notifyAutoMatch(track: Track) {
+        if (appContext.isPostNotificationPermissionDenied()) return
+        val channelId = NOTIFICATION_CHANNEL_ID_AUTO_MATCH
+        postGrouped(
+            channelId = channelId,
+            tag = track.id,
+            notification = trackMatchBuilder(channelId, track).build(),
+        )
     }
 
     override fun cancelBackgroundMatches(trackIds: Set<String>) {
         cancelActiveNotifications(
             trackIds = trackIds,
-            channelIds = setOf(NOTIFICATION_CHANNEL_ID_BACKGROUND_RESULT)
+            channelIds = setOf(
+                NOTIFICATION_CHANNEL_ID_BACKGROUND_RESULT,
+                NOTIFICATION_CHANNEL_ID_AUTO_MATCH,
+            )
         )
     }
 
@@ -314,7 +255,8 @@ class ResultNotificationHelper @Inject constructor(
             channelIds = setOf(
                 NOTIFICATION_CHANNEL_ID_BACKGROUND_RESULT,
                 NOTIFICATION_CHANNEL_ID_FOREGROUND_RESULT,
-                NOTIFICATION_CHANNEL_ID_DEFERRED_RESULT
+                NOTIFICATION_CHANNEL_ID_DEFERRED_RESULT,
+                NOTIFICATION_CHANNEL_ID_AUTO_MATCH,
             )
         )
     }
@@ -382,6 +324,26 @@ class ResultNotificationHelper @Inject constructor(
         }
     }
 
+    // Notification posting is async, so consecutive notify() calls may briefly
+    // observe the group as empty even when a notification is already being sent.
+    // The only side effect in our case is an extra summary refresh.
+    // And we don't notify results so frequently.
+    private fun postGrouped(
+        channelId: String,
+        tag: String?,
+        notification: Notification,
+    ) {
+        val groupKey = groupKeyForChannel(channelId)
+        val isGroupEmpty = isGroupEmpty(groupKey) // Check before notify
+        notificationManager.notify(tag, resultNotificationIdForChannel(channelId), notification)
+        if (isGroupEmpty) {
+            notificationManager.notify(
+                summaryNotificationIdForGroup(groupKey),
+                buildResultsSummaryNotification(channelId),
+            )
+        }
+    }
+
     private fun isGroupEmpty(groupKey: String) = notificationManager.activeNotifications
         .none { sbn -> sbn.notification.group == groupKey && !sbn.notification.isGroupSummary }
 
@@ -412,27 +374,40 @@ class ResultNotificationHelper @Inject constructor(
         return recognitionDate.format(DateTimeFormatter.ofPattern(pattern, Locale.getDefault()))
     }
 
+    private suspend fun trackMatchBuilder(
+        channelId: String,
+        track: Track,
+    ): NotificationCompat.Builder {
+        val isLyricsFetcherRunning = trackMetadataFetchManager
+            .isLyricsFetcherEnqueuedOrRunning(track.id).first()
+        return resultNotificationBuilder(channelId)
+            .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
+            .setPublicVersion(
+                resultNotificationBuilder(channelId)
+                    .setContentTitle(appContext.getString(StringsR.string.notification_title_match_found))
+                    .build()
+            )
+            .setContentTitle(track.title)
+            .setContentText(track.artist)
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .setBigContentTitle(track.title)
+                    .bigText(track.artist)
+            )
+            .setLargeIconWithTrack(track.artworkThumbUrl, track.artworkUrl)
+            .addTrackDeepLinkIntent(track.id)
+            .addOptionalShowLyricsButton(track, isLyricsFetcherRunning)
+            .addShareButton(track.getSharedBody())
+            .addTrackInfoToExtras(track)
+    }
+
     private suspend fun NotificationCompat.Builder.setLargeIconWithTrack(
         artworkThumbUrl: String?,
         artworkUrl: String?,
     ): NotificationCompat.Builder {
-        var largeIcon: Bitmap? = null
-        // These resources return 64dp, which causes StrictMode policy violation "Downscaling oversized Icon Bitmap"
-//        val iconWidth = appContext.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_width)
-//        val iconHeight = appContext.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height)
-        // 48dp looks like the standard icon size, preventing StrictMode violation
-        val imageSizePx = appContext.dpToPx(48f).toInt()
-        val urlsInPriorityOrder = listOfNotNull(artworkThumbUrl, artworkUrl)
-        for (url in urlsInPriorityOrder) {
-            largeIcon = appContext.getCachedImageOrNull(
-                url = url,
-                allowHardware = false,
-                widthPx = imageSizePx,
-                heightPx = imageSizePx,
-            )
-            if (largeIcon != null) break
-        }
-        return if (largeIcon != null) setLargeIcon(largeIcon) else this
+        val largeIcon = appContext.cachedNotificationArtwork(artworkThumbUrl, artworkUrl)
+            ?: return this
+        return setLargeIcon(largeIcon)
     }
 
     private fun NotificationCompat.Builder.addTrackDeepLinkIntent(
@@ -521,7 +496,7 @@ class ResultNotificationHelper @Inject constructor(
         return NotificationCompat.Builder(appContext, channelId)
             .setSmallIcon(UiR.drawable.ic_notification_ready)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
-            .setOnlyAlertOnce(true)
+            .setOnlyAlertOnce(false)
             .setShowWhen(true)
             .setOngoing(false)
             .setAutoCancel(true)
@@ -568,6 +543,7 @@ class ResultNotificationHelper @Inject constructor(
         NOTIFICATION_CHANNEL_ID_BACKGROUND_RESULT -> NOTIFICATION_ID_BACKGROUND_RESULT
         NOTIFICATION_CHANNEL_ID_FOREGROUND_RESULT -> NOTIFICATION_ID_FOREGROUND_RESULT
         NOTIFICATION_CHANNEL_ID_DEFERRED_RESULT -> NOTIFICATION_ID_DEFERRED_RESULT
+        NOTIFICATION_CHANNEL_ID_AUTO_MATCH -> NOTIFICATION_ID_AUTO_MATCH
         else -> error("Unknown notification channel id")
     }
 
@@ -575,6 +551,7 @@ class ResultNotificationHelper @Inject constructor(
         NOTIFICATION_CHANNEL_ID_BACKGROUND_RESULT -> NOTIFICATION_GROUP_KEY_BACKGROUND_RESULT
         NOTIFICATION_CHANNEL_ID_FOREGROUND_RESULT -> NOTIFICATION_GROUP_KEY_FOREGROUND_RESULT
         NOTIFICATION_CHANNEL_ID_DEFERRED_RESULT -> NOTIFICATION_GROUP_KEY_DEFERRED_RESULT
+        NOTIFICATION_CHANNEL_ID_AUTO_MATCH -> NOTIFICATION_GROUP_KEY_AUTO_MATCH
         else -> error("Unknown notification channel id")
     }
 
@@ -582,6 +559,7 @@ class ResultNotificationHelper @Inject constructor(
         NOTIFICATION_GROUP_KEY_BACKGROUND_RESULT -> NOTIFICATION_ID_BACKGROUND_RESULT_SUMMARY
         NOTIFICATION_GROUP_KEY_FOREGROUND_RESULT -> NOTIFICATION_ID_FOREGROUND_RESULT_SUMMARY
         NOTIFICATION_GROUP_KEY_DEFERRED_RESULT -> NOTIFICATION_ID_DEFERRED_RESULT_SUMMARY
+        NOTIFICATION_GROUP_KEY_AUTO_MATCH -> NOTIFICATION_ID_AUTO_MATCH_SUMMARY
         else -> error("Unknown group key")
     }
 
@@ -591,18 +569,22 @@ class ResultNotificationHelper @Inject constructor(
         private const val NOTIFICATION_ID_BACKGROUND_RESULT = 2
         private const val NOTIFICATION_ID_FOREGROUND_RESULT = 3
         private const val NOTIFICATION_ID_DEFERRED_RESULT = 4
+        private const val NOTIFICATION_ID_AUTO_MATCH = 12
 
         private const val NOTIFICATION_ID_BACKGROUND_RESULT_SUMMARY = 102
         private const val NOTIFICATION_ID_FOREGROUND_RESULT_SUMMARY = 103
         private const val NOTIFICATION_ID_DEFERRED_RESULT_SUMMARY = 104
+        private const val NOTIFICATION_ID_AUTO_MATCH_SUMMARY = 112
 
         private const val NOTIFICATION_GROUP_KEY_BACKGROUND_RESULT = "com.mrsep.musicrecognizer.notification_group.background_result"
         private const val NOTIFICATION_GROUP_KEY_FOREGROUND_RESULT = "com.mrsep.musicrecognizer.notification_group.foreground_result"
         private const val NOTIFICATION_GROUP_KEY_DEFERRED_RESULT = "com.mrsep.musicrecognizer.notification_group.deferred_result"
+        private const val NOTIFICATION_GROUP_KEY_AUTO_MATCH = "com.mrsep.musicrecognizer.notification_group.auto_recognition_match"
 
         private const val NOTIFICATION_CHANNEL_ID_BACKGROUND_RESULT = "com.mrsep.musicrecognizer.result"
         private const val NOTIFICATION_CHANNEL_ID_FOREGROUND_RESULT = "com.mrsep.musicrecognizer.foreground_result"
         private const val NOTIFICATION_CHANNEL_ID_DEFERRED_RESULT = "com.mrsep.musicrecognizer.enqueued_result"
+        private const val NOTIFICATION_CHANNEL_ID_AUTO_MATCH = "com.mrsep.musicrecognizer.auto_recognition_match"
 
         private const val BUNDLE_KEY_TRACK_ID = "com.mrsep.musicrecognizer.track_metadata.id"
         private const val BUNDLE_KEY_TRACK_TITLE = "com.mrsep.musicrecognizer.track_metadata.title"
@@ -656,13 +638,45 @@ class ResultNotificationHelper @Inject constructor(
                 vibrationPattern = longArrayOf(100, 100, 100, 100)
             }
         }
+
+        fun getChannelForAutoRecognitionMatch(context: Context): NotificationChannel {
+            val name = context.getString(StringsR.string.notification_channel_name_auto_recognition_result)
+            val importance = NotificationManager.IMPORTANCE_LOW
+            return NotificationChannel(NOTIFICATION_CHANNEL_ID_AUTO_MATCH, name, importance).apply {
+                description = context.getString(StringsR.string.notification_channel_desc_auto_recognition_result)
+                lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                setShowBadge(true)
+                enableLights(false)
+                enableVibration(false)
+            }
+        }
     }
 }
 
 internal fun Context.isPostNotificationPermissionDenied(): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        checkSelfPermission(this, permission.POST_NOTIFICATIONS) == PERMISSION_DENIED
-    } else {
-        false
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            checkSelfPermission(this, permission.POST_NOTIFICATIONS) == PERMISSION_DENIED
+}
+
+internal fun RemoteRecognitionResult.Error.notificationTitleToMessageRes(): Pair<Int, Int> {
+    return when (this) {
+        RemoteRecognitionResult.Error.BadConnection ->
+            StringsR.string.result_title_bad_connection to
+                    StringsR.string.result_message_bad_connection
+        RemoteRecognitionResult.Error.AuthError ->
+            StringsR.string.result_title_auth_error to
+                    StringsR.string.result_message_auth_error
+        RemoteRecognitionResult.Error.ApiUsageLimited ->
+            StringsR.string.result_title_service_usage_limited to
+                    StringsR.string.result_message_service_usage_limited
+        is RemoteRecognitionResult.Error.BadRecording ->
+            StringsR.string.result_title_recording_error to
+                    StringsR.string.result_message_recording_error
+        is RemoteRecognitionResult.Error.HttpError ->
+            StringsR.string.result_title_bad_network_response to
+                    StringsR.string.result_message_bad_network_response
+        is RemoteRecognitionResult.Error.UnhandledError ->
+            StringsR.string.result_title_internal_error to
+                    StringsR.string.result_message_internal_error
     }
 }

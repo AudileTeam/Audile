@@ -23,6 +23,8 @@ import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionSche
 import com.mrsep.musicrecognizer.feature.backup.AutoBackupScheduler
 import com.mrsep.musicrecognizer.feature.backup.BackupNotificationHelper
 import com.mrsep.musicrecognizer.feature.backup.RestoreStaging
+import com.mrsep.musicrecognizer.feature.recognition.service.AutoServiceNotificationHelper
+import com.mrsep.musicrecognizer.feature.recognition.service.AutoRecognitionTileService
 import com.mrsep.musicrecognizer.feature.recognition.service.RecognitionControlActivity
 import com.mrsep.musicrecognizer.feature.recognition.service.ResultNotificationHelper
 import com.mrsep.musicrecognizer.feature.recognition.service.ServiceNotificationHelper
@@ -41,6 +43,7 @@ import javax.inject.Inject
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 import androidx.core.net.toUri
+import com.mrsep.musicrecognizer.feature.recognition.service.OneTimeRecognitionTileService
 
 @HiltAndroidApp
 class MusicRecognizerApp : Application(), SingletonImageLoader.Factory, Configuration.Provider {
@@ -80,6 +83,8 @@ class MusicRecognizerApp : Application(), SingletonImageLoader.Factory, Configur
         if (BuildConfig.DEBUG) enableStrictMode()
         cleanup()
         createNotificationChannels()
+        AutoRecognitionTileService.requestListeningState(this)
+        OneTimeRecognitionTileService.requestListeningState(this)
         createShortcuts()
         ensureAutoBackupSchedule()
         ensureRecognitionQueueSchedule()
@@ -116,10 +121,12 @@ class MusicRecognizerApp : Application(), SingletonImageLoader.Factory, Configur
     private fun createNotificationChannels() {
         getSystemService<NotificationManager>()?.createNotificationChannels(
             listOf(
-                ServiceNotificationHelper.getChannelForRecognitionStatuses(this),
+                ServiceNotificationHelper.getStatusChannel(this),
+                AutoServiceNotificationHelper.getStatusChannel(this),
                 ResultNotificationHelper.getChannelForBackgroundRecognitionResult(this),
                 ResultNotificationHelper.getChannelForForegroundRecognitionResult(this),
                 ResultNotificationHelper.getChannelForScheduledRecognitionResult(this),
+                ResultNotificationHelper.getChannelForAutoRecognitionMatch(this),
                 BackupNotificationHelper.getChannelForBackup(this),
             )
         )

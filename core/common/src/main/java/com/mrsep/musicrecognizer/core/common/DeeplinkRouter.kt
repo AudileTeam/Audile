@@ -13,4 +13,6 @@ interface DeeplinkRouter {
     fun getDeepLinkIntentToQueue(): Intent
 
     fun getDeepLinkIntentToBackupRestore(): Intent
+
+    fun getDeepLinkIntentToPreferences(): Intent
 }

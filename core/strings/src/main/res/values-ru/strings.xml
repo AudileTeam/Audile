@@ -18,6 +18,7 @@
     <string name="quick_tile_recognize">Распознать песню</string>
     <string name="quick_tile_cancel_recognition">Отменить распознавание</string>
     <string name="quick_tile_auto_recognition">Автораспознавание</string>
+    <string name="quick_tile_auto_recognition_now_playing">Сейчас играет</string>
     <string name="action_recognize">Распознать</string>
     <string name="action_cancel_recognition">Отменить распознавание</string>
     <!-- App shortcuts. If there's enough space, the launcher displays _long version instead of _short. Short should be limited to 10 chars. Long should be limited to 25 chars.-->

@@ -59,7 +59,6 @@ internal class ConnectivityManagerNetworkMonitor @Inject constructor(
     }
         .distinctUntilChanged()
         .conflate()
-        .flowOn(ioDispatcher)
 
     private fun ConnectivityManager.isCurrentlyConnected(): Boolean {
         return activeNetwork

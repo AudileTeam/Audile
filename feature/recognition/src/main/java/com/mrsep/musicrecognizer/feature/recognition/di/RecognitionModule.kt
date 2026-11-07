@@ -1,9 +1,11 @@
 package com.mrsep.musicrecognizer.feature.recognition.di
 
+import com.mrsep.musicrecognizer.core.domain.recognition.AutoRecognitionInteractor
 import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionScheduler
 import com.mrsep.musicrecognizer.core.domain.recognition.RecognitionInteractor
 import com.mrsep.musicrecognizer.core.domain.recognition.ResultNotificationManager
 import com.mrsep.musicrecognizer.core.domain.recognition.TrackMetadataFetchManager
+import com.mrsep.musicrecognizer.feature.recognition.domain.AutoRecognitionInteractorImpl
 import com.mrsep.musicrecognizer.feature.recognition.domain.RecognitionInteractorImpl
 import com.mrsep.musicrecognizer.feature.recognition.scheduler.TrackMetadataFetchManagerImpl
 import com.mrsep.musicrecognizer.feature.recognition.presentation.recognitionscreen.ScreenRecognitionController
@@ -25,6 +27,11 @@ internal interface RecognitionModule {
     @Singleton
     fun bindRecognitionInteractor(impl: RecognitionInteractorImpl):
             RecognitionInteractor
+
+    @Binds
+    @Singleton
+    fun bindAutoRecognitionInteractor(impl: AutoRecognitionInteractorImpl):
+            AutoRecognitionInteractor
 
     @Binds
     @Singleton

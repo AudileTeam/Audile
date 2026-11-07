@@ -32,6 +32,7 @@ class ServiceStartupReceiver : BroadcastReceiver() {
                     RecognitionControlService.startHoldMode(context.applicationContext, true)
                 }
                 OneTimeRecognitionTileService.requestListeningState(context)
+                AutoRecognitionTileService.requestListeningState(context)
             }.invokeOnCompletion {
                 pendingResult.finish()
             }

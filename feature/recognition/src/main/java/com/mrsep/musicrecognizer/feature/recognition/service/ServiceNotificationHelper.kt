@@ -122,7 +122,7 @@ class ServiceNotificationHelper @Inject constructor(
 //        private const val NOTIFICATION_ID_STATUS_SUMMARY = 101
 //        private const val NOTIFICATION_GROUP_KEY_STATUS = "com.mrsep.musicrecognizer.notification_group.status"
 
-        fun getChannelForRecognitionStatuses(context: Context): NotificationChannel {
+        fun getStatusChannel(context: Context): NotificationChannel {
             val name = context.getString(StringsR.string.notification_channel_name_control)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             return NotificationChannel(NOTIFICATION_CHANNEL_ID_STATUS, name, importance).apply {

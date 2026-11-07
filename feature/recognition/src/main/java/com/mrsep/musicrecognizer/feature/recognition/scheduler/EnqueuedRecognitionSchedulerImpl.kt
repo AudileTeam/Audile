@@ -7,6 +7,7 @@ import com.mrsep.musicrecognizer.core.common.di.ApplicationScope
 import com.mrsep.musicrecognizer.core.domain.preferences.PreferencesRepository
 import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionRepository
 import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionScheduler
+import com.mrsep.musicrecognizer.feature.recognition.platform.BatteryMonitor
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.first
@@ -24,6 +25,7 @@ internal class EnqueuedRecognitionSchedulerImpl @Inject constructor(
     private val repository: EnqueuedRecognitionRepository,
     private val runRegistry: EnqueuedRecognitionRunRegistry,
     private val preferencesRepository: PreferencesRepository,
+    private val batteryMonitor: BatteryMonitor,
     @ApplicationScope private val appScope: CoroutineScope,
 ) : EnqueuedRecognitionScheduler {
 
@@ -72,7 +74,7 @@ internal class EnqueuedRecognitionSchedulerImpl @Inject constructor(
             repository.resetStaleRunningOnAppStart()
             scheduleMutex.withLock {
                 val isQueueAllowedOnLowBattery = isQueueAllowedOnLowBattery()
-                if (isQueueAllowedOnLowBattery && !appContext.isSystemBatteryLow()) {
+                if (isQueueAllowedOnLowBattery && !batteryMonitor.isBatteryLow()) {
                     preferencesRepository.setAllowQueueOnLowBattery(false)
                     workManager.cancelUniqueWork(LowBatteryResetWorker.UNIQUE_NAME)
                 } else if (isQueueAllowedOnLowBattery) {
@@ -86,7 +88,7 @@ internal class EnqueuedRecognitionSchedulerImpl @Inject constructor(
     override suspend fun allowLowBatteryThisTime() {
         withContext(persistentCoroutineContext) {
             scheduleMutex.withLock {
-                if (!appContext.isSystemBatteryLow()) return@withLock
+                if (!batteryMonitor.isBatteryLow()) return@withLock
                 preferencesRepository.setAllowQueueOnLowBattery(true)
                 updateConstraintsAndScheduleLocked()
                 scheduleResetWorker()

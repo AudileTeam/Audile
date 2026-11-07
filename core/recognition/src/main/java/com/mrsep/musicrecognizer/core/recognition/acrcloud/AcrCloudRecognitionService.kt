@@ -53,6 +53,8 @@ internal class AcrCloudRecognitionService @AssistedInject constructor(
         encodeSteps = true,
     )
 
+    override val autoRecognitionSampleDuration = 8.seconds
+
     override suspend fun recognize(sample: AudioSample) = withContext(ioDispatcher) {
         if (sample.duration > SAMPLE_DURATION_LIMIT) {
             // It's strange, but tests show that samples are truncated from the beginning, not the end

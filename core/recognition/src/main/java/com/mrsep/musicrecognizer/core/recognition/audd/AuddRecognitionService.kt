@@ -64,6 +64,8 @@ internal class AuddRecognitionService @AssistedInject constructor(
         encodeSteps = true,
     )
 
+    override val autoRecognitionSampleDuration = 8.seconds
+
     override suspend fun recognize(sample: AudioSample) = withContext(ioDispatcher) {
         val httpClient = httpClientLazy.get()
         val response = try {

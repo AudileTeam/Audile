@@ -2,17 +2,16 @@ package com.mrsep.musicrecognizer.feature.recognition.scheduler
 
 import android.content.Context
 import com.mrsep.musicrecognizer.core.domain.preferences.PreferencesRepository
-import com.mrsep.musicrecognizer.core.domain.preferences.ShazamConfig
 import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionRepository
 import com.mrsep.musicrecognizer.core.domain.recognition.RecognitionServiceFactory
 import com.mrsep.musicrecognizer.core.domain.recognition.TrackMetadataFetchManager
 import com.mrsep.musicrecognizer.core.domain.recognition.model.ClaimedEnqueuedRecognition
-import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionProvider
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RemoteRecognitionResult
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionWorkStatus
 import com.mrsep.musicrecognizer.core.domain.track.TrackRepository
 import com.mrsep.musicrecognizer.core.domain.track.model.Track
 import com.mrsep.musicrecognizer.core.ui.util.generateThemeSeedColor
+import com.mrsep.musicrecognizer.feature.recognition.domain.recognitionServiceConfig
 import com.mrsep.musicrecognizer.feature.recognition.service.ResultNotificationHelper
 import com.mrsep.musicrecognizer.feature.recognition.service.ext.downloadImageToDiskCache
 import com.mrsep.musicrecognizer.feature.recognition.service.ext.getCachedImageOrNull
@@ -48,11 +47,7 @@ internal class RunEnqueuedRecognition @Inject constructor(
         }
 
         val userPreferences = preferencesRepository.userPreferencesFlow.first()
-        val serviceConfig = when (userPreferences.currentRecognitionProvider) {
-            RecognitionProvider.Audd -> userPreferences.auddConfig
-            RecognitionProvider.AcrCloud -> userPreferences.acrCloudConfig
-            RecognitionProvider.Shazam -> ShazamConfig
-        }
+        val serviceConfig = userPreferences.recognitionServiceConfig()
         val result = recognitionServiceFactory.getService(serviceConfig).recognize(sample)
 
         return when (result) {
@@ -136,14 +131,15 @@ internal class RunEnqueuedRecognition @Inject constructor(
     }
 
     private suspend fun prepareTrackImages(track: Track) = withContext(Dispatchers.Default) {
-        listOfNotNull(track.artworkThumbUrl, track.artworkUrl)
+        val urls = listOfNotNull(track.artworkThumbUrl, track.artworkUrl).distinct()
+        urls
             .map { imageUrl -> async { appContext.downloadImageToDiskCache(imageUrl) } }
             .awaitAll()
-        track.artworkUrl?.let { artworkUrl ->
-            appContext.getCachedImageOrNull(artworkUrl, allowHardware = false)
-                ?.generateThemeSeedColor()
-                ?.let { themeColor -> trackRepository.setThemeSeedColor(track.id, themeColor) }
-        }
+        // Thumb first: it is the image the UI shows first, and cheaper to decode.
+        urls
+            .firstNotNullOfOrNull { url -> appContext.getCachedImageOrNull(url, allowHardware = false) }
+            ?.generateThemeSeedColor()
+            ?.let { themeColor -> trackRepository.setThemeSeedColor(track.id, themeColor) }
     }
 
     companion object {

@@ -9,8 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrsep.musicrecognizer.core.common.di.MainDispatcher
 import com.mrsep.musicrecognizer.core.domain.preferences.PreferencesRepository
-import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionStatus
+import com.mrsep.musicrecognizer.core.domain.recognition.AutoRecognitionInteractor
 import com.mrsep.musicrecognizer.core.domain.recognition.NetworkMonitor
+import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionStatus
 import com.mrsep.musicrecognizer.feature.recognition.di.MainScreenStatusHolder
 import com.mrsep.musicrecognizer.feature.recognition.RecognitionStatusHolder
 import com.mrsep.musicrecognizer.feature.recognition.platform.VibrationManager
@@ -42,9 +43,11 @@ internal class RecognitionViewModel @Inject constructor(
     private val vibrationManager: VibrationManager,
     preferencesRepository: PreferencesRepository,
     networkMonitor: NetworkMonitor,
+    autoRecognitionInteractor: AutoRecognitionInteractor,
 ) : ViewModel() {
 
-    val recognitionState by statusHolder::status
+    val recognitionState = statusHolder.status
+    val autoRecognitionState = autoRecognitionInteractor.state
 
     val preferences = preferencesRepository.userPreferencesFlow.stateIn(
         scope = viewModelScope,

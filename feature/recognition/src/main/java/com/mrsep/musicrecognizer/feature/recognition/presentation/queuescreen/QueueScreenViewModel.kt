@@ -1,6 +1,5 @@
 package com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen
 
-import android.content.Context
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,12 +13,11 @@ import com.mrsep.musicrecognizer.core.domain.recognition.EnqueuedRecognitionSche
 import com.mrsep.musicrecognizer.core.domain.recognition.NetworkMonitor
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionWorkStatus
 import com.mrsep.musicrecognizer.feature.recognition.domain.DeleteEnqueuedRecognition
+import com.mrsep.musicrecognizer.feature.recognition.platform.BatteryMonitor
 import com.mrsep.musicrecognizer.feature.recognition.presentation.model.EnqueuedRecognitionUi
 import com.mrsep.musicrecognizer.feature.recognition.presentation.model.PlayerStatusUi
 import com.mrsep.musicrecognizer.feature.recognition.presentation.model.toUi
-import com.mrsep.musicrecognizer.feature.recognition.scheduler.systemBatteryLowFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,7 +27,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class QueueScreenViewModel @Inject constructor(
-    @ApplicationContext private val appContext: Context,
     private val preferencesRepository: PreferencesRepository,
     private val enqueuedRecognitionRepository: EnqueuedRecognitionRepository,
     private val recognitionScheduler: EnqueuedRecognitionScheduler,
@@ -37,13 +34,14 @@ internal class QueueScreenViewModel @Inject constructor(
     private val playerController: PlayerController,
     private val dateFormatter: AppDateTimeFormatter,
     networkMonitor: NetworkMonitor,
+    batteryMonitor: BatteryMonitor,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     val screenUiStateFlow = combine(
         enqueuedRecognitionRepository.getAllRecognitionsFlow(),
         preferencesRepository.userPreferencesFlow,
-        appContext.systemBatteryLowFlow(),
+        batteryMonitor.isBatteryLowFlow(),
         networkMonitor.isOffline,
     ) { enqueuedList, preferences, batteryLow, offline ->
         QueueScreenUiState.Success(

@@ -16,6 +16,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:name=".MusicRecognizerApp"
@@ -69,6 +71,11 @@
             android:foregroundServiceType="microphone|mediaProjection" />
 
         <service
+            android:name=".feature.recognition.service.AutoRecognitionService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <service
             android:name=".feature.recognition.service.OneTimeRecognitionTileService"
             android:exported="true"
             android:icon="@drawable/ic_retro_microphone"
@@ -80,6 +87,24 @@
             <meta-data
                 android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="false" />
+
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".feature.recognition.service.AutoRecognitionTileService"
+            android:exported="true"
+            android:icon="@drawable/rounded_auto_recognition_24"
+            android:label="@string/quick_tile_auto_recognition"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
 
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
