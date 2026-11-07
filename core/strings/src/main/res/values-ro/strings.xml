@@ -25,7 +25,7 @@
     <string name="quick_tile_auto_recognition">Auto recunoastere</string>
     <string name="action_recognize">Recunoaste</string>
     <string name="action_cancel_recognition">Anuleaza recunoasterea</string>
-    <string name="app_shortcut_recognize_short">Scurtaturi aplicatie. Daca este destul spatiu, launcherul afiseaza_varianta lunga a melodiei in loc de_cea scurta. Cea scurta ar trebui sa fie limitata la 10 caractere. Cea lunga sa fie limitata la 25.</string>
+    <string name="app_shortcut_recognize_short"></string>
     <string name="app_shortcut_recognize_long">Recunoaste in spate</string>
     <string name="app_shortcut_open_and_recognize_short">Deschide si recunoaste</string>
     <string name="app_shortcut_open_and_recognize_long">Deschide aplicatia si recunoaste</string>
