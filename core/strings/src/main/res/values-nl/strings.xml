@@ -397,4 +397,6 @@
     <string name="auto_recognition_battery_unrestricted_required">Automatische herkenning vereist dat het batterijgebruik van deze app is ingesteld op \'Onbeperkt\'</string>
     <string name="notification_auto_recognition_status_subtitle_on">Identificeert continu muziek in je omgeving</string>
     <string name="quick_tile_auto_recognition_now_playing">Nu aan het afspelen</string>
+    <string name="app_shortcut_start_auto_recognition_short">Automatische herkenning</string>
+    <string name="app_shortcut_start_auto_recognition_long">Automatische herkenning</string>
 </resources>
