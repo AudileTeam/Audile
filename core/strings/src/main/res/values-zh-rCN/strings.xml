@@ -393,4 +393,6 @@
     <string name="notification_auto_recognition_action_turn_on">打开</string>
     <string name="auto_recognition_battery_unrestricted_required">自动识别需要将本应用的电池使用设为无限制</string>
     <string name="quick_tile_auto_recognition_now_playing">正在播放</string>
+    <string name="app_shortcut_start_auto_recognition_short">自动识别</string>
+    <string name="app_shortcut_start_auto_recognition_long">自动识别</string>
 </resources>
