@@ -1,0 +1,4 @@
+* Add auto recognition that continuously identifies music around you (fixed one-minute interval, microphone only)
+* Queued recognitions now run strictly one by one, oldest first
+* Recognition queue state now survives backup and restore
+* Minor fixes
