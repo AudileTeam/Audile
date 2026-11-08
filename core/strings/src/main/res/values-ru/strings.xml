@@ -370,7 +370,6 @@
     <string name="notification_channel_desc_auto_recognition_status">Статус автораспознавания</string>
     <string name="notification_channel_name_auto_recognition_result">Результаты автораспознавания</string>
     <string name="notification_channel_desc_auto_recognition_result">Показывает песни, найденные автораспознаванием</string>
-
     <string name="notification_auto_recognition_status_title_on">Автораспознавание включено</string>
     <string name="notification_auto_recognition_status_subtitle_on">Непрерывно распознаёт музыку вокруг вас</string>
     <string name="notification_auto_recognition_status_title_off">Автораспознавание выключено</string>
@@ -389,7 +388,6 @@
     <string name="notification_auto_recognition_action_turn_off">Выключить</string>
     <string name="notification_auto_recognition_action_turn_on">Включить</string>
     <string name="auto_recognition_battery_unrestricted_required">Автораспознаванию требуется разрешение на использование батареи "Без ограничений"</string>
-
     <string name="crash_dialog_title">Произошел сбой Audile</string>
     <string name="crash_dialog_message">Непредвиденная ошибка привела к остановке приложения. Хотите отправить письмо с подробным отчетом, чтобы помочь исправить эту ошибку\?</string>
     <string name="crash_dialog_comment_prompt">Здесь вы можете добавить дополнительную информацию:</string>
@@ -421,4 +419,6 @@
         <item quantity="many">Выбрано %d</item>
         <item quantity="other">Выбрано %d</item>
     </plurals>
+    <string name="app_shortcut_start_auto_recognition_short">Автораспознавание</string>
+    <string name="app_shortcut_start_auto_recognition_long">Автораспознавание</string>
 </resources>
