@@ -409,4 +409,6 @@
     <string name="notification_auto_recognition_action_turn_on">Activer</string>
     <string name="auto_recognition_battery_unrestricted_required">Pour que la reconnaissance automatique fonctionne, la consommation de batterie de cette application doit être réglée sur « Sans restriction ».</string>
     <string name="quick_tile_auto_recognition_now_playing">En cours de lecture</string>
+    <string name="app_shortcut_start_auto_recognition_short">Reconnaissance Auto</string>
+    <string name="app_shortcut_start_auto_recognition_long">Reconnaissance Automatique</string>
 </resources>
