@@ -376,4 +376,27 @@
     <string name="recognition_queue_offline_paused">A cola está en pausa mentras non hai conexión a internet</string>
     <string name="recognition_queue_low_battery_paused">A cola está en pausa mentras queda pouca batería</string>
     <string name="recognition_queue_low_battery_allow">Permitir esta vez</string>
+    <string name="quick_tile_auto_recognition">Identificación automática</string>
+    <string name="quick_tile_auto_recognition_now_playing">Reproducindo</string>
+    <string name="app_shortcut_start_auto_recognition_short">Auto identificación</string>
+    <string name="app_shortcut_start_auto_recognition_long">Auto identificación</string>
+    <string name="notification_channel_name_auto_recognition_status">Auto identificación</string>
+    <string name="notification_channel_desc_auto_recognition_status">Estado da identificación automática</string>
+    <string name="notification_channel_name_auto_recognition_result">Resultados atopados pola identificación automática</string>
+    <string name="notification_channel_desc_auto_recognition_result">Mostra os resultados atopados pola identificación automática</string>
+    <string name="notification_auto_recognition_status_title_on">A auto identificación está activada</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Identifica de xeito contínuo a música que soa arredor de ti</string>
+    <string name="notification_auto_recognition_status_title_off">A autoidentificación está apagada</string>
+    <string name="notification_auto_recognition_status_waiting_network">Agardando pola conexión á rede</string>
+    <string name="notification_auto_recognition_status_low_battery">En pausa mentras queda pouca batería</string>
+    <string name="notification_auto_recognition_status_during_call">En pausa durante unha chamada</string>
+    <string name="notification_auto_recognition_status_time_limit">Acadouse o límite de tempo da sesión</string>
+    <string name="notification_auto_recognition_now_playing">Reproducindo %1$s de %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">%d canción atopada</item>
+        <item quantity="other">%d cancións atopadas</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Desactivar</string>
+    <string name="notification_auto_recognition_action_turn_on">Activar</string>
+    <string name="auto_recognition_battery_unrestricted_required">A auto identificación precisa non restrinxir o uso de batería para esta app</string>
 </resources>
