@@ -1,0 +1,321 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 14,
+    "identityHash": "46874c5598fa9f0fdb642418bcafba65",
+    "entities": [
+      {
+        "tableName": "track",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `artist` TEXT NOT NULL, `album` TEXT, `release_date` INTEGER, `duration` INTEGER, `recognized_at` INTEGER, `recognized_by` TEXT NOT NULL, `recognition_date` INTEGER NOT NULL, `lyrics` TEXT, `is_lyrics_synced` INTEGER NOT NULL, `isrc` TEXT, `link_artwork_thumb` TEXT, `link_artwork` TEXT, `link_amazon_music` TEXT, `link_anghami` TEXT, `link_apple_music` TEXT, `link_audiomack` TEXT, `link_audius` TEXT, `link_boomplay` TEXT, `link_deezer` TEXT, `link_jiosaavn` TEXT, `link_musicbrainz` TEXT, `link_napster` TEXT, `link_pandora` TEXT, `link_qobuz` TEXT, `link_soundcloud` TEXT, `link_spotify` TEXT, `link_tidal` TEXT, `link_yandex_music` TEXT, `link_youtube` TEXT, `link_youtube_music` TEXT, `is_favorite` INTEGER NOT NULL, `is_viewed` INTEGER NOT NULL, `theme_seed_color` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "artist",
+            "columnName": "artist",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "album",
+            "columnName": "album",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "releaseDate",
+            "columnName": "release_date",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "recognizedAt",
+            "columnName": "recognized_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "recognizedBy",
+            "columnName": "recognized_by",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recognitionDate",
+            "columnName": "recognition_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lyrics",
+            "columnName": "lyrics",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isLyricsSynced",
+            "columnName": "is_lyrics_synced",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isrc",
+            "columnName": "isrc",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.artworkThumbnail",
+            "columnName": "link_artwork_thumb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.artwork",
+            "columnName": "link_artwork",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.amazonMusic",
+            "columnName": "link_amazon_music",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.anghami",
+            "columnName": "link_anghami",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.appleMusic",
+            "columnName": "link_apple_music",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.audiomack",
+            "columnName": "link_audiomack",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.audius",
+            "columnName": "link_audius",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.boomplay",
+            "columnName": "link_boomplay",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.deezer",
+            "columnName": "link_deezer",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.jioSaavn",
+            "columnName": "link_jiosaavn",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.musicBrainz",
+            "columnName": "link_musicbrainz",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.napster",
+            "columnName": "link_napster",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.pandora",
+            "columnName": "link_pandora",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.qobuz",
+            "columnName": "link_qobuz",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.soundCloud",
+            "columnName": "link_soundcloud",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.spotify",
+            "columnName": "link_spotify",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.tidal",
+            "columnName": "link_tidal",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.yandexMusic",
+            "columnName": "link_yandex_music",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.youtube",
+            "columnName": "link_youtube",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "links.youtubeMusic",
+            "columnName": "link_youtube_music",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "properties.isFavorite",
+            "columnName": "is_favorite",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "properties.isViewed",
+            "columnName": "is_viewed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "properties.themeSeedColor",
+            "columnName": "theme_seed_color",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_track_is_viewed",
+            "unique": false,
+            "columnNames": [
+              "is_viewed"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_track_is_viewed` ON `${TABLE_NAME}` (`is_viewed`)"
+          }
+        ]
+      },
+      {
+        "tableName": "enqueued_recognition",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `record_file` TEXT NOT NULL, `creation_date` INTEGER NOT NULL, `work_status` TEXT NOT NULL, `queued_at` INTEGER, `attempt_count` INTEGER NOT NULL, `next_attempt_at` INTEGER, `result_type` TEXT, `result_track_id` TEXT, `result_message` TEXT, `result_date` INTEGER, FOREIGN KEY(`result_track_id`) REFERENCES `track`(`id`) ON UPDATE CASCADE ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sampleFileName",
+            "columnName": "record_file",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "creationDate",
+            "columnName": "creation_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "workStatus",
+            "columnName": "work_status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "queuedAt",
+            "columnName": "queued_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "attemptCount",
+            "columnName": "attempt_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nextAttemptAt",
+            "columnName": "next_attempt_at",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "resultType",
+            "columnName": "result_type",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "resultTrackId",
+            "columnName": "result_track_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "resultMessage",
+            "columnName": "result_message",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "resultDate",
+            "columnName": "result_date",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_enqueued_recognition_result_track_id",
+            "unique": false,
+            "columnNames": [
+              "result_track_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_enqueued_recognition_result_track_id` ON `${TABLE_NAME}` (`result_track_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "track",
+            "onDelete": "SET NULL",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "result_track_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '46874c5598fa9f0fdb642418bcafba65')"
+    ]
+  }
+}

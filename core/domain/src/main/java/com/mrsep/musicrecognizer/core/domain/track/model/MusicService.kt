@@ -8,6 +8,7 @@ enum class MusicService {
     Audius,
     Boomplay,
     Deezer,
+    JioSaavn,
     MusicBrainz,
     Napster,
     Pandora,

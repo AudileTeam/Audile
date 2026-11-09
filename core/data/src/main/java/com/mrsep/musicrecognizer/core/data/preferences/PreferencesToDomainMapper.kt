@@ -73,6 +73,7 @@ internal fun UserPreferencesProto.toDomain() = UserPreferences(
             MusicServiceProto.Audius -> MusicService.Audius
             MusicServiceProto.Boomplay -> MusicService.Boomplay
             MusicServiceProto.Deezer -> MusicService.Deezer
+            MusicServiceProto.JioSaavn -> MusicService.JioSaavn
             MusicServiceProto.MusicBrainz -> MusicService.MusicBrainz
             MusicServiceProto.Napster -> MusicService.Napster
             MusicServiceProto.Pandora -> MusicService.Pandora

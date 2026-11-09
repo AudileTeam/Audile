@@ -14,6 +14,7 @@ object MusicServiceUtils {
             MusicService.AppleMusic -> parseAppleMusic(parsed)
             MusicService.Youtube, MusicService.YoutubeMusic -> parseYoutube(parsed)
             MusicService.Deezer -> parsed.segmentAfter("track", ::isDigits)
+            MusicService.JioSaavn -> parseJioSaavn(parsed)
             MusicService.Tidal -> parsed.segmentAfter("track", ::isDigits)
             MusicService.YandexMusic -> parsed.segmentAfter("track", ::isDigits)
             MusicService.Napster -> parsed.segmentAfter("track", ::isNapsterTrackId)
@@ -88,6 +89,18 @@ object MusicServiceUtils {
         return url.queryValue("id")?.takeIf(::isDigits)
     }
 
+    private fun parseJioSaavn(url: Url): String? {
+        val hostValid = url.host.equals("jiosaavn.com", ignoreCase = true) ||
+                url.host.endsWith(".jiosaavn.com", ignoreCase = true)
+        if (!hostValid) return null
+        val segments = url.segments
+        if (segments.none { it.equals("song", ignoreCase = true) }) return null
+        if (segments.any { it.equals("search", ignoreCase = true) || it.equals("album", ignoreCase = true) }) {
+            return null
+        }
+        return segments.lastOrNull()?.takeIf(jioSaavnTrackIdRegex::matches)
+    }
+
     private fun Url.segmentAfter(key: String, predicate: (String) -> Boolean): String? {
         val index = segments.indexOfLast { it.equals(key, ignoreCase = true) }
         if (index < 0 || index + 1 >= segments.size) return null
@@ -127,4 +140,5 @@ object MusicServiceUtils {
         this in '0'..'9' || this in 'A'..'Z' || this in 'a'..'z'
 
     private val pandoraIdRegex = Regex("""TR:\d+""", RegexOption.IGNORE_CASE)
+    private val jioSaavnTrackIdRegex = Regex("""[^/?#]+""")
 }

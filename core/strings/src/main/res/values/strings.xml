@@ -431,6 +431,7 @@
     <string name="bandcamp" translatable="false">Bandcamp</string>
     <string name="boomplay" translatable="false">Boomplay</string>
     <string name="deezer" translatable="false">Deezer</string>
+    <string name="jiosaavn" translatable="false">JioSaavn</string>
     <string name="musicbrainz" translatable="false">MusicBrainz</string>
     <string name="napster" translatable="false">Napster</string>
     <string name="pandora" translatable="false">Pandora</string>

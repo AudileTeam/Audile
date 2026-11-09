@@ -186,7 +186,9 @@ class OdesliTrackLinksFetcher @Inject constructor(
         MusicService.Tidal -> "t"
         MusicService.YandexMusic -> "ya"
         MusicService.Youtube, MusicService.YoutubeMusic -> "y"
-        MusicService.MusicBrainz, MusicService.Qobuz -> null
+        MusicService.MusicBrainz,
+        MusicService.Qobuz,
+        MusicService.JioSaavn -> null
     }
 
     // ========== JSON Parsing ==========

@@ -21,4 +21,5 @@ enum MusicServiceProto {
     Youtube = 14;
     YoutubeMusic = 15;
     Qobuz = 16;
+    JioSaavn = 17;
 }

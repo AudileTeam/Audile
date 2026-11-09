@@ -34,6 +34,7 @@ internal class RoomModule {
                 Migration10To11,
                 Migration11To12,
                 Migration12To13,
+                Migration13To14,
             )
             .build()
     }

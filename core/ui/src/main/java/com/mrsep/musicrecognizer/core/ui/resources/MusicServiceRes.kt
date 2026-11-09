@@ -14,6 +14,7 @@ fun MusicService.titleId() = when (this) {
     MusicService.Audius -> StringsR.string.audius
     MusicService.Boomplay -> StringsR.string.boomplay
     MusicService.Deezer -> StringsR.string.deezer
+    MusicService.JioSaavn -> StringsR.string.jiosaavn
     MusicService.MusicBrainz -> StringsR.string.musicbrainz
     MusicService.Napster -> StringsR.string.napster
     MusicService.Pandora -> StringsR.string.pandora
@@ -35,6 +36,7 @@ fun MusicService.iconId() = when (this) {
     MusicService.Audius -> UiR.drawable.ic_audius_24
     MusicService.Boomplay -> UiR.drawable.ic_boomplay_24
     MusicService.Deezer -> UiR.drawable.ic_deezer_24
+    MusicService.JioSaavn -> UiR.drawable.ic_jiosaavn_24
     MusicService.MusicBrainz -> UiR.drawable.ic_musicbrainz_24
     MusicService.Napster -> UiR.drawable.ic_napster_24
     MusicService.Pandora -> UiR.drawable.ic_pandora_24

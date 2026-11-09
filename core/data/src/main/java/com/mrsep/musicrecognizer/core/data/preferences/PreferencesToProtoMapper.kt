@@ -77,6 +77,7 @@ internal fun MusicService.toProto() = when (this) {
     MusicService.Audius -> MusicServiceProto.Audius
     MusicService.Boomplay -> MusicServiceProto.Boomplay
     MusicService.Deezer -> MusicServiceProto.Deezer
+    MusicService.JioSaavn -> MusicServiceProto.JioSaavn
     MusicService.MusicBrainz -> MusicServiceProto.MusicBrainz
     MusicService.Napster -> MusicServiceProto.Napster
     MusicService.Pandora -> MusicServiceProto.Pandora

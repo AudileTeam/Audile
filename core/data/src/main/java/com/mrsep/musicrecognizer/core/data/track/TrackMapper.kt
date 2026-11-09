@@ -36,6 +36,7 @@ internal fun Track.toEntity() = TrackEntity(
         audius = trackLinks[MusicService.Audius],
         boomplay = trackLinks[MusicService.Boomplay],
         deezer = trackLinks[MusicService.Deezer],
+        jioSaavn = trackLinks[MusicService.JioSaavn],
         musicBrainz = trackLinks[MusicService.MusicBrainz],
         napster = trackLinks[MusicService.Napster],
         pandora = trackLinks[MusicService.Pandora],
@@ -77,6 +78,7 @@ internal fun TrackEntity.toDomain() = Track(
             audius?.run { put(MusicService.Audius, this) }
             boomplay?.run { put(MusicService.Boomplay, this) }
             deezer?.run { put(MusicService.Deezer, this) }
+            jioSaavn?.run { put(MusicService.JioSaavn, this) }
             musicBrainz?.run { put(MusicService.MusicBrainz, this) }
             napster?.run { put(MusicService.Napster, this) }
             pandora?.run { put(MusicService.Pandora, this) }

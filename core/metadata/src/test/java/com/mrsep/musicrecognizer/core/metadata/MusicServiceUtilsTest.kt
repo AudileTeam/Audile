@@ -39,6 +39,7 @@ internal class MusicServiceUtilsTest {
             Case(MusicService.Soundcloud, "https://soundcloud.com/tracks/718846078", "718846078"),
             Case(MusicService.MusicBrainz, "https://musicbrainz.org/recording/f32fab67-77dd-4449-9c25-3b139e67eb19", "f32fab67-77dd-4449-9c25-3b139e67eb19"),
             Case(MusicService.Qobuz, "https://open.qobuz.com/track/3147371", "3147371"),
+            Case(MusicService.JioSaavn, "https://www.jiosaavn.com/song/tum-hi-ho/EToxUyFpcwQ", "EToxUyFpcwQ"),
         )
         for ((service, url, expectedId) in cases) {
             MusicServiceUtils.parseTrackId(url, service) shouldBe expectedId

@@ -62,6 +62,8 @@ data class TrackEntity(
         val boomplay: String?,
         @ColumnInfo(name = "deezer")
         val deezer: String?,
+        @ColumnInfo(name = "jiosaavn")
+        val jioSaavn: String?,
         @ColumnInfo(name = "musicbrainz")
         val musicBrainz: String?,
         @ColumnInfo(name = "napster")

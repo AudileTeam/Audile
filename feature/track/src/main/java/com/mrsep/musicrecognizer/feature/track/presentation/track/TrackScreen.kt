@@ -390,6 +390,11 @@ private fun MusicService.createSearchUrlFor(track: TrackUi, target: SearchTarget
             SearchTarget.Artist ->  "https://www.deezer.com/search/${queryEncoded}/artist"
             SearchTarget.Album ->   "https://www.deezer.com/search/${queryEncoded}/album"
         }
+        MusicService.JioSaavn -> when (target) {
+            SearchTarget.Track ->   "https://www.jiosaavn.com/search/song/${queryEncoded}"
+            SearchTarget.Artist ->  "https://www.jiosaavn.com/search/artist/${queryEncoded}"
+            SearchTarget.Album ->   "https://www.jiosaavn.com/search/album/${queryEncoded}"
+        }
         MusicService.MusicBrainz -> when (target) {
             // Don't use 'type=work' because for work searches artist means composer/lyricist, not performer,
             // so we can't specify track artist to narrow the search
