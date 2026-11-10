@@ -22,4 +22,5 @@ enum class TrackLinksSource {
     Qobuz,
     JioSaavn,
     MusicBrainz,
+    Spotify,
 }

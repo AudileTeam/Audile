@@ -24,6 +24,7 @@ import com.mrsep.musicrecognizer.core.metadata.tracklink.jiosaavn.JioSaavnTrackL
 import com.mrsep.musicrecognizer.core.metadata.tracklink.musicbrainz.MusicBrainzTrackLinksFetcher
 import com.mrsep.musicrecognizer.core.metadata.tracklink.odesli.OdesliTrackLinksFetcher
 import com.mrsep.musicrecognizer.core.metadata.tracklink.qobuz.QobuzTrackLinksFetcher
+import com.mrsep.musicrecognizer.core.metadata.tracklink.spotify.SpotifyTrackLinksFetcher
 import com.mrsep.musicrecognizer.core.metadata.tracklink.youtube.YoutubeTrackLinksFetcher
 import com.mrsep.musicrecognizer.feature.recognition.scheduler.TrackMetadataFetchManagerImpl.Companion.buildWorkTagForTrack
 import dagger.assisted.Assisted
@@ -46,6 +47,7 @@ internal class TrackLinksFetchWorker @AssistedInject constructor(
     private val qobuzTrackLinksFetcher: QobuzTrackLinksFetcher,
     private val musicBrainzTrackLinksFetcher: MusicBrainzTrackLinksFetcher,
     private val jioSaavnTrackLinksFetcher: JioSaavnTrackLinksFetcher,
+    private val spotifyTrackLinksFetcher: SpotifyTrackLinksFetcher,
 ) : CoroutineWorker(appContext, workerParams) {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -96,7 +98,10 @@ internal class TrackLinksFetchWorker @AssistedInject constructor(
                 musicBrainzTrackLinksFetcher,
                 jioSaavnTrackLinksFetcher,
             ),
-            listOf(youtubeTrackLinksFetcher),
+            listOf(
+                youtubeTrackLinksFetcher,
+                spotifyTrackLinksFetcher,
+            ),
         ).mapNotNull { batch ->
             batch
                 .filter { fetcher ->
@@ -174,6 +179,7 @@ internal class TrackLinksFetchWorker @AssistedInject constructor(
         TrackLinksSource.Qobuz -> qobuzTrackLinksFetcher
         TrackLinksSource.MusicBrainz -> musicBrainzTrackLinksFetcher
         TrackLinksSource.JioSaavn -> jioSaavnTrackLinksFetcher
+        TrackLinksSource.Spotify -> spotifyTrackLinksFetcher
     }
 
     companion object {
