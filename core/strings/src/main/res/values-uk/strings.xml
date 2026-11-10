@@ -382,4 +382,29 @@
     <string name="recognition_queue_offline_paused">Черга призупиняється, поки немає мережі</string>
     <string name="recognition_queue_low_battery_paused">Черга призупиняється, коли рівень заряду акумулятора низький</string>
     <string name="recognition_queue_low_battery_allow">Дозволити цього разу</string>
+    <string name="quick_tile_auto_recognition">Авторозпізнавання</string>
+    <string name="quick_tile_auto_recognition_now_playing">Зараз грає</string>
+    <string name="app_shortcut_start_auto_recognition_short">Авторозпізнавання</string>
+    <string name="app_shortcut_start_auto_recognition_long">Авторозпізнавання</string>
+    <string name="notification_channel_name_auto_recognition_status">Авторозпізнавання</string>
+    <string name="notification_channel_desc_auto_recognition_status">Статус авторозпізнавання</string>
+    <string name="notification_channel_name_auto_recognition_result">Результати пісень, знайдені за допомогою авторозпізнавання</string>
+    <string name="notification_channel_desc_auto_recognition_result">Показує пісні, знайдені за допомогою авторозпізнавання</string>
+    <string name="notification_auto_recognition_status_title_on">Авторозпізнавання ввімкнено</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Постійно ідентифікує музику навколо вас</string>
+    <string name="notification_auto_recognition_status_title_off">Авторозпізнавання вимкнено</string>
+    <string name="notification_auto_recognition_status_waiting_network">Очікування мережевого з’єднання</string>
+    <string name="notification_auto_recognition_status_low_battery">Призупинено, поки заряд акумулятора низький</string>
+    <string name="notification_auto_recognition_status_during_call">Призупинено під час дзвінка</string>
+    <string name="notification_auto_recognition_status_time_limit">Досягнуто ліміт часу сеансу</string>
+    <string name="notification_auto_recognition_now_playing">Зараз грає %2$s: %1$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">Знайдено %d пісню</item>
+        <item quantity="few">Знайдено %d пісні</item>
+        <item quantity="many">Знайдено %d пісень</item>
+        <item quantity="other">Знайдено %d пісень</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Вимкнути</string>
+    <string name="notification_auto_recognition_action_turn_on">Увімкнути</string>
+    <string name="auto_recognition_battery_unrestricted_required">Для роботи авторозпізнавання дозвольте цьому застосунку необмежено використовувати акумулятор</string>
 </resources>
