@@ -396,4 +396,7 @@
     <string name="notification_auto_recognition_action_turn_off">Lülita välja</string>
     <string name="notification_auto_recognition_action_turn_on">Lülita sisse</string>
     <string name="auto_recognition_battery_unrestricted_required">Automaatne tuvastus eeldab, et selle rakenduse akukasutusele pole piiranguid</string>
+    <string name="quick_tile_auto_recognition_now_playing">Hetkel esitamisel</string>
+    <string name="app_shortcut_start_auto_recognition_short">Automaatne tuvastus</string>
+    <string name="app_shortcut_start_auto_recognition_long">Automaatne tuvastus</string>
 </resources>

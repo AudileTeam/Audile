@@ -137,7 +137,7 @@
     <string name="library_search_hint">トラックを検索する⋯</string>
     <string name="format_recognition_status">ステータス︰%s</string>
     <string name="recognition_status_idle">待機中</string>
-    <string name="recognition_status_enqueued">処理待ち</string>
+    <string name="recognition_status_enqueued">認識待ち</string>
     <string name="recognition_status_running">認識中</string>
     <string name="recognition_status_track_found">トラックを見つかりました</string>
     <string name="no_tracks_match_filter">選択した条件に一致するトラックはありません</string>
@@ -369,4 +369,30 @@
     <string name="auto_backup_error_access_denied">バックアップフォルダへの書き込み権限がありません、フォルダを再度選択してください</string>
     <string name="auto_backup_error_file_not_found">選択したフォルダでバックアップファイルを作成できませんでした</string>
     <string name="auto_backup_error_unhandled">予期せぬエラーが発生しました。空き容量を確認し、フォルダへのアクセスを確認してください</string>
+    <string name="quick_tile_auto_recognition">自動認識</string>
+    <string name="quick_tile_auto_recognition_now_playing">再生中</string>
+    <string name="app_shortcut_start_auto_recognition_short">自動認識</string>
+    <string name="app_shortcut_start_auto_recognition_long">自動認識</string>
+    <string name="recognition_status_retry">再試行を予定しました</string>
+    <string name="recognition_queue_low_battery_allow">一回だけ許可する</string>
+    <string name="notification_channel_name_auto_recognition_status">自動認識</string>
+    <string name="notification_channel_desc_auto_recognition_status">自動認識の状態</string>
+    <string name="notification_channel_name_auto_recognition_result">自動認識の結果</string>
+    <string name="notification_channel_desc_auto_recognition_result">自動認識で識別できた曲を表示します</string>
+    <string name="notification_auto_recognition_status_title_on">自動認識は有効です</string>
+    <string name="notification_auto_recognition_status_subtitle_on">周囲の音楽を継続的に認識しています</string>
+    <string name="notification_auto_recognition_status_title_off">自動認識は無効です</string>
+    <string name="notification_auto_recognition_status_waiting_network">インターネット接続を待機中</string>
+    <string name="recognition_queue_offline_paused">ネットワークに接続していない間は、認識待ちの曲を処理しません</string>
+    <string name="recognition_queue_low_battery_paused">バッテリー残量が少ない間は、認識待ちの曲を処理しません</string>
+    <string name="notification_auto_recognition_status_low_battery">バッテリー残量が少ない間に一時停止</string>
+    <string name="notification_auto_recognition_status_during_call">電話中に一時停止</string>
+    <string name="notification_auto_recognition_now_playing">%2$sの%1$sを再生中</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="other">%d曲を認識できました</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">無効にする</string>
+    <string name="notification_auto_recognition_action_turn_on">有効にする</string>
+    <string name="notification_auto_recognition_status_time_limit">セッションの制限時間に達しました</string>
+    <string name="auto_recognition_battery_unrestricted_required">自動認識を使用するように、アプリのバックグラウンドでのパッテリー使用許可を「制限なし」に設定する必要です</string>
 </resources>
