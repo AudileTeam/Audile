@@ -400,4 +400,7 @@
     <string name="notification_auto_recognition_action_turn_off">Desactivar</string>
     <string name="notification_auto_recognition_action_turn_on">Activar</string>
     <string name="auto_recognition_battery_unrestricted_required">El auto reconocimiento necesita el uso sin restricciones de la batería</string>
+    <string name="quick_tile_auto_recognition_now_playing">Reproduciendo ahora</string>
+    <string name="app_shortcut_start_auto_recognition_short">Auto Reconocimiento</string>
+    <string name="app_shortcut_start_auto_recognition_long">Auto Reconocimiento</string>
 </resources>
