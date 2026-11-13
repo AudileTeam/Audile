@@ -72,6 +72,15 @@ Feel free to submit new translations, correct errors, or suggest better phrasing
 ## Donation
 This app is completely free. It comes without any ads or other forms of commercial monetization. To support ongoing development or simply say thanks, consider making a [donation](https://github.com/AudileTeam/Audile/blob/master/FUNDING.md).
 
+## SHA-256 certificate fingerprints:
+
+**Package ID:** com.mrsep.musicrecognizer
+
+**GitHub APK:**
+```
+A5:A1:DC:1D:78:D7:F0:3A:95:36:51:B2:7D:3A:07:C2:5E:3A:F0:13:27:F4:5C:DF:86:19:A2:23:B7:03:57:D0
+```
+
 ## Building from sources
 Please refer to the [detailed build instructions](https://github.com/AudileTeam/Audile/blob/master/BUILDING.md).
 
