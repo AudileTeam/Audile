@@ -167,7 +167,7 @@
     <string name="pref_title_show_creation_date">Zobrazit datum vytvoření</string>
     <string name="pref_title_music_services_links">Odkazy na hudební služby</string>
     <string name="pref_subtitle_no_selected_services">Žádný</string>
-    <string name="music_services_links_dialog">Vyberte hudební služby, pro které chcete zobrazit webové odkazy (pokud jsou k dispozici):</string>
+    <string name="music_services_links_dialog">Vyberte služby, pro které chcete zobrazit odkazy na skladby:</string>
     <string name="pref_title_vibration_feedback">Vibrační odezva</string>
     <string name="vibration_feedback_dialog_title">Vibrace</string>
     <string name="vibration_feedback_dialog_message">Přizpůsobení vibrační odezvy pro určité akce v aplikaci:</string>
@@ -412,4 +412,9 @@
     <string name="notification_auto_recognition_action_turn_off">Vypnout</string>
     <string name="notification_auto_recognition_action_turn_on">Zapnout</string>
     <string name="auto_recognition_battery_unrestricted_required">Automatické rozpoznávání vyžaduje nastavení využití baterie touto aplikací na Neomezené</string>
+    <string name="quick_tile_auto_recognition_now_playing">Nyní hraje</string>
+    <string name="app_shortcut_start_auto_recognition_short">Automatické rozpoznávání</string>
+    <string name="app_shortcut_start_auto_recognition_long">Automatické rozpoznávání</string>
+    <string name="music_services_links_extra_lookup">Povolte pouze ty, které používáte. Některé přidají další hledání po každém rozpoznání.</string>
+    <string name="music_services_links_order">Tlačítka na obrazovce skladby jsou zobrazena v tomto pořadí.</string>
 </resources>
