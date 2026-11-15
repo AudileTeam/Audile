@@ -192,7 +192,7 @@
     <string name="pref_title_music_services_links">Liens vers les services musicaux</string>
     <string name="pref_subtitle_format_more_services">"%1$s, et %2$d de plus"</string>
     <string name="pref_subtitle_no_selected_services">Aucun</string>
-    <string name="music_services_links_dialog">Choisissez les services musicaux pour lesquels vous souhaiteriez voir des liens web (si disponibles) :</string>
+    <string name="music_services_links_dialog">Choisissez les services musicaux pour lesquels vous souhaiteriez voir des liens web (si disponibles) :</string>
     <string name="pref_group_misc">Divers</string>
     <string name="pref_title_vibration_feedback">Retour par vibration</string>
     <string name="vibration_feedback_dialog_title">Vibration</string>
