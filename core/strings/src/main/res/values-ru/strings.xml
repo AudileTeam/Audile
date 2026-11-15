@@ -246,7 +246,9 @@
     <string name="pref_title_music_services_links">Ссылки на музыкальные сервисы</string>
     <string name="pref_subtitle_format_more_services">"%1$s и ещё %2$d"</string>
     <string name="pref_subtitle_no_selected_services">Не показывать ссылки</string>
-    <string name="music_services_links_dialog">Выберите музыкальные сервисы, для которых вы бы хотели видеть веб-ссылки (если они доступны):</string>
+    <string name="music_services_links_dialog">Выберите сервисы, для которых вы бы хотели видеть трек-ссылки:</string>
+    <string name="music_services_links_extra_lookup">Включайте только нужные сервисы. Некоторые добавляют дополнительный поиск после распознавания.</string>
+    <string name="music_services_links_order">Кнопки на экране трека отображаются в этом порядке.</string>
     <string name="pref_group_misc">Разное</string>
     <string name="pref_title_vibration_feedback">Вибрация</string>
     <string name="vibration_feedback_dialog_title">Вибрация</string>

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
@@ -271,12 +272,17 @@ internal fun PreferencesScreen(
                             subtitle = requiredMusicServices.getEnumerationForSubtitle(limit = 3),
                             onItemClick = { showServicesDialog = true }
                         )
+                        val container = LocalWindowInfo.current.containerDpSize
+                        val dialogWidth = (container.width - 80.dp)
+                            .coerceIn(320.dp, 560.dp)
+                            .coerceAtMost(container.width)
+                        val dialogHeight = 640.dp
+                            .coerceAtMost(container.height)
                         if (showServicesDialog) {
                             RequiredServicesDialog(
                                 modifier = Modifier
-                                    .heightIn(min = 300.dp)
-                                    .fillMaxHeight(0.67f)
-                                ,
+                                    .widthIn(max = dialogWidth)
+                                    .heightIn(max = dialogHeight),
                                 requiredServices = requiredMusicServices,
                                 onRequiredServicesChanged = viewModel::setRequiredMusicServices,
                                 onDismissClick = { showServicesDialog = false }

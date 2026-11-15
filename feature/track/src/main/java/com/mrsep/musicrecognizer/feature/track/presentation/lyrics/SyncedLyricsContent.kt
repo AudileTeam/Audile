@@ -52,7 +52,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
@@ -651,7 +650,8 @@ private data class SyncPoint(
     val playbackPosition: Duration,
 ) {
     companion object {
-        val Saver: Saver<SyncPoint?, *> = listSaver(
+        // Avoid listSaver: it encodes an empty list as null, which rememberSaveable treats as missing state
+        val Saver = Saver<SyncPoint?, List<String>>(
             save = { syncPoint ->
                 if (syncPoint != null) {
                     listOf(
@@ -663,7 +663,7 @@ private data class SyncPoint(
                 }
             },
             restore = { saved ->
-                if (saved.isNotEmpty()) {
+                if (saved.size == 2) {
                     SyncPoint(
                         time = Instant.parse(saved[0]),
                         playbackPosition = Duration.parseIsoString(saved[1])
