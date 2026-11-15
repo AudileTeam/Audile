@@ -358,4 +358,16 @@
     <string name="pref_subtitle_backup_location">ستُخزَّن النسخة الاحتياطية في: %s</string>
     <string name="pref_title_backup_frequency">مُعدَّل النسخ الاحتياطي</string>
     <string name="pref_subtitle_backup_frequency_one">كل يوم</string>
+    <string name="quick_tile_auto_recognition">التعرّف التلقائي</string>
+    <string name="quick_tile_auto_recognition_now_playing">قيد التشغيل الآن</string>
+    <string name="app_shortcut_start_auto_recognition_short">التعرّف التلقائي</string>
+    <string name="app_shortcut_start_auto_recognition_long">التعرّف التلقائي</string>
+    <plurals name="pref_subtitle_backup_frequency">
+        <item quantity="zero">لا أيام</item>
+        <item quantity="one">كل يومٍ واحد</item>
+        <item quantity="two">كل يومين</item>
+        <item quantity="few">كل %d أيام</item>
+        <item quantity="many">كل %d يومًا</item>
+        <item quantity="other">كل %d يوم</item>
+    </plurals>
 </resources>
