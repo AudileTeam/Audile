@@ -218,7 +218,7 @@
     <string name="pref_title_music_services_links">Links naar muziekdiensten</string>
     <string name="pref_subtitle_format_more_services">%1$s, en %2$d meer</string>
     <string name="pref_subtitle_no_selected_services">Geen</string>
-    <string name="music_services_links_dialog">Selecteer de muziekdiensten waarvoor je webkoppelingen wilt zien (indien beschikbaar):</string>
+    <string name="music_services_links_dialog">Selecteer de diensten waarvoor je nummerkoppelingen wilt zien:</string>
     <string name="pref_group_misc">Overig</string>
     <string name="pref_title_vibration_feedback">Trillen</string>
     <string name="vibration_feedback_dialog_title">Trillen</string>
@@ -399,4 +399,6 @@
     <string name="quick_tile_auto_recognition_now_playing">Nu aan het afspelen</string>
     <string name="app_shortcut_start_auto_recognition_short">Autom. herkenning</string>
     <string name="app_shortcut_start_auto_recognition_long">Automatische herkenning</string>
+    <string name="music_services_links_extra_lookup">Schakel alleen de diensten in die je gebruikt. Sommige voeren na elke herkenning een extra zoekopdracht uit.</string>
+    <string name="music_services_links_order">Knoppen onder het nummer worden in deze volgorde weergegeven.</string>
 </resources>
