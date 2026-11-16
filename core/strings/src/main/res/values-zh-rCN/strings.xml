@@ -218,7 +218,7 @@
     <string name="pref_title_music_services_links">音乐服务链接</string>
     <string name="pref_subtitle_format_more_services">%1$s，以及另外 %2$d 个</string>
     <string name="pref_subtitle_no_selected_services">无</string>
-    <string name="music_services_links_dialog">选择您希望显示网页链接的音乐服务（如可用）：</string>
+    <string name="music_services_links_dialog">选择您希望看到曲目链接的服务：</string>
     <string name="pref_group_misc">其他设置</string>
     <string name="pref_title_vibration_feedback">震动反馈</string>
     <string name="vibration_feedback_dialog_title">震动</string>
@@ -395,4 +395,6 @@
     <string name="quick_tile_auto_recognition_now_playing">正在播放</string>
     <string name="app_shortcut_start_auto_recognition_short">自动识别</string>
     <string name="app_shortcut_start_auto_recognition_long">自动识别</string>
+    <string name="music_services_links_extra_lookup">仅启用你使用的服务。一些服务在每次识别后添加额外的查询。</string>
+    <string name="music_services_links_order">歌曲屏幕上的按钮以该顺序显示。</string>
 </resources>
