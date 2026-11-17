@@ -250,7 +250,7 @@
     <string name="acr_cloud_help_dialog_step3">Vali tuvastusmootor, mida soovid kasutada. Tüüpiliselt annab „Heli sõrmejälg“ üldise kasutuse puhul parima tulemuse</string>
     <string name="acr_cloud_help_dialog_step4">Vali kõik kolmandate osapoolte lõimingute märkeruudud</string>
     <string name="pref_subtitle_no_selected_services">Määramata</string>
-    <string name="music_services_links_dialog">Vali muusikateenused, mille veebilinke sa soovid näha (kui need on saadaval):</string>
+    <string name="music_services_links_dialog">Vali teenused, mille lugude linke sa soovid näha:</string>
     <string name="pref_group_misc">Varia</string>
     <string name="pref_title_vibration_feedback">Tagasiside värinana</string>
     <string name="vibration_feedback_dialog_title">Värinaalarm</string>
@@ -399,4 +399,6 @@
     <string name="quick_tile_auto_recognition_now_playing">Hetkel esitamisel</string>
     <string name="app_shortcut_start_auto_recognition_short">Automaatne tuvastus</string>
     <string name="app_shortcut_start_auto_recognition_long">Automaatne tuvastus</string>
+    <string name="music_services_links_extra_lookup">Lülita sisse vaid need, mida sa kasutad. Mõnede puhul lisandub peale tuvastust täiendav viiteaeg.</string>
+    <string name="music_services_links_order">Loo infovaates kuvatavad nupud kuvatakse selles järjekorras.</string>
 </resources>
