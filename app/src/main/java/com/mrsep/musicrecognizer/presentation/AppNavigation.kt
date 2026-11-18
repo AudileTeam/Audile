@@ -3,17 +3,22 @@ package com.mrsep.musicrecognizer.presentation
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -22,55 +27,47 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.core.util.Consumer
-import androidx.lifecycle.withResumed
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navOptions
-import androidx.navigation.navigation
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import com.mrsep.musicrecognizer.BuildConfig
-import com.mrsep.musicrecognizer.feature.backup.presentation.BackupRestoreScreenNavigation.backupRestoreScreen
-import com.mrsep.musicrecognizer.feature.backup.presentation.BackupRestoreScreenNavigation.navigateToBackupRestoreScreen
-import com.mrsep.musicrecognizer.feature.developermode.presentation.DeveloperScreenNavigation.developerScreen
-import com.mrsep.musicrecognizer.feature.developermode.presentation.DeveloperScreenNavigation.navigateToDeveloperScreen
-import com.mrsep.musicrecognizer.feature.library.presentation.library.LibraryScreen
-import com.mrsep.musicrecognizer.feature.library.presentation.library.LibraryScreen.libraryScreen
-import com.mrsep.musicrecognizer.feature.library.presentation.search.LibrarySearchScreen.librarySearchScreen
-import com.mrsep.musicrecognizer.feature.library.presentation.search.LibrarySearchScreen.navigateToLibrarySearchScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.PreferencesScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.PreferencesScreen.navigateToPreferencesScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.PreferencesScreen.preferencesScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.AboutScreenNavigation.aboutScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.AboutScreenNavigation.navigateToAboutScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.AppLicenseScreen.appLicenseScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.AppLicenseScreen.navigateToAppLicenseScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.SoftwareDetailsScreen.softwareDetailsScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.SoftwareDetailsScreen.navigateToSoftwareDetailsScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.SoftwareScreenNavigation.softwareScreen
-import com.mrsep.musicrecognizer.feature.preferences.presentation.about.SoftwareScreenNavigation.navigateToSoftwareScreen
-import com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen.RecognitionQueueScreen
-import com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen.RecognitionQueueScreen.navigateToQueueScreen
-import com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen.RecognitionQueueScreen.queueScreen
+import com.mrsep.musicrecognizer.feature.backup.presentation.BackupRestoreRoute
+import com.mrsep.musicrecognizer.feature.backup.presentation.backupRestoreEntry
+import com.mrsep.musicrecognizer.feature.developermode.presentation.DeveloperRoute
+import com.mrsep.musicrecognizer.feature.developermode.presentation.developerEntry
+import com.mrsep.musicrecognizer.feature.library.presentation.library.libraryEntry
+import com.mrsep.musicrecognizer.feature.library.presentation.search.LibrarySearchRoute
+import com.mrsep.musicrecognizer.feature.library.presentation.search.librarySearchEntry
+import com.mrsep.musicrecognizer.feature.preferences.presentation.PreferencesRoute
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.AboutRoute
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.AppLicenseRoute
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.SoftwareDetailsRoute
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.SoftwareRoute
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.aboutEntry
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.appLicenseEntry
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.softwareDetailsEntry
+import com.mrsep.musicrecognizer.feature.preferences.presentation.about.softwareEntry
+import com.mrsep.musicrecognizer.feature.preferences.presentation.preferencesEntry
+import com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen.QueueRoute
+import com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen.queueEntry
 import com.mrsep.musicrecognizer.feature.recognition.presentation.recognitionscreen.RecognitionRequest
-import com.mrsep.musicrecognizer.feature.recognition.presentation.recognitionscreen.RecognitionScreen
-import com.mrsep.musicrecognizer.feature.recognition.presentation.recognitionscreen.RecognitionScreen.recognitionScreen
-import com.mrsep.musicrecognizer.feature.track.presentation.lyrics.LyricsScreen.lyricsScreen
-import com.mrsep.musicrecognizer.feature.track.presentation.lyrics.LyricsScreen.navigateToLyricsScreen
-import com.mrsep.musicrecognizer.feature.track.presentation.track.TrackScreen
-import com.mrsep.musicrecognizer.feature.track.presentation.track.TrackScreen.navigateToTrackScreen
-import com.mrsep.musicrecognizer.feature.track.presentation.track.TrackScreen.trackScreen
-
-private const val SCREEN_TRANSITION_DURATION = 250
+import com.mrsep.musicrecognizer.feature.recognition.presentation.recognitionscreen.RecognitionRoute
+import com.mrsep.musicrecognizer.feature.recognition.presentation.recognitionscreen.recognitionEntry
+import com.mrsep.musicrecognizer.feature.track.presentation.lyrics.LyricsRoute
+import com.mrsep.musicrecognizer.feature.track.presentation.lyrics.lyricsEntry
+import com.mrsep.musicrecognizer.feature.track.presentation.track.TrackRoute
+import com.mrsep.musicrecognizer.feature.track.presentation.track.trackEntry
+import com.mrsep.musicrecognizer.presentation.navigation.Navigator
+import com.mrsep.musicrecognizer.presentation.navigation.TrackPopStyle
+import com.mrsep.musicrecognizer.presentation.navigation.parseAppDeepLink
+import com.mrsep.musicrecognizer.presentation.navigation.rememberNavigationState
 
 @Composable
 internal fun AppNavigation(
@@ -79,274 +76,229 @@ internal fun AppNavigation(
     setPendingRecognitionRequest: (RecognitionRequest?) -> Unit,
     shouldShowNavRail: Boolean,
     isExpandedScreen: Boolean,
-    hideSplashScreen: () -> Unit
+    restoreState: Boolean,
+    hideSplashScreen: () -> Unit,
 ) {
-    val outerNavController = rememberNavController()
-    val innerNavController = rememberNavController()
-    val optionalOuterEntry by outerNavController.currentBackStackEntryAsState()
-    val optionalInnerEntry by innerNavController.currentBackStackEntryAsState()
-    // Handle deep links manually due to activity launch mode
-    // https://developer.android.com/guide/navigation/design/deep-link#handle
     val activity = LocalActivity.current as ComponentActivity
-    DisposableEffect(Unit) {
-        val deeplinkListener = Consumer<Intent> { intent ->
-            outerNavController.handleDeepLink(intent)
+    // Parsed once. Restored process must not seed from the launch intent again.
+    val initialDeepLink = remember {
+        if (restoreState) null else parseAppDeepLink(activity.intent)
+    }
+    val navigationState = rememberNavigationState(
+        startRoute = TopLevelDestination.Recognition.key,
+        topLevelRoutes = TopLevelDestination.keys,
+        initial = initialDeepLink,
+    )
+    val navigator = remember(navigationState) { Navigator(navigationState) }
+    // Warm singleTask intents only. The launch intent is not delivered here.
+    DisposableEffect(activity, navigator) {
+        val listener = Consumer<Intent> { intent ->
+            val link = parseAppDeepLink(intent) ?: return@Consumer
+            navigator.applyDeepLink(link)
         }
-        activity.addOnNewIntentListener(deeplinkListener)
-        onDispose {
-            activity.removeOnNewIntentListener(deeplinkListener)
+        activity.addOnNewIntentListener(listener)
+        onDispose { activity.removeOnNewIntentListener(listener) }
+    }
+
+    // Entry content is recreated only when that tab's back stack changes.
+    val pendingRequest = rememberUpdatedState(pendingRecognitionRequest)
+    val expandedScreen = rememberUpdatedState(isExpandedScreen)
+    val showRail = rememberUpdatedState(shouldShowNavRail)
+    val barHeight = remember { mutableIntStateOf(0) }
+    val railWidth = remember { mutableIntStateOf(0) }
+
+    val visible = navigationState.backStacks.getValue(navigationState.topLevelRoute).last()
+    LaunchedEffect(visible, pendingRecognitionRequest) {
+        if (pendingRecognitionRequest != null && visible != RecognitionRoute) {
+            navigator.openTopLevel(RecognitionRoute)
         }
     }
-    val isRecognitionRequested = pendingRecognitionRequest != null
-    // Conditional navigation for recognition request
-    LaunchedEffect(
-        optionalOuterEntry,
-        optionalInnerEntry,
-        isRecognitionRequested,
-    ) {
-        // optionalInnerEntry can be null, for example if nav graph is created with track deeplink
-        val outerEntry = optionalOuterEntry ?: return@LaunchedEffect
-        val innerEntry = optionalInnerEntry
-        // navigate to recognition screen if recognition requested
-        if (isRecognitionRequested) {
-            if (outerEntry.destination.route != BAR_HOST_ROUTE) {
-                outerNavController.popBackStack(BAR_HOST_ROUTE, inclusive = false)
-                return@LaunchedEffect
-            } else if (innerEntry != null && innerEntry.destination.route != RecognitionScreen.ROUTE) {
-                innerNavController.navigate(TopLevelDestination.Recognition.route) {
-                    popUpTo(innerNavController.graph.findStartDestination().id) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-                return@LaunchedEffect
-            }
-        }
-        // hide splash screen if result screen is resumed
-        if (outerEntry.destination.route == BAR_HOST_ROUTE) {
-            optionalInnerEntry?.lifecycle?.withResumed(hideSplashScreen)
-        } else {
-            outerEntry.lifecycle.withResumed(hideSplashScreen)
-        }
-    }
-    NavHost(
-        navController = outerNavController,
-        startDestination = BAR_HOST_ROUTE,
-        enterTransition = { fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        exitTransition = { fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        popEnterTransition = { fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        popExitTransition = { fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        predictivePopEnterTransition = { fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        predictivePopExitTransition = { fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        barNavHost(
-            unviewedTracksCount = unviewedTracksCount,
-            pendingRecognitionRequest = pendingRecognitionRequest,
-            setPendingRecognitionRequest = setPendingRecognitionRequest,
-            shouldShowNavRail = shouldShowNavRail,
-            outerNavController = outerNavController,
-            innerNavController = innerNavController
-        )
-        librarySearchScreen(
-            onBackPressed = outerNavController::navigateUp,
-            onTrackClick = { trackId, from ->
-                outerNavController.navigateToTrackScreen(trackId = trackId, from = from)
-            }
-        )
-        navigation(
-            route = "nav_graph_track",
-            startDestination = TrackScreen.ROUTE,
-        ) {
-            trackScreen(
-                isExpandedScreen = isExpandedScreen,
-                onBackPressed = outerNavController::navigateUp,
-                onNavigateToLyricsScreen = { trackId, from ->
-                    outerNavController.navigateToLyricsScreen(trackId = trackId, from = from)
+
+    val atTabRoot = visible == navigationState.topLevelRoute
+    val barVisible = atTabRoot && !shouldShowNavRail
+    val railVisible = atTabRoot && shouldShowNavRail
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        NavDisplay(
+            entries = navigationState.toEntries(
+                entryProvider = entryProvider {
+                    recognitionEntry(
+                        pendingRecognitionRequest = pendingRequest,
+                        onResetPendingRecognitionRequest = { setPendingRecognitionRequest(null) },
+                        onNavigateToTrack = { trackId ->
+                            navigator.navigate(TrackRoute(trackId, allowRetry = true))
+                        },
+                        onNavigateToQueue = { navigator.navigate(QueueRoute) },
+                        onNavigateToPreferences = { navigator.navigate(PreferencesRoute) },
+                        barHeight = barHeight,
+                        railWidth = railWidth,
+                        showRail = showRail,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    libraryEntry(
+                        onNavigateToTrack = { trackId -> navigator.navigate(TrackRoute(trackId)) },
+                        onNavigateToLibrarySearch = { navigator.navigate(LibrarySearchRoute) },
+                        barHeight = barHeight,
+                        railWidth = railWidth,
+                        showRail = showRail,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    queueEntry(
+                        onNavigateToTrack = { trackId -> navigator.navigate(TrackRoute(trackId)) },
+                        barHeight = barHeight,
+                        railWidth = railWidth,
+                        showRail = showRail,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    preferencesEntry(
+                        showDeveloperOptions = BuildConfig.DEV_OPTIONS,
+                        onNavigateToAbout = { navigator.navigate(AboutRoute) },
+                        onNavigateToBackupRestore = { navigator.navigate(BackupRestoreRoute) },
+                        onNavigateToDeveloper = { navigator.navigate(DeveloperRoute) },
+                        barHeight = barHeight,
+                        railWidth = railWidth,
+                        showRail = showRail,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    librarySearchEntry(
+                        onBackPressed = navigator::goBack,
+                        onNavigateToTrack = { trackId -> navigator.navigate(TrackRoute(trackId)) },
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    trackEntry(
+                        isExpandedScreen = expandedScreen,
+                        onBackPressed = navigator::goBack,
+                        onTrackDeleted = { navigator.popTrack(TrackPopStyle.Deleted) },
+                        onRetryRequested = {
+                            setPendingRecognitionRequest(RecognitionRequest.Retry)
+                            navigator.popTrack(TrackPopStyle.Dismissed)
+                            // The pending request effect runs on the next frame and would
+                            // replace this pop, dropping the dismiss animation. Switch in
+                            // this snapshot when the pop didn't already land on Recognition.
+                            val landed = navigationState.backStacks
+                                .getValue(navigationState.topLevelRoute)
+                                .last()
+                            if (landed != RecognitionRoute) {
+                                navigator.openTopLevel(RecognitionRoute)
+                            }
+                        },
+                        onNavigateToLyrics = { trackId -> navigator.navigate(LyricsRoute(trackId)) },
+                        hideSplashScreen = hideSplashScreen,
+                        metadata = trackPopMetadata(navigator),
+                    )
+                    lyricsEntry(
+                        onBackPressed = navigator::goBack,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    aboutEntry(
+                        onBackPressed = navigator::goBack,
+                        onNavigateToSoftware = { navigator.navigate(SoftwareRoute) },
+                        onNavigateToAppLicense = { navigator.navigate(AppLicenseRoute) },
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    softwareEntry(
+                        onBackPressed = navigator::goBack,
+                        onNavigateToSoftwareDetails = { uniqueId ->
+                            navigator.navigate(SoftwareDetailsRoute(uniqueId))
+                        },
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    softwareDetailsEntry(
+                        onBackPressed = navigator::goBack,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    appLicenseEntry(
+                        onBackPressed = navigator::goBack,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    backupRestoreEntry(
+                        onBackPressed = navigator::goBack,
+                        hideSplashScreen = hideSplashScreen,
+                    )
+                    developerEntry(
+                        onBackPressed = navigator::goBack,
+                        hideSplashScreen = hideSplashScreen,
+                    )
                 },
-                onRetryRequested = { setPendingRecognitionRequest(RecognitionRequest.Retry) }
-            )
-            lyricsScreen(onBackPressed = outerNavController::navigateUp)
-        }
-        aboutScreen(
-            onBackPressed = outerNavController::navigateUp,
-            onNavigateToSoftwareScreen = { from ->
-                outerNavController.navigateToSoftwareScreen(from)
-            },
-            onNavigateToAppLicenseScreen = { from ->
-                outerNavController.navigateToAppLicenseScreen(from)
-            }
+            ),
+            modifier = Modifier.fillMaxSize(),
+            transitionSpec = { defaultScreenTransition },
+            popTransitionSpec = { defaultScreenTransition },
+            predictivePopTransitionSpec = { _ -> defaultScreenTransition },
+            onBack = navigator::goBack,
         )
-        softwareScreen(
-            onBackPressed = outerNavController::navigateUp,
-            onNavigateToSoftwareDetailsScreen = { uniqueId, from ->
-                outerNavController.navigateToSoftwareDetailsScreen(uniqueId, from)
-            }
-        )
-        softwareDetailsScreen(onBackPressed = outerNavController::navigateUp)
-        appLicenseScreen(onBackPressed = outerNavController::navigateUp)
-        backupRestoreScreen(onBackPressed = outerNavController::navigateUp)
-        developerScreen(onBackPressed = outerNavController::navigateUp)
-    }
-}
-
-private const val BAR_HOST_ROUTE = "bar_host"
-
-private fun NavGraphBuilder.barNavHost(
-    unviewedTracksCount: State<Int>,
-    pendingRecognitionRequest: RecognitionRequest?,
-    setPendingRecognitionRequest: (RecognitionRequest?) -> Unit,
-    shouldShowNavRail: Boolean,
-    outerNavController: NavController,
-    innerNavController: NavHostController
-) {
-    composable(BAR_HOST_ROUTE) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Row(
-                verticalAlignment = Alignment.Top,
-                horizontalArrangement = Arrangement.Start,
+        AnimatedVisibility(
+            visible = barVisible,
+            enter = defaultEnterTransition,
+            exit = defaultExitTransition,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
+        ) {
+            AppNavigationBar(
+                unviewedTracksCount = unviewedTracksCount,
+                selectedKey = navigationState.topLevelRoute,
+                onSelect = navigator::navigate,
+                enabled = barVisible,
                 modifier = Modifier
-                    .weight(1f)
+                    .onSizeChanged { barHeight.intValue = it.height }
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal)
+                    ),
+            )
+        }
+        AnimatedVisibility(
+            visible = railVisible,
+            enter = defaultEnterTransition,
+            exit = defaultExitTransition,
+            modifier = Modifier.align(Alignment.CenterStart),
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxHeight()
                     .windowInsetsPadding(
                         WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal)
                     )
+                    .onSizeChanged { railWidth.intValue = it.width },
             ) {
-                if (shouldShowNavRail) {
-                    AppNavigationRail(
-                        unviewedTracksCount = unviewedTracksCount,
-                        navController = innerNavController
-                    )
-                    VerticalDivider(modifier = Modifier.alpha(0.2f))
-                }
-                BarNavHost(
-                    pendingRecognitionRequest = pendingRecognitionRequest,
-                    setPendingRecognitionRequest = setPendingRecognitionRequest,
-                    outerNavController = outerNavController,
-                    innerNavController = innerNavController,
-                    modifier = Modifier
-                        .weight(1f)
-                        .then(
-                            if (shouldShowNavRail) {
-                                Modifier.windowInsetsPadding(
-                                    WindowInsets.navigationBars.only(WindowInsetsSides.Bottom)
-                                )
-                            } else {
-                                Modifier.consumeWindowInsets(
-                                    WindowInsets.navigationBars.only(WindowInsetsSides.Bottom)
-                                )
-                            }
-                        ),
-                )
-            }
-            if (!shouldShowNavRail) {
-                AppNavigationBar(
+                AppNavigationRail(
                     unviewedTracksCount = unviewedTracksCount,
-                    navController = innerNavController
+                    selectedKey = navigationState.topLevelRoute,
+                    onSelect = navigator::navigate,
+                    enabled = railVisible,
+                    modifier = Modifier.fillMaxHeight(),
                 )
+                VerticalDivider(modifier = Modifier.alpha(0.2f))
             }
         }
     }
 }
 
-@Composable
-private fun BarNavHost(
-    pendingRecognitionRequest: RecognitionRequest?,
-    setPendingRecognitionRequest: (RecognitionRequest?) -> Unit,
-    outerNavController: NavController,
-    innerNavController: NavHostController,
-    modifier: Modifier = Modifier
-) {
-    NavHost(
-        navController = innerNavController,
-        startDestination = TopLevelDestination.Recognition.route,
-        modifier = modifier.fillMaxSize(),
-        enterTransition = { fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        exitTransition = { fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        popEnterTransition = { fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        popExitTransition = { fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        predictivePopEnterTransition = { fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-        predictivePopExitTransition = { fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION)) },
-    ) {
-        navigation(
-            startDestination = RecognitionScreen.ROUTE,
-            route = TopLevelDestination.Recognition.route
-        ) {
-            recognitionScreen(
-                pendingRecognitionRequest = pendingRecognitionRequest,
-                onResetPendingRecognitionRequest = { setPendingRecognitionRequest(null) },
-                onNavigateToTrackScreen = { trackId, from ->
-                    outerNavController.navigateToTrackScreen(
-                        trackId = trackId,
-                        isRetryAvailable = true,
-                        from = from
-                    )
-                },
-                onNavigateToQueueScreen = { _, from ->
-                    innerNavController.navigateToQueueScreen(
-                        from = from,
-                        navOptions = navOptions {
-                            popUpTo(innerNavController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    )
-                },
-                onNavigateToPreferencesScreen = { from ->
-                    innerNavController.navigateToPreferencesScreen(
-                        from = from,
-                        navOptions = navOptions {
-                            popUpTo(innerNavController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    )
-                }
-            )
-        }
-        navigation(
-            startDestination = LibraryScreen.ROUTE,
-            route = TopLevelDestination.Library.route
-        ) {
-            libraryScreen(
-                onTrackClick = { trackId, from ->
-                    outerNavController.navigateToTrackScreen(trackId = trackId, from = from)
-                },
-                onTrackSearchClick = { from ->
-                    outerNavController.navigateToLibrarySearchScreen(from = from)
-                }
-            )
-        }
-        navigation(
-            startDestination = RecognitionQueueScreen.ROUTE,
-            route = TopLevelDestination.Queue.route
-        ) {
-            queueScreen(
-                onNavigateToTrackScreen = { trackId, from ->
-                    outerNavController.navigateToTrackScreen(trackId = trackId, from = from)
-                }
-            )
-        }
-        navigation(
-            startDestination = PreferencesScreen.ROUTE,
-            route = TopLevelDestination.Preferences.route
-        ) {
-            preferencesScreen(
-                showDeveloperOptions = BuildConfig.DEV_OPTIONS,
-                onNavigateToAboutScreen = { from ->
-                    outerNavController.navigateToAboutScreen(from)
-                },
-                onNavigateToBackupRestoreScreen = { from ->
-                    outerNavController.navigateToBackupRestoreScreen(from)
-                },
-                onNavigateToDeveloperScreen = { from ->
-                    outerNavController.navigateToDeveloperScreen(from)
-                }
-            )
-        }
-    }
+private const val SCREEN_TRANSITION_DURATION = 250
+private val defaultEnterTransition = fadeIn(animationSpec = tween(SCREEN_TRANSITION_DURATION))
+private val defaultExitTransition = fadeOut(animationSpec = tween(SCREEN_TRANSITION_DURATION))
+private val defaultScreenTransition = defaultEnterTransition togetherWith defaultExitTransition
+
+private fun trackPopMetadata(navigator: Navigator): Map<String, Any> =
+    NavDisplay.popTransitionSpec { styledTrackPop(navigator.trackPopStyle) } +
+        NavDisplay.predictivePopTransitionSpec { _ -> styledTrackPop(navigator.trackPopStyle) }
+
+private fun styledTrackPop(style: TrackPopStyle): ContentTransform? = when (style) {
+    TrackPopStyle.Deleted -> deletedTrackPop()
+    TrackPopStyle.Dismissed -> dismissedTrackPop()
+    TrackPopStyle.NoAction -> null
 }
+
+private fun deletedTrackPop(): ContentTransform =
+    defaultEnterTransition togetherWith (
+        fadeOut(animationSpec = tween(durationMillis = SCREEN_TRANSITION_DURATION - 50, delayMillis = 50)) +
+            scaleOut(animationSpec = tween(durationMillis = SCREEN_TRANSITION_DURATION), targetScale = 0.85f)
+        )
+
+private fun dismissedTrackPop(): ContentTransform =
+    defaultEnterTransition togetherWith (
+        slideOutVertically(
+            animationSpec = tween(SCREEN_TRANSITION_DURATION, easing = FastOutLinearInEasing),
+            targetOffsetY = { fullHeight -> -fullHeight / 2 },
+        ) + fadeOut(tween(durationMillis = SCREEN_TRANSITION_DURATION))
+        )

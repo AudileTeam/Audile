@@ -1,7 +1,6 @@
 package com.mrsep.musicrecognizer.feature.track.presentation.lyrics
 
 import androidx.compose.runtime.Immutable
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrsep.musicrecognizer.core.domain.preferences.LyricsStyle
@@ -11,30 +10,37 @@ import com.mrsep.musicrecognizer.core.domain.recognition.ResultNotificationManag
 import com.mrsep.musicrecognizer.core.domain.recognition.TrackMetadataFetchManager
 import com.mrsep.musicrecognizer.core.domain.track.TrackRepository
 import com.mrsep.musicrecognizer.core.domain.track.model.Lyrics
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.Instant
-import javax.inject.Inject
 import kotlin.time.Duration
 
-@HiltViewModel
-internal class LyricsViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+@HiltViewModel(assistedFactory = LyricsViewModel.Factory::class)
+internal class LyricsViewModel @AssistedInject constructor(
+    @Assisted route: LyricsRoute,
     private val trackRepository: TrackRepository,
     private val preferencesRepository: PreferencesRepository,
     trackMetadataFetchManager: TrackMetadataFetchManager,
     private val resultNotificationManager: ResultNotificationManager,
 ) : ViewModel() {
 
-    private val args = LyricsScreen.Args(savedStateHandle)
+    private val trackId = route.trackId
+
+    @AssistedFactory
+    interface Factory {
+        fun create(route: LyricsRoute): LyricsViewModel
+    }
 
     val uiStateStream = combine(
-        flow = trackRepository.getTrackFlow(args.trackId),
+        flow = trackRepository.getTrackFlow(trackId),
         flow2 = preferencesRepository.userPreferencesFlow,
-        flow3 = trackMetadataFetchManager.isLyricsFetcherRunning(args.trackId)
+        flow3 = trackMetadataFetchManager.isLyricsFetcherRunning(trackId)
     ) { track, preferences, isLyricsFetcherRunning ->
         if (track == null) return@combine LyricsUiState.TrackNotFound
         if (isLyricsFetcherRunning) return@combine LyricsUiState.Loading

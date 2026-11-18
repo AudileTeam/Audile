@@ -48,7 +48,7 @@ import com.mrsep.musicrecognizer.core.strings.R as StringsR
 @Composable
 internal fun LibrarySearchScreen(
     onBackPressed: () -> Unit,
-    onTrackClick: (trackId: String) -> Unit,
+    onNavigateToTrack: (trackId: String) -> Unit,
     viewModel: LibrarySearchViewModel = hiltViewModel()
 ) {
     val topBarBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
@@ -88,7 +88,7 @@ internal fun LibrarySearchScreen(
         SearchResultLazyColumn(
             query = query,
             searchResult = searchResult,
-            onTrackClick = onTrackClick,
+            onTrackClick = onNavigateToTrack,
             topBarBehaviour = topBarBehaviour,
             modifier = Modifier.fillMaxSize()
         )

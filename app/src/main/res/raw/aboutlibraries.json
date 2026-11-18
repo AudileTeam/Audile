@@ -1085,24 +1085,6 @@
             ]
         },
         {
-            "uniqueId": "androidx.hilt:hilt-navigation-compose",
-            "artifactVersion": "1.4.0",
-            "name": "Navigation Compose Hilt Integration",
-            "description": "Navigation Compose Hilt Integration",
-            "website": "https://developer.android.com/jetpack/androidx/releases/hilt#1.4.0",
-            "developers": [
-                {
-                    "name": "The Android Open Source Project"
-                }
-            ],
-            "organization": {
-                "name": "The Android Open Source Project"
-            },
-            "licenses": [
-                "Apache-2.0"
-            ]
-        },
-        {
             "uniqueId": "androidx.hilt:hilt-work",
             "artifactVersion": "1.4.0",
             "name": "WorkManager Hilt Extension",
@@ -1370,6 +1352,24 @@
             ]
         },
         {
+            "uniqueId": "androidx.lifecycle:lifecycle-viewmodel-navigation3",
+            "artifactVersion": "2.11.0",
+            "name": "Androidx Lifecycle Navigation3 ViewModel",
+            "description": "Provides the ViewModel wrapper for nav3.",
+            "website": "https://developer.android.com/jetpack/androidx/releases/lifecycle#2.11.0",
+            "developers": [
+                {
+                    "name": "The Android Open Source Project"
+                }
+            ],
+            "organization": {
+                "name": "The Android Open Source Project"
+            },
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
             "uniqueId": "androidx.lifecycle:lifecycle-viewmodel-savedstate",
             "artifactVersion": "2.11.0",
             "name": "Lifecycle ViewModel with SavedState",
@@ -1529,11 +1529,11 @@
             ]
         },
         {
-            "uniqueId": "androidx.navigation:navigation-common",
-            "artifactVersion": "2.10.2",
-            "name": "Navigation Common",
-            "description": "Android Navigation-Common",
-            "website": "https://developer.android.com/jetpack/androidx/releases/navigation#2.10.2",
+            "uniqueId": "androidx.navigation3:navigation3-runtime",
+            "artifactVersion": "1.2.1",
+            "name": "Androidx Navigation 3 Runtime",
+            "description": "Provides the building blocks for a Compose first Navigation solution that easily supports extensions.",
+            "website": "https://developer.android.com/jetpack/androidx/releases/navigation3#1.2.1",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1547,29 +1547,11 @@
             ]
         },
         {
-            "uniqueId": "androidx.navigation:navigation-compose",
-            "artifactVersion": "2.10.2",
-            "name": "Compose Navigation",
-            "description": "Compose integration with Navigation",
-            "website": "https://developer.android.com/jetpack/androidx/releases/navigation#2.10.2",
-            "developers": [
-                {
-                    "name": "The Android Open Source Project"
-                }
-            ],
-            "organization": {
-                "name": "The Android Open Source Project"
-            },
-            "licenses": [
-                "Apache-2.0"
-            ]
-        },
-        {
-            "uniqueId": "androidx.navigation:navigation-runtime",
-            "artifactVersion": "2.10.2",
-            "name": "Navigation Runtime",
-            "description": "Android Navigation-Runtime",
-            "website": "https://developer.android.com/jetpack/androidx/releases/navigation#2.10.2",
+            "uniqueId": "androidx.navigation3:navigation3-ui",
+            "artifactVersion": "1.2.1",
+            "name": "Androidx Navigation 3 UI",
+            "description": "Provides a Navigation3 display that uses the building blocks from runtime to create a higher level solution.",
+            "website": "https://developer.android.com/jetpack/androidx/releases/navigation3#1.2.1",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1584,10 +1566,10 @@
         },
         {
             "uniqueId": "androidx.navigationevent:navigationevent",
-            "artifactVersion": "1.1.2",
+            "artifactVersion": "1.1.1",
             "name": "Navigation Event",
             "description": "Provides APIs to easily intercept platform navigation events, including swipes and clicks, to provide a consistent API surface for handling these events.",
-            "website": "https://developer.android.com/jetpack/androidx/releases/navigationevent#1.1.2",
+            "website": "https://developer.android.com/jetpack/androidx/releases/navigationevent#1.1.1",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1602,10 +1584,10 @@
         },
         {
             "uniqueId": "androidx.navigationevent:navigationevent-compose",
-            "artifactVersion": "1.1.2",
+            "artifactVersion": "1.1.1",
             "name": "NavigationEvent Compose",
             "description": "Compose integration with NavigationEvent",
-            "website": "https://developer.android.com/jetpack/androidx/releases/navigationevent#1.1.2",
+            "website": "https://developer.android.com/jetpack/androidx/releases/navigationevent#1.1.1",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1728,10 +1710,10 @@
         },
         {
             "uniqueId": "androidx.savedstate:savedstate",
-            "artifactVersion": "1.5.0",
+            "artifactVersion": "1.4.0",
             "name": "Saved State",
             "description": "Android Lifecycle Saved State",
-            "website": "https://developer.android.com/jetpack/androidx/releases/savedstate#1.5.0",
+            "website": "https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1746,10 +1728,10 @@
         },
         {
             "uniqueId": "androidx.savedstate:savedstate-compose",
-            "artifactVersion": "1.5.0",
+            "artifactVersion": "1.4.0",
             "name": "Saved State Compose",
             "description": "Compose integration with Saved State",
-            "website": "https://developer.android.com/jetpack/androidx/releases/savedstate#1.5.0",
+            "website": "https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1764,10 +1746,10 @@
         },
         {
             "uniqueId": "androidx.savedstate:savedstate-ktx",
-            "artifactVersion": "1.5.0",
+            "artifactVersion": "1.4.0",
             "name": "SavedState Kotlin Extensions",
             "description": "Kotlin extensions for 'savedstate' artifact",
-            "website": "https://developer.android.com/jetpack/androidx/releases/savedstate#1.5.0",
+            "website": "https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0",
             "developers": [
                 {
                     "name": "The Android Open Source Project"

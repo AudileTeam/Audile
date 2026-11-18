@@ -133,6 +133,7 @@ class MainActivity : ComponentActivity() {
                         setPendingRecognitionRequest = viewModel::setPendingRecognitionRequest,
                         shouldShowNavRail = shouldShowNavRail(windowSizeClass),
                         isExpandedScreen = isExpandedScreen(windowSizeClass),
+                        restoreState = savedInstanceState != null,
                         hideSplashScreen = { keepSplashScreen = false }
                     )
                 }

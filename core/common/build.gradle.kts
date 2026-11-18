@@ -12,7 +12,4 @@ dependencies {
     implementation(projects.core.strings)
 
     implementation(libs.kotlinx.coroutinesAndroid)
-    implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.androidx.navigation.compose)
 }

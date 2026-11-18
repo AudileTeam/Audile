@@ -1,53 +1,46 @@
 package com.mrsep.musicrecognizer.feature.preferences.presentation
 
-import android.content.Intent
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import androidx.navigation.navDeepLink
-import com.mrsep.musicrecognizer.core.common.util.lifecycleIsResumed
+import androidx.compose.runtime.IntState
+import androidx.compose.runtime.State
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.mrsep.musicrecognizer.core.common.APP_DEEP_LINK_BASE
+import com.mrsep.musicrecognizer.core.ui.navigation.HideSplashWhenResumed
+import com.mrsep.musicrecognizer.core.ui.navigation.AppNavigationPadding
+import com.mrsep.musicrecognizer.core.ui.navigation.ifResumed
+import kotlinx.serialization.Serializable
 
-object PreferencesScreen {
-
-    private const val ROOT_DEEP_LINK = "app://mrsep.musicrecognizer.com"
-    const val ROUTE = "preferences"
-
-    fun NavGraphBuilder.preferencesScreen(
-        showDeveloperOptions: Boolean,
-        onNavigateToAboutScreen: (from: NavBackStackEntry) -> Unit,
-        onNavigateToBackupRestoreScreen: (from: NavBackStackEntry) -> Unit,
-        onNavigateToDeveloperScreen: (from: NavBackStackEntry) -> Unit
-    ) {
-        composable(
-            route = ROUTE,
-            deepLinks = listOf(
-                navDeepLink {
-                    uriPattern = "$ROOT_DEEP_LINK/$ROUTE"
-                    action = Intent.ACTION_VIEW
-                }
-            )
-        ) { backStackEntry ->
+fun EntryProviderScope<NavKey>.preferencesEntry(
+    showDeveloperOptions: Boolean,
+    onNavigateToAbout: () -> Unit,
+    onNavigateToBackupRestore: () -> Unit,
+    onNavigateToDeveloper: () -> Unit,
+    barHeight: IntState,
+    railWidth: IntState,
+    showRail: State<Boolean>,
+    hideSplashScreen: () -> Unit,
+) {
+    entry<PreferencesRoute> {
+        HideSplashWhenResumed(hideSplashScreen)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        AppNavigationPadding(
+            barHeight = barHeight,
+            railWidth = railWidth,
+            showRail = showRail,
+        ) {
             PreferencesScreen(
                 showDeveloperOptions = showDeveloperOptions,
-                onNavigateToAboutScreen = { onNavigateToAboutScreen(backStackEntry) },
-                onNavigateToBackupRestoreScreen = { onNavigateToBackupRestoreScreen(backStackEntry) },
-                onNavigateToDeveloperScreen = { onNavigateToDeveloperScreen(backStackEntry) }
+                onNavigateToAboutScreen = { lifecycle.ifResumed(onNavigateToAbout) },
+                onNavigateToBackupRestoreScreen = { lifecycle.ifResumed(onNavigateToBackupRestore) },
+                onNavigateToDeveloperScreen = { lifecycle.ifResumed(onNavigateToDeveloper) },
             )
         }
     }
+}
 
-    fun NavController.navigateToPreferencesScreen(
-        from: NavBackStackEntry,
-        navOptions: NavOptions? = null
-    ) {
-        if (from.lifecycleIsResumed) {
-            this.navigate(route = ROUTE, navOptions = navOptions)
-        }
-    }
+@Serializable
+data object PreferencesRoute : NavKey {
 
-    fun createDeepLink(): String {
-        return "$ROOT_DEEP_LINK/$ROUTE"
-    }
+    fun deepLinkUri(): String = "$APP_DEEP_LINK_BASE/preferences"
 }

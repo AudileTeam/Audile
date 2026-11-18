@@ -1,49 +1,44 @@
 package com.mrsep.musicrecognizer.feature.library.presentation.library
 
-import android.content.Intent
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import androidx.navigation.navDeepLink
-import com.mrsep.musicrecognizer.core.common.util.lifecycleIsResumed
+import androidx.compose.runtime.IntState
+import androidx.compose.runtime.State
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.mrsep.musicrecognizer.core.common.APP_DEEP_LINK_BASE
+import com.mrsep.musicrecognizer.core.ui.navigation.HideSplashWhenResumed
+import com.mrsep.musicrecognizer.core.ui.navigation.AppNavigationPadding
+import com.mrsep.musicrecognizer.core.ui.navigation.ifResumed
+import kotlinx.serialization.Serializable
 
-object LibraryScreen {
-
-    private const val ROOT_DEEP_LINK = "app://mrsep.musicrecognizer.com"
-    const val ROUTE = "library"
-
-    fun NavGraphBuilder.libraryScreen(
-        onTrackClick: (trackId: String, from: NavBackStackEntry) -> Unit,
-        onTrackSearchClick: (from: NavBackStackEntry) -> Unit
-    ) {
-        composable(
-            route = ROUTE,
-            deepLinks = listOf(
-                navDeepLink {
-                    uriPattern = "$ROOT_DEEP_LINK/$ROUTE"
-                    action = Intent.ACTION_VIEW
-                }
-            )
-        ) { backStackEntry ->
+fun EntryProviderScope<NavKey>.libraryEntry(
+    onNavigateToTrack: (trackId: String) -> Unit,
+    onNavigateToLibrarySearch: () -> Unit,
+    barHeight: IntState,
+    railWidth: IntState,
+    showRail: State<Boolean>,
+    hideSplashScreen: () -> Unit,
+) {
+    entry<LibraryRoute> {
+        HideSplashWhenResumed(hideSplashScreen)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        AppNavigationPadding(
+            barHeight = barHeight,
+            railWidth = railWidth,
+            showRail = showRail,
+        ) {
             LibraryScreen(
-                onTrackClick = { trackId -> onTrackClick(trackId, backStackEntry) },
-                onTrackSearchClick = { onTrackSearchClick(backStackEntry) }
+                onNavigateToTrack = { trackId ->
+                    lifecycle.ifResumed { onNavigateToTrack(trackId) }
+                },
+                onNavigateToLibrarySearch = { lifecycle.ifResumed(onNavigateToLibrarySearch) },
             )
         }
     }
+}
 
-    fun NavController.navigateToLibraryScreen(
-        from: NavBackStackEntry,
-        navOptions: NavOptions? = null
-    ) {
-        if (from.lifecycleIsResumed) {
-            this.navigate(route = ROUTE, navOptions = navOptions)
-        }
-    }
+@Serializable
+data object LibraryRoute : NavKey {
 
-    fun createDeepLink(): String {
-        return "$ROOT_DEEP_LINK/$ROUTE"
-    }
+    fun deepLinkUri(): String = "$APP_DEEP_LINK_BASE/library"
 }

@@ -29,8 +29,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 }
 
                 listOf(
-                    "androidx.navigation.compose",
-                    "androidx.hilt.navigation.compose",
+                    "androidx.hilt.lifecycle.viewmodel.compose",
+                    "androidx.navigation3.runtime",
+                    "androidx.lifecycle.viewmodel.navigation3",
+                    "kotlinx.serializationCore",
 
                     "androidx.core",
                     "androidx.activity.compose",

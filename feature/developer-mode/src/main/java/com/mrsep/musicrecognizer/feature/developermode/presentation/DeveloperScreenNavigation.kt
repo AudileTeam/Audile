@@ -1,30 +1,24 @@
 package com.mrsep.musicrecognizer.feature.developermode.presentation
 
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.mrsep.musicrecognizer.core.common.util.lifecycleIsResumed
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.mrsep.musicrecognizer.core.ui.navigation.HideSplashWhenResumed
+import com.mrsep.musicrecognizer.core.ui.navigation.ifResumed
+import kotlinx.serialization.Serializable
 
-object DeveloperScreenNavigation {
-
-    private const val ROUTE = "developer"
-
-    fun NavGraphBuilder.developerScreen(
-        onBackPressed: () -> Unit,
-    ) {
-        composable(ROUTE) {
-            DeveloperScreen(onBackPressed = onBackPressed)
-        }
-    }
-
-    fun NavController.navigateToDeveloperScreen(
-        from: NavBackStackEntry,
-        navOptions: NavOptions? = null
-    ) {
-        if (from.lifecycleIsResumed) {
-            this.navigate(route = ROUTE, navOptions = navOptions)
-        }
+fun EntryProviderScope<NavKey>.developerEntry(
+    onBackPressed: () -> Unit,
+    hideSplashScreen: () -> Unit,
+) {
+    entry<DeveloperRoute> {
+        HideSplashWhenResumed(hideSplashScreen)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        DeveloperScreen(
+            onBackPressed = { lifecycle.ifResumed(onBackPressed) },
+        )
     }
 }
+
+@Serializable
+data object DeveloperRoute : NavKey

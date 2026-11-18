@@ -36,8 +36,11 @@ import com.mrsep.musicrecognizer.core.ui.theme.SwitchingMusicRecognizerTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LyricsScreen(
+    route: LyricsRoute,
     onBackPressed: () -> Unit,
-    viewModel: LyricsViewModel = hiltViewModel()
+    viewModel: LyricsViewModel = hiltViewModel<LyricsViewModel, LyricsViewModel.Factory>(
+        creationCallback = { factory -> factory.create(route) },
+    ),
 ) {
     val screenUiState by viewModel.uiStateStream.collectAsStateWithLifecycle()
     when (val uiState = screenUiState) {

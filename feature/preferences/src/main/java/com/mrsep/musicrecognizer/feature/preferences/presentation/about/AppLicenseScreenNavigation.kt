@@ -1,28 +1,24 @@
 package com.mrsep.musicrecognizer.feature.preferences.presentation.about
 
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.mrsep.musicrecognizer.core.common.util.lifecycleIsResumed
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.mrsep.musicrecognizer.core.ui.navigation.HideSplashWhenResumed
+import com.mrsep.musicrecognizer.core.ui.navigation.ifResumed
+import kotlinx.serialization.Serializable
 
-object AppLicenseScreen {
-
-    const val ROUTE = "app_license"
-
-    fun NavGraphBuilder.appLicenseScreen(onBackPressed: () -> Unit) {
-        composable(route = ROUTE) {
-            AppLicenseScreen(onBackPressed = onBackPressed)
-        }
-    }
-
-    fun NavController.navigateToAppLicenseScreen(
-        from: NavBackStackEntry,
-        navOptions: NavOptions? = null,
-    ) {
-        if (from.lifecycleIsResumed) {
-            this.navigate(route = ROUTE, navOptions = navOptions)
-        }
+fun EntryProviderScope<NavKey>.appLicenseEntry(
+    onBackPressed: () -> Unit,
+    hideSplashScreen: () -> Unit,
+) {
+    entry<AppLicenseRoute> {
+        HideSplashWhenResumed(hideSplashScreen)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        AppLicenseScreen(
+            onBackPressed = { lifecycle.ifResumed(onBackPressed) },
+        )
     }
 }
+
+@Serializable
+data object AppLicenseRoute : NavKey

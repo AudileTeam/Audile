@@ -17,7 +17,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,28 +25,25 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation3.runtime.NavKey
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 
 @Composable
 fun AppNavigationBar(
     unviewedTracksCount: State<Int>,
-    navController: NavController,
-    modifier: Modifier = Modifier
+    selectedKey: NavKey,
+    onSelect: (NavKey) -> Unit,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     NavigationBar(
         modifier = modifier
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
         TopLevelDestination.entries.forEach { destinationEntry ->
-            val selected = currentDestination.isDestinationInHierarchy(destinationEntry)
+            val selected = destinationEntry.key == selectedKey
             NavigationBarItem(
                 selected = selected,
+                enabled = enabled,
                 icon = {
                     when (destinationEntry) {
                         TopLevelDestination.Library -> LibraryNavigationIcon(
@@ -72,22 +68,11 @@ fun AppNavigationBar(
                     )
                 },
                 alwaysShowLabel = false,
-                onClick = {
-                    navController.navigate(destinationEntry.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+                onClick = { onSelect(destinationEntry.key) },
             )
         }
     }
 }
-
-fun NavDestination?.isDestinationInHierarchy(destination: TopLevelDestination) =
-    this?.hierarchy?.any { it.route == destination.route } == true
 
 @Composable
 fun LibraryNavigationIcon(

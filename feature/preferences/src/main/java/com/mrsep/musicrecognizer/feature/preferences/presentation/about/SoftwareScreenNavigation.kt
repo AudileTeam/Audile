@@ -1,36 +1,28 @@
 package com.mrsep.musicrecognizer.feature.preferences.presentation.about
 
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.mrsep.musicrecognizer.core.common.util.lifecycleIsResumed
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.mrsep.musicrecognizer.core.ui.navigation.HideSplashWhenResumed
+import com.mrsep.musicrecognizer.core.ui.navigation.ifResumed
+import kotlinx.serialization.Serializable
 
-object SoftwareScreenNavigation {
-
-    private const val ROUTE = "third_party_software"
-
-    fun NavGraphBuilder.softwareScreen(
-        onBackPressed: () -> Unit,
-        onNavigateToSoftwareDetailsScreen: (uniqueId: String, from: NavBackStackEntry) -> Unit,
-    ) {
-        composable(ROUTE) { backStackEntry ->
-            SoftwareScreen(
-                onBackPressed = onBackPressed,
-                onNavigateToSoftwareDetailsScreen = { uniqueId ->
-                    onNavigateToSoftwareDetailsScreen(uniqueId, backStackEntry)
-                },
-            )
-        }
-    }
-
-    fun NavController.navigateToSoftwareScreen(
-        from: NavBackStackEntry,
-        navOptions: NavOptions? = null
-    ) {
-        if (from.lifecycleIsResumed) {
-            this.navigate(route = ROUTE, navOptions = navOptions)
-        }
+fun EntryProviderScope<NavKey>.softwareEntry(
+    onBackPressed: () -> Unit,
+    onNavigateToSoftwareDetails: (uniqueId: String) -> Unit,
+    hideSplashScreen: () -> Unit,
+) {
+    entry<SoftwareRoute> {
+        HideSplashWhenResumed(hideSplashScreen)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        SoftwareScreen(
+            onBackPressed = { lifecycle.ifResumed(onBackPressed) },
+            onNavigateToSoftwareDetailsScreen = { uniqueId ->
+                lifecycle.ifResumed { onNavigateToSoftwareDetails(uniqueId) }
+            },
+        )
     }
 }
+
+@Serializable
+data object SoftwareRoute : NavKey

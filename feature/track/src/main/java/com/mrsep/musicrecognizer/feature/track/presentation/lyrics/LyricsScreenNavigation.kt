@@ -1,63 +1,33 @@
 package com.mrsep.musicrecognizer.feature.track.presentation.lyrics
 
-import android.content.Intent
-import androidx.lifecycle.SavedStateHandle
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.NavType
-import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import androidx.navigation.navDeepLink
-import com.mrsep.musicrecognizer.core.common.util.lifecycleIsResumed
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.mrsep.musicrecognizer.core.common.APP_DEEP_LINK_BASE
+import com.mrsep.musicrecognizer.core.ui.navigation.HideSplashWhenResumed
+import com.mrsep.musicrecognizer.core.ui.navigation.ifResumed
+import kotlinx.serialization.Serializable
 
-object LyricsScreen {
-
-    private const val ROOT_ROUTE = "lyrics"
-    private const val ROOT_DEEP_LINK = "app://mrsep.musicrecognizer.com"
-    private const val ARG_TRACK_ID = "trackId"
-
-    const val ROUTE = "$ROOT_ROUTE/{$ARG_TRACK_ID}"
-
-    data class Args(val trackId: String) {
-        constructor(savedStateHandle: SavedStateHandle) : this(
-            trackId = checkNotNull(savedStateHandle[ARG_TRACK_ID])
+fun EntryProviderScope<NavKey>.lyricsEntry(
+    onBackPressed: () -> Unit,
+    hideSplashScreen: () -> Unit,
+) {
+    entry<LyricsRoute> { route ->
+        HideSplashWhenResumed(hideSplashScreen)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        LyricsScreen(
+            route = route,
+            onBackPressed = { lifecycle.ifResumed(onBackPressed) },
         )
     }
+}
 
-    private fun routeWithArgs(trackId: String) = "$ROOT_ROUTE/$trackId"
+@Serializable
+data class LyricsRoute(val trackId: String) : NavKey {
 
-    fun NavGraphBuilder.lyricsScreen(
-        onBackPressed: () -> Unit
-    ) {
-        composable(
-            route = ROUTE,
-            arguments = listOf(navArgument(ARG_TRACK_ID) { type = NavType.StringType }),
-            deepLinks = listOf(
-                navDeepLink {
-                    uriPattern = "$ROOT_DEEP_LINK/$ROUTE"
-                    action = Intent.ACTION_VIEW
-                }
-            )
-        ) { _ ->
-            LyricsScreen(
-                onBackPressed = onBackPressed
-            )
-        }
-    }
+    fun deepLinkUri(): String = "$APP_DEEP_LINK_BASE/lyrics/$trackId"
 
-    fun NavController.navigateToLyricsScreen(
-        trackId: String,
-        from: NavBackStackEntry,
-        navOptions: NavOptions? = null
-    ) {
-        if (from.lifecycleIsResumed) {
-            this.navigate(route = routeWithArgs(trackId), navOptions = navOptions)
-        }
-    }
-
-    fun createDeepLink(trackId: String): String {
-        return "$ROOT_DEEP_LINK/${routeWithArgs(trackId)}"
+    companion object {
+        const val DEEP_LINK_PATTERN: String = "$APP_DEEP_LINK_BASE/lyrics/{trackId}"
     }
 }

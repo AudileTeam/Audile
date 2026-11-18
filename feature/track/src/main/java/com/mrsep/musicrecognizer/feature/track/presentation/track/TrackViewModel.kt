@@ -1,6 +1,5 @@
 package com.mrsep.musicrecognizer.feature.track.presentation.track
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrsep.musicrecognizer.core.domain.preferences.ThemeMode
@@ -12,17 +11,19 @@ import com.mrsep.musicrecognizer.core.domain.track.TrackRepository
 import com.mrsep.musicrecognizer.core.domain.track.model.MusicService
 import com.mrsep.musicrecognizer.core.domain.track.model.Track
 import com.mrsep.musicrecognizer.core.domain.usecase.DeleteTrack
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.annotation.concurrent.Immutable
-import javax.inject.Inject
 
-@HiltViewModel
-internal class TrackViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+@HiltViewModel(assistedFactory = TrackViewModel.Factory::class)
+internal class TrackViewModel @AssistedInject constructor(
+    @Assisted route: TrackRoute,
     preferencesRepository: PreferencesRepository,
     private val trackRepository: TrackRepository,
     trackMetadataFetchManager: TrackMetadataFetchManager,
@@ -30,7 +31,12 @@ internal class TrackViewModel @Inject constructor(
     private val resultNotificationManager: ResultNotificationManager,
 ) : ViewModel() {
 
-    private val args = TrackScreen.Args(savedStateHandle)
+    private val trackId = route.trackId
+
+    @AssistedFactory
+    interface Factory {
+        fun create(route: TrackRoute): TrackViewModel
+    }
 
     private var trackRemovalRequested = false
 
@@ -38,10 +44,10 @@ internal class TrackViewModel @Inject constructor(
     val trackExistingState = _trackExistingState.asStateFlow()
 
     val uiStateStream = combine(
-        trackRepository.getTrackFlow(args.trackId),
+        trackRepository.getTrackFlow(trackId),
         preferencesRepository.userPreferencesFlow,
-        trackMetadataFetchManager.isTrackLinksFetcherRunning(args.trackId),
-        trackMetadataFetchManager.isLyricsFetcherRunning(args.trackId),
+        trackMetadataFetchManager.isTrackLinksFetcherRunning(trackId),
+        trackMetadataFetchManager.isLyricsFetcherRunning(trackId),
     ) { track, preferences, isTrackLinksFetcherRunning, isLyricsFetcherRunning ->
         track?.toUiState(preferences, isTrackLinksFetcherRunning, isLyricsFetcherRunning)
             ?: TrackUiState.TrackNotFound

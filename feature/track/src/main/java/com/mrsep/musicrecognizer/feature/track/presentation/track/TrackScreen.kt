@@ -46,13 +46,15 @@ import com.mrsep.musicrecognizer.core.strings.R as StringsR
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TrackScreen(
-    viewModel: TrackViewModel = hiltViewModel(),
+    route: TrackRoute,
     isExpandedScreen: Boolean,
-    isRetryAllowed: Boolean,
     onBackPressed: () -> Unit,
     onNavigateToLyricsScreen: (trackId: String) -> Unit,
     onRetryRequested: () -> Unit,
     onTrackDeleted: () -> Unit,
+    viewModel: TrackViewModel = hiltViewModel<TrackViewModel, TrackViewModel.Factory>(
+        creationCallback = { factory -> factory.create(route) },
+    ),
 ) {
     val screenUiState by viewModel.uiStateStream.collectAsStateWithLifecycle()
     val topBarBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
@@ -185,7 +187,7 @@ internal fun TrackScreen(
                                     isFavorite = uiState.track.isFavorite,
                                     isLyricsAvailable = uiState.track.lyrics != null,
                                     isLyricsLoading = uiState.isLyricsFetcherRunning,
-                                    isRetryAllowed = isRetryAllowed,
+                                    isRetryAllowed = route.allowRetry,
                                     onFavoriteClick = {
                                         viewModel.setFavorite(uiState.track.id, !uiState.track.isFavorite)
                                     },

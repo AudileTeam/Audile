@@ -98,8 +98,10 @@ dependencies {
     implementation(projects.feature.backup)
     implementation(projects.feature.developerMode)
 
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+    implementation(libs.kotlinx.serializationCore)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.core.splashscreen)

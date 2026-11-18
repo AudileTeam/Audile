@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LibraryScreen(
-    onTrackClick: (trackId: String) -> Unit,
-    onTrackSearchClick: () -> Unit,
+    onNavigateToTrack: (trackId: String) -> Unit,
+    onNavigateToLibrarySearch: () -> Unit,
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
@@ -60,7 +60,7 @@ internal fun LibraryScreen(
                 isMultiselectEnabled = multiSelectionState.hasSelected,
                 selectedCount = multiSelectionState.selectedCount,
                 totalCount = uiState.trackList.size,
-                onSearchClick = onTrackSearchClick,
+                onSearchClick = onNavigateToLibrarySearch,
                 onFilterClick = { showFilterBottomSheet = !showFilterBottomSheet },
                 onDeleteClick = { showDeleteDialog = true },
                 onSelectAll = { multiSelectionState.select(uiState.trackList.map { it.id }) },
@@ -85,7 +85,7 @@ internal fun LibraryScreen(
                         val lazyGridState = rememberLazyGridState()
                         TrackLazyGrid(
                             trackList = uiState.trackList,
-                            onTrackClick = onTrackClick,
+                            onTrackClick = onNavigateToTrack,
                             lazyGridState = lazyGridState,
                             multiSelectionState = multiSelectionState,
                             showRecognitionDate = uiState.showRecognitionDate,
@@ -104,7 +104,7 @@ internal fun LibraryScreen(
                         val lazyListState = rememberLazyListState()
                         TrackLazyColumn(
                             trackList = uiState.trackList,
-                            onTrackClick = onTrackClick,
+                            onTrackClick = onNavigateToTrack,
                             lazyListState = lazyListState,
                             multiSelectionState = multiSelectionState,
                             showRecognitionDate = uiState.showRecognitionDate,

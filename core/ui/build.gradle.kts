@@ -13,6 +13,7 @@ dependencies {
 
     api(libs.materialKolor)
     implementation(libs.androidx.palette)
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.runtimeKtx)
     implementation(libs.coil.compose)
 }
