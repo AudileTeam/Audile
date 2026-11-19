@@ -8,9 +8,8 @@ internal sealed interface CsvField {
     fun extractFrom(track: Track): String?
 
     companion object {
-        fun List<CsvField>.extractFrom(track: Track, missingFieldValue: String): List<String> {
-            return map { field -> field.extractFrom(track) ?: missingFieldValue }
-        }
+        fun List<CsvField>.extractFrom(track: Track): List<String?> =
+            map { field -> field.extractFrom(track) }
     }
 }
 

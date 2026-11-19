@@ -1655,11 +1655,11 @@
             ]
         },
         {
-            "uniqueId": "androidx.room:room-common",
-            "artifactVersion": "2.8.5",
+            "uniqueId": "androidx.room3:room3-common",
+            "artifactVersion": "3.0.3",
             "name": "Room-Common",
             "description": "Android Room-Common",
-            "website": "https://developer.android.com/jetpack/androidx/releases/room#2.8.5",
+            "website": "https://developer.android.com/jetpack/androidx/releases/room3#3.0.3",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1673,11 +1673,29 @@
             ]
         },
         {
-            "uniqueId": "androidx.room:room-ktx",
-            "artifactVersion": "2.8.5",
-            "name": "Room Kotlin Extensions",
-            "description": "Android Room Kotlin Extensions",
-            "website": "https://developer.android.com/jetpack/androidx/releases/room#2.8.5",
+            "uniqueId": "androidx.room3:room3-runtime",
+            "artifactVersion": "3.0.3",
+            "name": "Room-Runtime",
+            "description": "Android Room-Runtime",
+            "website": "https://developer.android.com/jetpack/androidx/releases/room3#3.0.3",
+            "developers": [
+                {
+                    "name": "The Android Open Source Project"
+                }
+            ],
+            "organization": {
+                "name": "The Android Open Source Project"
+            },
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "androidx.room:room-common",
+            "artifactVersion": "2.7.0",
+            "name": "Room-Common",
+            "description": "Android Room-Common",
+            "website": "https://developer.android.com/jetpack/androidx/releases/room#2.7.0",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1692,10 +1710,10 @@
         },
         {
             "uniqueId": "androidx.room:room-runtime",
-            "artifactVersion": "2.8.5",
+            "artifactVersion": "2.7.0",
             "name": "Room-Runtime",
             "description": "Android Room-Runtime",
-            "website": "https://developer.android.com/jetpack/androidx/releases/room#2.8.5",
+            "website": "https://developer.android.com/jetpack/androidx/releases/room#2.7.0",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1764,10 +1782,28 @@
         },
         {
             "uniqueId": "androidx.sqlite:sqlite",
-            "artifactVersion": "2.6.2",
+            "artifactVersion": "2.7.1",
             "name": "SQLite",
             "description": "SQLite API",
-            "website": "https://developer.android.com/jetpack/androidx/releases/sqlite#2.6.2",
+            "website": "https://developer.android.com/jetpack/androidx/releases/sqlite#2.7.1",
+            "developers": [
+                {
+                    "name": "The Android Open Source Project"
+                }
+            ],
+            "organization": {
+                "name": "The Android Open Source Project"
+            },
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "androidx.sqlite:sqlite-async",
+            "artifactVersion": "2.7.1",
+            "name": "SQLite Async",
+            "description": "SQLite Async Extensions",
+            "website": "https://developer.android.com/jetpack/androidx/releases/sqlite#2.7.1",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -1782,10 +1818,10 @@
         },
         {
             "uniqueId": "androidx.sqlite:sqlite-framework",
-            "artifactVersion": "2.6.2",
+            "artifactVersion": "2.7.1",
             "name": "SQLite Framework Integration",
             "description": "The implementation of SQLite library using the framework code.",
-            "website": "https://developer.android.com/jetpack/androidx/releases/sqlite#2.6.2",
+            "website": "https://developer.android.com/jetpack/androidx/releases/sqlite#2.7.1",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -2345,7 +2381,7 @@
         },
         {
             "uniqueId": "com.jsoizo:kotlin-csv",
-            "artifactVersion": "2.0.0",
+            "artifactVersion": "2.1.0",
             "name": "kotlin-csv",
             "description": "Pure Kotlin CSV reader and writer",
             "website": "https://github.com/jsoizo/kotlin-csv",
@@ -3566,7 +3602,7 @@
         },
         {
             "uniqueId": "org.jetbrains.kotlinx:kotlinx-serialization-bom",
-            "artifactVersion": "1.12.0",
+            "artifactVersion": "1.13.0",
             "name": "kotlinx-serialization-bom",
             "description": "Kotlin multiplatform serialization runtime library",
             "website": "https://github.com/Kotlin/kotlinx.serialization",
@@ -3582,7 +3618,7 @@
         },
         {
             "uniqueId": "org.jetbrains.kotlinx:kotlinx-serialization-core",
-            "artifactVersion": "1.12.0",
+            "artifactVersion": "1.13.0",
             "name": "kotlinx-serialization-core",
             "description": "Kotlin multiplatform serialization runtime library",
             "website": "https://github.com/Kotlin/kotlinx.serialization",
@@ -3598,7 +3634,7 @@
         },
         {
             "uniqueId": "org.jetbrains.kotlinx:kotlinx-serialization-json",
-            "artifactVersion": "1.12.0",
+            "artifactVersion": "1.13.0",
             "name": "kotlinx-serialization-json",
             "description": "Kotlin multiplatform serialization runtime library",
             "website": "https://github.com/Kotlin/kotlinx.serialization",
@@ -3614,7 +3650,7 @@
         },
         {
             "uniqueId": "org.jetbrains.kotlinx:kotlinx-serialization-json-io",
-            "artifactVersion": "1.12.0",
+            "artifactVersion": "1.13.0",
             "name": "kotlinx-serialization-json-io",
             "description": "Kotlin multiplatform serialization runtime library",
             "website": "https://github.com/Kotlin/kotlinx.serialization",

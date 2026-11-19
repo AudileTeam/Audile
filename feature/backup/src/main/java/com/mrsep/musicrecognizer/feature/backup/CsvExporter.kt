@@ -5,7 +5,7 @@ import android.net.Uri
 import android.provider.DocumentsContract
 import android.util.Log
 import com.jsoizo.kotlincsv.csvWriter
-import com.jsoizo.kotlincsv.writer.write
+import com.jsoizo.kotlincsv.writer.writeNullable
 import com.mrsep.musicrecognizer.core.common.di.IoDispatcher
 import com.mrsep.musicrecognizer.core.domain.preferences.FavoritesMode
 import com.mrsep.musicrecognizer.core.domain.track.TrackRepository
@@ -55,17 +55,19 @@ internal class CsvExporterImpl @Inject constructor(
                 .asSequence()
                 .mapNotNull { track ->
                     coroutineContext.ensureActive()
-                    params.exportFields.extractFrom(track, "")
-                        .takeIf { values -> values.any { value -> value.isNotBlank() } }
+                    params.exportFields.extractFrom(track)
+                        .takeIf { values -> values.any { value -> !value.isNullOrBlank() } }
                         ?.also { trackCount++ }
                 }
 
             outputStream.use { stream ->
-                if (params.writeHeader) {
-                    val headerRow = listOf(params.exportFields.map { it.header(appContext) })
-                    csvWriter.write(headerRow, stream)
+                val rows = sequence {
+                    if (params.writeHeader) {
+                        yield(params.exportFields.map { it.header(appContext) })
+                    }
+                    yieldAll(trackRows)
                 }
-                csvWriter.write(trackRows, stream)
+                csvWriter.writeNullable(rows, stream)
             }
             ExportResult.Success(trackCount)
         } catch (e: CancellationException) {
