@@ -264,7 +264,7 @@
     <string name="theme_use_pure_black">純黒</string>
     <string name="pref_title_music_services_links">音楽配信サービスへのリンク</string>
     <string name="pref_subtitle_format_more_services">%1$s、およびその他の%2$d件</string>
-    <string name="music_services_links_dialog">リンクを表示したい音楽配信サービスを選択してください（利用可能な場合のみ）：</string>
+    <string name="music_services_links_dialog">トラックを表示したいサービスを選択してください：</string>
     <string name="pref_group_misc">その他</string>
     <string name="pref_title_vibration_feedback">触覚フィードバック</string>
     <string name="vibration_feedback_dialog_title">触覚フィードバック</string>
@@ -395,4 +395,6 @@
     <string name="notification_auto_recognition_action_turn_on">有効にする</string>
     <string name="notification_auto_recognition_status_time_limit">セッションの制限時間に達しました</string>
     <string name="auto_recognition_battery_unrestricted_required">自動認識を使用するように、アプリのバックグラウンドでのパッテリー使用許可を「制限なし」に設定する必要です</string>
+    <string name="music_services_links_extra_lookup">利用するサービスだけを選択してください。サービスによって、認識直後に追加の検索が行われるものがあります。</string>
+    <string name="music_services_links_order">トラック画面上のボタンはこちらの順番で表示されます。</string>
 </resources>
