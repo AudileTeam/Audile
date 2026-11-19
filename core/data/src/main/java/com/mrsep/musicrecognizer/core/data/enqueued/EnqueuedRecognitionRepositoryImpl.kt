@@ -1,6 +1,6 @@
 package com.mrsep.musicrecognizer.core.data.enqueued
 
-import androidx.room.withTransaction
+import androidx.room3.withWriteTransaction
 import com.mrsep.musicrecognizer.core.common.di.ApplicationScope
 import com.mrsep.musicrecognizer.core.common.di.IoDispatcher
 import com.mrsep.musicrecognizer.core.data.PersistentStoreLock
@@ -149,7 +149,7 @@ internal class EnqueuedRecognitionRepositoryImpl @Inject constructor(
     ): Track? {
         return withStoreWrite {
             try {
-                database.withTransaction {
+                database.withWriteTransaction {
                     val stored = trackDao.upsertFromRecognition(track.toEntity()).toDomain()
                     val written = dao.finishRun(
                         recognitionId = recognitionId,

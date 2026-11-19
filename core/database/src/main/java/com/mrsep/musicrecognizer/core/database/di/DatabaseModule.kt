@@ -1,7 +1,7 @@
 package com.mrsep.musicrecognizer.core.database.di
 
 import android.content.Context
-import androidx.room.Room
+import androidx.room3.Room
 import com.mrsep.musicrecognizer.core.database.ApplicationDatabase
 import com.mrsep.musicrecognizer.core.database.ApplicationDatabase.Companion.DATABASE_NAME
 import com.mrsep.musicrecognizer.core.database.migration.*

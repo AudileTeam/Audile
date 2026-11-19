@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.musicrecognizer.android.library)
     alias(libs.plugins.musicrecognizer.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -11,11 +12,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+}
 
-    ksp {
-        arg("room.generateKotlin", "true")
-        arg("room.schemaLocation", "$projectDir/schemas")
-    }
+room3 {
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
@@ -24,8 +24,7 @@ dependencies {
 
     implementation(libs.kotlinx.coroutinesAndroid)
     implementation(libs.androidx.core)
-    api(libs.room.ktx)
-    implementation(libs.room.runtime)
-    ksp(libs.room.compiler)
+    api(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.uuidCreator)
 }

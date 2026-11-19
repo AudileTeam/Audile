@@ -1,11 +1,12 @@
 package com.mrsep.musicrecognizer.core.database
 
 import android.util.Log
-import androidx.room.AutoMigration
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.room3.AutoMigration
+import androidx.room3.ColumnTypeConverters
+import androidx.room3.Database
+import androidx.room3.RoomDatabase
+import androidx.room3.useReaderConnection
+import androidx.room3.useWriterConnection
 import com.mrsep.musicrecognizer.core.database.enqueued.EnqueuedRecognitionDao
 import com.mrsep.musicrecognizer.core.database.enqueued.model.EnqueuedRecognitionEntity
 import com.mrsep.musicrecognizer.core.database.migration.AutoMigrationSpec3To4
@@ -28,7 +29,7 @@ import kotlin.time.Duration.Companion.milliseconds
         AutoMigration(from = 4, to = 5),
     ]
 )
-@TypeConverters(
+@ColumnTypeConverters(
     value = [
         InstantRoomConverter::class,
         DurationRoomConverter::class,
@@ -41,11 +42,13 @@ abstract class ApplicationDatabase : RoomDatabase() {
 
     abstract fun enqueuedRecognitionDao(): EnqueuedRecognitionDao
 
-    fun getDataSize(): Long {
+    suspend fun getDataSize(): Long {
         val q = "SELECT page_count * page_size as size FROM pragma_page_count(), pragma_page_size()"
-        return query(SimpleSQLiteQuery(q)).use { cursor ->
-            cursor.moveToFirst()
-            cursor.getLong(0)
+        return useReaderConnection { connection ->
+            connection.usePrepared(q) { statement ->
+                statement.step()
+                statement.getLong(0)
+            }
         }
     }
 
@@ -62,22 +65,24 @@ abstract class ApplicationDatabase : RoomDatabase() {
 
     // https://www.sqlite.org/pragma.html#pragma_wal_checkpoint
     // TRUNCATE waits for all readers so it can reset the WAL, FULL does not
-    private fun checkout(): Boolean {
-        return query(SimpleSQLiteQuery("PRAGMA wal_checkpoint(FULL)")).use { cursor ->
-            if (!cursor.moveToFirst()) return false
-            val busy = cursor.getInt(0)
-            val log = cursor.getInt(1)
-            val checkpointed = cursor.getInt(2)
-            if (busy != 0) return false
-            when {
-                log == -1 && checkpointed == -1 -> {
-                    Log.w(DATABASE_NAME, "There is no write-ahead log for database")
-                    true
-                }
-                log >= 0 && log == checkpointed -> true
-                else -> {
-                    Log.w(DATABASE_NAME, "Incomplete WAL checkpoint: log=$log, checkpointed=$checkpointed")
-                    false
+    private suspend fun checkout(): Boolean {
+        return useWriterConnection { connection ->
+            connection.usePrepared("PRAGMA wal_checkpoint(FULL)") { statement ->
+                if (!statement.step()) return@usePrepared false
+                val busy = statement.getLong(0)
+                val log = statement.getLong(1)
+                val checkpointed = statement.getLong(2)
+                if (busy != 0L) return@usePrepared false
+                when {
+                    log == -1L && checkpointed == -1L -> {
+                        Log.w(DATABASE_NAME, "There is no write-ahead log for database")
+                        true
+                    }
+                    log >= 0L && log == checkpointed -> true
+                    else -> {
+                        Log.w(DATABASE_NAME, "Incomplete WAL checkpoint: log=$log, checkpointed=$checkpointed")
+                        false
+                    }
                 }
             }
         }

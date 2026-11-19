@@ -1,6 +1,6 @@
 package com.mrsep.musicrecognizer.core.database.track
 
-import androidx.room.*
+import androidx.room3.*
 import com.mrsep.musicrecognizer.core.database.DatabaseUtils
 import com.mrsep.musicrecognizer.core.database.DatabaseUtils.eachDbChunk
 import com.mrsep.musicrecognizer.core.database.SQLSearchPattern

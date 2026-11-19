@@ -1,16 +1,16 @@
 package com.mrsep.musicrecognizer.core.database
 
-import androidx.room.TypeConverter
+import androidx.room3.ColumnTypeConverter
 import java.time.Instant
 
 internal class InstantRoomConverter {
 
-    @TypeConverter
+    @ColumnTypeConverter
     fun instantToTimestamp(instant: Instant): Long {
         return instant.toEpochMilli()
     }
 
-    @TypeConverter
+    @ColumnTypeConverter
     fun timestampToInstant(epochMillis: Long): Instant {
         return Instant.ofEpochMilli(epochMillis)
     }
