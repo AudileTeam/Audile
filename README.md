@@ -19,11 +19,11 @@ The app runs on Android 8.0 or later.
 
 ## Features
 
-* **Recognition** - Audile allows you to perform song recognition in one click. The app will save the recording if there is no internet connection, and the recognition process will resume when you come back online. You can customize the default behavior for unsuccessful recognition (no internet, no matches, another failure) via the preferences.
-* **Background Usage** - Use the app seamlessly from the notification drawer, home screen widget, floating button, or quick settings tile. Manage the recognition process and obtain track information without launching the app.
-* **Track Information** - Upon successful recognition, the app provides information about the track, including the title, artist, album, release year, artwork, lyrics, and links to the track on popular music services.
-* **Library** - All recognized tracks are stored in the app library. You can filter the track list, create a favorites collection, search for tracks, or delete tracks.
-* **Preferences** - The app offers various options to customize its behavior and appearance, accessible from the settings screen.
+* **Recognition** - Audile allows you to recognize a track in one tap. The app can record from the microphone or from device audio, including music playing through headphones. If you are offline, the recording can be saved and recognition continues once you are back online.
+* **Auto recognition** - The app can run recognition in the background at intervals and notify you of each match as it is found. This feature uses only the microphone.
+* **Background usage** - Use the app seamlessly from the notification drawer, a home screen widget, a floating button, or a quick settings tile. Start recognition and get the result without launching the app.
+* **Track information** - After a successful recognition, the app searches for lyrics and for links to the track on music services. Recognized tracks are kept in the library, where you can search them or mark them as favorites.
+* **Backup and preferences** - App data can be backed up and restored, and tracks can be exported to a CSV file. The app also offers various options to customize its behavior and appearance.
 
 ## Screenshots
 [<img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/00.png" width=200>](./fastlane/metadata/android/en-US/images/phoneScreenshots/00.png "Recognition screen")
