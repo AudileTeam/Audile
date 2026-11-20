@@ -41,19 +41,6 @@ Before starting development, please add a comment to an existing issue or open a
 * Ensure the project builds successfully before committing. Refer to the detailed [build instructions](https://github.com/AudileTeam/Audile/blob/master/BUILDING.md).
 * Test your code thoroughly and include automated tests where applicable.
 
-### AI Code Policy
-
-Please refrain from using generative AI to write entire new features or make substantial architectural changes on your behalf. Contributions that heavily rely on AI generated code typically lack a fundamental understanding of the project details and result in poor quality, so they will not be accepted.
-
-You may only use generative AI if you meet all of the following conditions:
-
-* You are fully aware of the existing project structure.
-* You completely understand every line of the generated code.
-* You ensure the generated code perfectly matches the project architecture and style.
-* You have thoroughly reviewed and tested the result.
-
-Pull requests that violate this policy will be closed.
-
 ## Donating
 
 Audile is completely free. It comes without any ads or other forms of commercial monetization. To support ongoing development consider making a [donation](https://github.com/AudileTeam/Audile/blob/master/FUNDING.md).
