@@ -78,8 +78,7 @@ internal class RunEnqueuedRecognition @Inject constructor(
                 )
                 if (latestPreferences.autoDeleteSavedRecordingOnMatch) {
                     enqueuedRecognitionRepository.delete(listOf(claimed.id))
-                }
-                Unit
+                } else {}
             }
 
             RemoteRecognitionResult.NoSoundDetected,

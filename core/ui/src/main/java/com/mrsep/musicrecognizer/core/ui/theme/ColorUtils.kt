@@ -1,7 +1,6 @@
 package com.mrsep.musicrecognizer.core.ui.theme
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -12,7 +11,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import com.materialkolor.PaletteStyle
-import com.materialkolor.dynamicColorScheme
+import com.materialkolor.dynamiccolor.ColorSpec
+import com.materialkolor.material3.dynamicColorScheme
+import com.materialkolor.material3.ktx.animateColorScheme
 
 @Composable
 fun SwitchingMusicRecognizerTheme(
@@ -23,7 +24,7 @@ fun SwitchingMusicRecognizerTheme(
     highContrastMode: Boolean = false,
     style: PaletteStyle = PaletteStyle.Vibrant,
     contrastLevel: Double = 0.0,
-    animationSpec: AnimationSpec<Color> = tween(durationMillis = 800),
+    animationSpec: FiniteAnimationSpec<Color> = tween(durationMillis = 800),
     content: @Composable () -> Unit,
 ) {
     val defaultColorScheme = MaterialTheme.colorScheme
@@ -45,7 +46,8 @@ fun SwitchingMusicRecognizerTheme(
                     isAmoled = false,
                     isDark = useDarkTheme,
                     style = style,
-                    contrastLevel = contrastLevel
+                    contrastLevel = contrastLevel,
+                    specVersion = ColorSpec.SpecVersion.SPEC_2021,
                 )
             }
             val newBackgroundColor = when {
@@ -60,50 +62,10 @@ fun SwitchingMusicRecognizerTheme(
         }
     }
     MaterialTheme(
-        colorScheme = colorScheme.switch(animationSpec),
+        colorScheme = animateColorScheme(colorScheme, animationSpec = { animationSpec }),
         typography = MaterialTheme.typography,
         shapes = MaterialTheme.shapes
     ) {
         content()
     }
 }
-
-@Composable
-private fun ColorScheme.switch(animationSpec: AnimationSpec<Color>) = copy(
-    primary = animateColorAsState(primary, animationSpec, "").value,
-    onPrimary = animateColorAsState(onPrimary, animationSpec, "").value,
-    primaryContainer = animateColorAsState(primaryContainer, animationSpec, "").value,
-    onPrimaryContainer = animateColorAsState(onPrimaryContainer, animationSpec, "").value,
-    secondary = animateColorAsState(secondary, animationSpec, "").value,
-    onSecondary = animateColorAsState(onSecondary, animationSpec, "").value,
-    secondaryContainer = animateColorAsState(secondaryContainer, animationSpec, "").value,
-    onSecondaryContainer = animateColorAsState(onSecondaryContainer, animationSpec, "").value,
-    tertiary = animateColorAsState(tertiary, animationSpec, "").value,
-    onTertiary = animateColorAsState(onTertiary, animationSpec, "").value,
-    tertiaryContainer = animateColorAsState(tertiaryContainer, animationSpec, "").value,
-    onTertiaryContainer = animateColorAsState(onTertiaryContainer, animationSpec, "").value,
-    error = animateColorAsState(error, animationSpec, "").value,
-    errorContainer = animateColorAsState(errorContainer, animationSpec, "").value,
-    onError = animateColorAsState(onError, animationSpec, "").value,
-    onErrorContainer = animateColorAsState(onErrorContainer, animationSpec, "").value,
-    background = animateColorAsState(background, animationSpec, "").value,
-    onBackground = animateColorAsState(onBackground, animationSpec, "").value,
-    surface = animateColorAsState(surface, animationSpec, "").value,
-    onSurface = animateColorAsState(onSurface, animationSpec, "").value,
-    surfaceVariant = animateColorAsState(surfaceVariant, animationSpec, "").value,
-    onSurfaceVariant = animateColorAsState(onSurfaceVariant, animationSpec, "").value,
-    outline = animateColorAsState(outline, animationSpec, "").value,
-    inverseOnSurface = animateColorAsState(inverseOnSurface, animationSpec, "").value,
-    inverseSurface = animateColorAsState(inverseSurface, animationSpec, "").value,
-    inversePrimary = animateColorAsState(inversePrimary, animationSpec, "").value,
-    surfaceTint = animateColorAsState(surfaceTint, animationSpec, "").value,
-    outlineVariant = animateColorAsState(outlineVariant, animationSpec, "").value,
-    scrim = animateColorAsState(scrim, animationSpec, "").value,
-    surfaceBright = animateColorAsState(surfaceBright, animationSpec, "").value,
-    surfaceDim = animateColorAsState(surfaceDim, animationSpec, "").value,
-    surfaceContainer = animateColorAsState(surfaceContainer, animationSpec, "").value,
-    surfaceContainerHigh = animateColorAsState(surfaceContainerHigh, animationSpec, "").value,
-    surfaceContainerHighest = animateColorAsState(surfaceContainerHighest, animationSpec, "").value,
-    surfaceContainerLow = animateColorAsState(surfaceContainerLow, animationSpec, "").value,
-    surfaceContainerLowest = animateColorAsState(surfaceContainerLowest, animationSpec, "").value,
-)

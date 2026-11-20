@@ -12,6 +12,5 @@ dependencies {
     implementation(projects.core.domain)
 
     implementation(libs.coil.compose)
-    implementation(libs.materialKolor)
     implementation(libs.zoomable)
 }
