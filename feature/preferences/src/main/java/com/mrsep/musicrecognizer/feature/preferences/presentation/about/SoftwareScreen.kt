@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Badge
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,9 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
@@ -47,7 +46,6 @@ import kotlinx.coroutines.withContext
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SoftwareScreen(
     onNavigateToSoftwareDetailsScreen: (uniqueId: String) -> Unit,
@@ -184,7 +182,6 @@ private fun LicenseBadge(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SoftwareScreenTopBar(
     modifier: Modifier = Modifier,
@@ -195,7 +192,7 @@ private fun SoftwareScreenTopBar(
         modifier = modifier,
         title = {
             Text(
-                text = stringResource(StringsR.string.about_pref_title_licenses).toUpperCase(Locale.current),
+                text = stringResource(StringsR.string.about_pref_title_licenses).toUpperCase(LocalLocale.current),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

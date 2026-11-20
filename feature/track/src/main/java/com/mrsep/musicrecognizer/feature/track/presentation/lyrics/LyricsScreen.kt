@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Surface
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -76,7 +77,10 @@ internal fun LyricsScreen(
 
         is LyricsUiState.Success -> {
             var showLyricsStyleSheet by rememberSaveable { mutableStateOf(false) }
-            val lyricsStyleSheetState = rememberModalBottomSheetState(true)
+            val lyricsStyleSheetState = rememberBottomSheetState(
+                initialValue = SheetValue.Hidden,
+                enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+            )
             LaunchedEffect(uiState.isTrackViewed) {
                 if (!uiState.isTrackViewed) viewModel.setTrackAsViewed(uiState.trackId)
             }

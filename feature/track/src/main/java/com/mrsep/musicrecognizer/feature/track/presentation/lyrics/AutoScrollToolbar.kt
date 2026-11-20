@@ -15,7 +15,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -58,14 +60,18 @@ internal fun AutoScrollToolbarHorizontal(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 contentAlignment = Alignment.Center
             ) {
+                val valueRange = 0.5f..2f
+                val sliderState = remember(valueRange) {
+                    SliderState(value = scrollSpeed, steps = 0, trackRange = valueRange)
+                }
+                sliderState.value = scrollSpeed
                 Slider(
+                    state = sliderState,
+                    onValueChange = onScrollSpeedChange,
                     colors = SliderDefaults.colors(
                         activeTrackColor = MaterialTheme.colorScheme.onTertiaryContainer,
                         inactiveTrackColor = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.25f),
                     ),
-                    value = scrollSpeed,
-                    onValueChange = onScrollSpeedChange,
-                    valueRange = 0.5f..2f,
                     modifier = Modifier
                         .height(56.dp)
                         .width(156.dp)
@@ -128,14 +134,18 @@ internal fun AutoScrollToolbarVertical(
                 modifier = Modifier.padding(vertical = 16.dp),
                 contentAlignment = Alignment.Center,
             ) {
+                val valueRange = 0.5f..2f
+                val sliderState = remember(valueRange) {
+                    SliderState(value = scrollSpeed, steps = 0, trackRange = valueRange)
+                }
+                sliderState.value = scrollSpeed
                 Slider(
+                    state = sliderState,
+                    onValueChange = onScrollSpeedChange,
                     colors = SliderDefaults.colors(
                         activeTrackColor = MaterialTheme.colorScheme.onTertiaryContainer,
                         inactiveTrackColor = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.25f),
                     ),
-                    value = scrollSpeed,
-                    onValueChange = onScrollSpeedChange,
-                    valueRange = 0.5f..2f,
                     modifier = Modifier
                         .height(156.dp)
                         .width(56.dp)

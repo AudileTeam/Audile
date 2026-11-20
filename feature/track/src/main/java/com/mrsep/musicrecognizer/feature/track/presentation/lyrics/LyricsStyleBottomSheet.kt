@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -54,14 +55,19 @@ internal fun LyricsStyleBottomSheet(
             Spacer(Modifier.height(8.dp))
             val fontSizeDesc = stringResource(StringsR.string.font_size)
             val fontSizeStateDesc = style.fontSize.title()
+            val fontSizeValue = style.fontSize.ordinal.toFloat()
+            val valueRange = 0f..3f
+            val steps = 2
+            val sliderState = remember(steps, valueRange) {
+                SliderState(value = fontSizeValue, steps = steps, trackRange = valueRange)
+            }
+            sliderState.value = fontSizeValue
             Slider(
-                value = style.fontSize.ordinal.toFloat(),
+                state = sliderState,
                 onValueChange = { sliderValue ->
                     val fontSize = FontSize.entries[sliderValue.toInt()]
                     onStyleChanged(style.copy(fontSize = fontSize))
                 },
-                valueRange = 0f..3f,
-                steps = 2,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .semantics {

@@ -145,7 +145,10 @@ internal fun LibraryScreen(
                     )
                 }
 
-                val filterSheetState = rememberModalBottomSheetState(true)
+                val filterSheetState = rememberBottomSheetState(
+                    initialValue = SheetValue.Hidden,
+                    enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+                )
 
                 fun hideFilterSheet(newTrackFilter: TrackFilter) {
                     scope.launch { filterSheetState.hide() }.invokeOnCompletion {

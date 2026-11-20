@@ -7,7 +7,8 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -79,7 +80,10 @@ internal fun RecognitionLazyColumn(
                 }
             }
 
-            val actionsSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+            val actionsSheetState = rememberBottomSheetState(
+                initialValue = SheetValue.Hidden,
+                enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+            )
             fun hideActionsSheet(onHidden: () -> Unit = {}) {
                 scope.launch { actionsSheetState.hide() }.invokeOnCompletion {
                     if (!actionsSheetState.isVisible) {

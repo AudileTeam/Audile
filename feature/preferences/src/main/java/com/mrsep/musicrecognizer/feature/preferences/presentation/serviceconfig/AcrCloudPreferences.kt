@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenu
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
@@ -60,8 +62,7 @@ internal fun AcrCloudPreferences(
         Spacer(modifier = Modifier.height(12.dp))
         val showAccessKeyError = state.isEmptyAccessKey && state.shouldShowErrors.value
         PasswordInputField(
-            value = state.accessKey.value,
-            onValueChange = { newAccessKey -> state.accessKey.value = newAccessKey },
+            state = state.accessKey,
             label = stringResource(StringsR.string.access_key),
             error = stringResource(StringsR.string.text_field_must_not_be_empty)
                 .takeIf { showAccessKeyError },
@@ -70,8 +71,7 @@ internal fun AcrCloudPreferences(
         Spacer(modifier = Modifier.height(12.dp))
         val showAccessSecretError = state.isEmptyAccessSecret && state.shouldShowErrors.value
         PasswordInputField(
-            value = state.accessSecret.value,
-            onValueChange = { newAccessSecret -> state.accessSecret.value = newAccessSecret },
+            state = state.accessSecret,
             label = stringResource(StringsR.string.access_secret),
             error = stringResource(StringsR.string.text_field_must_not_be_empty)
                 .takeIf { showAccessSecretError },
@@ -80,7 +80,6 @@ internal fun AcrCloudPreferences(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AcrCloudHostDropdownMenu(
     modifier: Modifier = Modifier,
@@ -97,24 +96,23 @@ private fun AcrCloudHostDropdownMenu(
         modifier = modifier
     ) {
         OutlinedTextField(
-            onValueChange = onHostChanged,
+            state = remember(host) { TextFieldState(host) },
             readOnly = true,
-            value = host,
             label = { Text(text = label) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-            singleLine = true,
             supportingText = error?.let { { Text(error) } },
             isError = (error != null),
-            shape = MaterialTheme.shapes.small,
             keyboardOptions = KeyboardOptions(
                 autoCorrectEnabled = false,
                 keyboardType = KeyboardType.Ascii,
                 imeAction = ImeAction.Done
             ),
+            lineLimits = TextFieldLineLimits.SingleLine,
+            shape = MaterialTheme.shapes.small,
+            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
             modifier = Modifier
                 .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
         ExposedDropdownMenu(
             expanded = expanded,
@@ -157,31 +155,31 @@ internal enum class AcrCloudRegion(
 @Stable
 internal class AcrCloudPreferencesState(config: AcrCloudConfig) {
     val host = mutableStateOf(config.host)
-    val accessKey = mutableStateOf(config.accessKey)
-    val accessSecret = mutableStateOf(config.accessSecret)
+    val accessKey = TextFieldState(config.accessKey)
+    val accessSecret = TextFieldState(config.accessSecret)
 
     var shouldShowErrors = mutableStateOf(false)
 
     val currentConfig
         get() = AcrCloudConfig(
             host = host.value,
-            accessKey = accessKey.value,
-            accessSecret = accessSecret.value,
+            accessKey = accessKey.text.toString(),
+            accessSecret = accessSecret.text.toString(),
         )
 
     val isConfigValid
         get() = host.value.isNotBlank() &&
-                accessKey.value.isNotBlank() &&
-                accessSecret.value.isNotBlank()
+                accessKey.text.isNotBlank() &&
+                accessSecret.text.isNotBlank()
 
     val isEmptyHost
         get() = host.value.isBlank()
 
     val isEmptyAccessKey
-        get() = accessKey.value.isBlank()
+        get() = accessKey.text.isBlank()
 
     val isEmptyAccessSecret
-        get() = accessSecret.value.isBlank()
+        get() = accessSecret.text.isBlank()
 
     fun showErrors() {
         shouldShowErrors.value = true
@@ -192,8 +190,8 @@ internal class AcrCloudPreferencesState(config: AcrCloudConfig) {
             save = { state ->
                 listOf(
                     state.host.value,
-                    state.accessKey.value,
-                    state.accessSecret.value,
+                    state.accessKey.text.toString(),
+                    state.accessSecret.text.toString(),
                 )
             },
             restore = { saved ->

@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TrackScreenTopBar(
     onBackPressed: () -> Unit,
@@ -101,7 +99,6 @@ internal fun TrackScreenTopBar(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TrackScreenLoadingTopBar(
     onBackPressed: () -> Unit,

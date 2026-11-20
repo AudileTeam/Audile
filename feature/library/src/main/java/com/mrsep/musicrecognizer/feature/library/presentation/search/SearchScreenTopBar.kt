@@ -9,8 +9,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
+import androidx.compose.foundation.text.input.maxLengthReject
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -21,18 +25,14 @@ import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.VisualTransformation
 import com.mrsep.musicrecognizer.core.domain.track.model.TrackDataField
 import kotlinx.collections.immutable.ImmutableSet
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SearchScreenTopBar(
-    query: String,
-    onQueryChange: (String) -> Unit,
-    resetSearchQuery: () -> Unit,
+    queryState: TextFieldState,
     onBackPressed: () -> Unit,
     onSearchScopeChanged: (Set<TrackDataField>) -> Unit,
     searchScope: ImmutableSet<TrackDataField>,
@@ -46,13 +46,11 @@ internal fun SearchScreenTopBar(
         title = {
             val interactionSource = remember { MutableInteractionSource() }
             BasicTextField(
-                value = query,
-                onValueChange = onQueryChange,
+                state = queryState,
                 modifier = modifier
                     .height(SearchBarDefaults.InputFieldHeight)
                     .fillMaxWidth()
                     .focusRequester(focusRequester),
-                singleLine = true,
                 textStyle = MaterialTheme.typography.bodyLarge.copy(
                     color = LocalTextStyle.current.color.takeOrElse {
                         MaterialTheme.colorScheme.onSurface
@@ -60,23 +58,22 @@ internal fun SearchScreenTopBar(
                 ),
                 cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = { }),
+                lineLimits = TextFieldLineLimits.SingleLine,
+                inputTransformation = InputTransformation.maxLengthReject(
+                    LibrarySearchViewModel.SEARCH_QUERY_MAX_LENGTH
+                ),
                 interactionSource = interactionSource,
-                decorationBox = @Composable { innerTextField ->
-                    TextFieldDefaults.DecorationBox(
-                        value = query,
-                        innerTextField = innerTextField,
-                        enabled = true,
-                        singleLine = true,
-                        visualTransformation = VisualTransformation.None,
-                        interactionSource = interactionSource,
-                        placeholder = { Text(stringResource(StringsR.string.library_search_hint)) },
-                        shape = SearchBarDefaults.inputFieldShape,
-                        colors = SearchBarDefaults.inputFieldColors(),
-                        contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(),
-                        container = {},
-                    )
-                }
+                decorator = TextFieldDefaults.decorator(
+                    state = queryState,
+                    enabled = true,
+                    lineLimits = TextFieldLineLimits.SingleLine,
+                    outputTransformation = null,
+                    interactionSource = interactionSource,
+                    placeholder = { Text(stringResource(StringsR.string.library_search_hint)) },
+                    colors = SearchBarDefaults.inputFieldColors(),
+                    contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(),
+                    container = {},
+                ),
             )
         },
         navigationIcon = {
@@ -90,11 +87,11 @@ internal fun SearchScreenTopBar(
         actions = {
             Row {
                 AnimatedVisibility(
-                    visible = query.isNotBlank(),
+                    visible = queryState.text.isNotBlank(),
                     enter = fadeIn(spring()),
                     exit = fadeOut(spring()),
                 ) {
-                    IconButton(onClick = resetSearchQuery) {
+                    IconButton(onClick = { queryState.clearText() }) {
                         Icon(
                             painter = painterResource(UiR.drawable.outline_close_24),
                             contentDescription = stringResource(StringsR.string.clear_text_field)

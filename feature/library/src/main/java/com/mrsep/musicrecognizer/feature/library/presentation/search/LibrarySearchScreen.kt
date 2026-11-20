@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -44,7 +45,6 @@ import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.Dispatchers
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LibrarySearchScreen(
     onBackPressed: () -> Unit,
@@ -53,12 +53,17 @@ internal fun LibrarySearchScreen(
 ) {
     val topBarBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
     val query by viewModel.query.collectAsStateWithLifecycle(context = Dispatchers.Main.immediate)
+    val queryState = rememberTextFieldState(query)
     val searchScope = viewModel.searchScope.collectAsStateWithLifecycle().value.toImmutableSet()
     val searchResult by viewModel.trackSearchResultFlow.collectAsStateWithLifecycle()
 
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
+    LaunchedEffect(queryState) {
+        snapshotFlow { queryState.text.toString() }
+            .collect { viewModel.submitSearchQuery(it) }
+    }
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
     }
@@ -76,9 +81,7 @@ internal fun LibrarySearchScreen(
             .imePadding()
     ) {
         SearchScreenTopBar(
-            query = query,
-            onQueryChange = viewModel::submitSearchQuery,
-            resetSearchQuery = viewModel::resetSearchQuery,
+            queryState = queryState,
             onBackPressed = ::clearFocusAndCloseSearch,
             scrollBehavior = topBarBehaviour,
             searchScope = searchScope,
@@ -95,7 +98,6 @@ internal fun LibrarySearchScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchResultLazyColumn(
     query: String,

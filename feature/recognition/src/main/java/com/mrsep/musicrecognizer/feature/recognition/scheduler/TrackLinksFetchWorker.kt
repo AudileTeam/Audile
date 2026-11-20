@@ -29,7 +29,6 @@ import com.mrsep.musicrecognizer.core.metadata.tracklink.youtube.YoutubeTrackLin
 import com.mrsep.musicrecognizer.feature.recognition.scheduler.TrackMetadataFetchManagerImpl.Companion.buildWorkTagForTrack
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.guava.await
@@ -50,7 +49,6 @@ internal class TrackLinksFetchWorker @AssistedInject constructor(
     private val spotifyTrackLinksFetcher: SpotifyTrackLinksFetcher,
 ) : CoroutineWorker(appContext, workerParams) {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun doWork(): Result {
         Log.d(TAG, "$TAG started with attempt #$runAttemptCount")
         val trackId = inputData.getTrackId()

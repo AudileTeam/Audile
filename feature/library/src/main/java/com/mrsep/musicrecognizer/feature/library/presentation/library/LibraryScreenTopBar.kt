@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -20,7 +21,6 @@ import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toUpperCase
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
@@ -28,7 +28,6 @@ import com.mrsep.musicrecognizer.core.ui.R as UiR
 
 private enum class TopBarMode { EmptyLibrary, Default, MultiSelection }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LibraryScreenTopBar(
     isLibraryEmpty: Boolean,
@@ -67,7 +66,7 @@ internal fun LibraryScreenTopBar(
                     text = if (selectionTitle) {
                         if (selectedCount == 0) "" else "$selectedCount / $totalCount"
                     } else {
-                        stringResource(StringsR.string.library).toUpperCase(Locale.current)
+                        stringResource(StringsR.string.library).toUpperCase(LocalLocale.current)
                     },
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -227,7 +226,6 @@ private fun LibraryDropdownMenu(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LibraryScreenLoadingTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
@@ -237,7 +235,7 @@ internal fun LibraryScreenLoadingTopBar(
         modifier = modifier,
         title = {
             Text(
-                text = stringResource(StringsR.string.library).toUpperCase(Locale.current),
+                text = stringResource(StringsR.string.library).toUpperCase(LocalLocale.current),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

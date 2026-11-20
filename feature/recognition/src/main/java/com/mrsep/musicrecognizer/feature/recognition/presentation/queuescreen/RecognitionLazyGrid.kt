@@ -7,7 +7,8 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -76,7 +77,10 @@ internal fun RecognitionLazyGrid(
                 modifier = Modifier.animateItem(),
                 contentPadding = PaddingValues(4.dp)
             )
-            val actionsSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+            val actionsSheetState = rememberBottomSheetState(
+                initialValue = SheetValue.Hidden,
+                enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+            )
             fun hideActionsSheet(onHidden: () -> Unit = {}) {
                 scope.launch { actionsSheetState.hide() }.invokeOnCompletion {
                     if (!actionsSheetState.isVisible) {

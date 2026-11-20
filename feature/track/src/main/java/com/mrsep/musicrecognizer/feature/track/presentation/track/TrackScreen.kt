@@ -94,8 +94,14 @@ internal fun TrackScreen(
             var showShareSheet by rememberSaveable { mutableStateOf(false) }
             var showSearchBottomSheet by rememberSaveable { mutableStateOf(false) }
 
-            val shareSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-            val searchSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+            val shareSheetState = rememberBottomSheetState(
+                initialValue = SheetValue.Hidden,
+                enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+            )
+            val searchSheetState = rememberBottomSheetState(
+                initialValue = SheetValue.Hidden,
+                enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+            )
             fun hideShareSheet() {
                 scope.launch { shareSheetState.hide() }.invokeOnCompletion {
                     if (!shareSheetState.isVisible) showShareSheet = false

@@ -10,7 +10,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +22,6 @@ import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.BottomAppBarState
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -71,7 +70,6 @@ import net.engawapg.lib.zoomable.zoomable
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun AlbumArtworkShield(
     artworkUrl: String,
@@ -84,6 +82,7 @@ internal fun AlbumArtworkShield(
 ) {
     BackHandler(onBack = onBackPressed)
     val context = LocalContext.current
+    val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     val topBarScrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val bottomBarBehaviour = BottomAppBarDefaults.exitAlwaysScrollBehavior()
@@ -132,7 +131,7 @@ internal fun AlbumArtworkShield(
             val imageUri = getImageFileForSharing(
                 imageUrl = artworkUrl,
                 fileName = fileNameUnprocessed,
-                fileNameFallback = context.getString(StringsR.string.artwork),
+                fileNameFallback = resources.getString(StringsR.string.artwork),
                 context = context
             )
             imageUri?.let {
@@ -265,7 +264,6 @@ private fun HideSystemBars() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 private suspend fun TopAppBarState.expand(
     animationSpec: AnimationSpec<Float> = spring(stiffness = Spring.StiffnessMedium),
 ) {
@@ -279,7 +277,6 @@ private suspend fun TopAppBarState.expand(
     contentOffset = 0f
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 private suspend fun BottomAppBarState.expand(
     animationSpec: AnimationSpec<Float> = spring(stiffness = Spring.StiffnessMedium),
 ) {
@@ -293,7 +290,6 @@ private suspend fun BottomAppBarState.expand(
     contentOffset = 0f
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 private suspend fun TopAppBarState.collapse(
     animationSpec: AnimationSpec<Float> = spring(stiffness = Spring.StiffnessMedium),
 ) {
@@ -307,7 +303,6 @@ private suspend fun TopAppBarState.collapse(
     contentOffset = heightOffsetLimit
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 private suspend fun BottomAppBarState.collapse(
     animationSpec: AnimationSpec<Float> = spring(stiffness = Spring.StiffnessMedium),
 ) {

@@ -32,7 +32,6 @@ import com.mrsep.musicrecognizer.core.ui.components.LoadingStub
 import com.mrsep.musicrecognizer.core.ui.components.rememberMultiSelectionState
 import com.mrsep.musicrecognizer.feature.recognition.presentation.model.PlayerStatusUi
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun QueueScreen(
     viewModel: QueueScreenViewModel = hiltViewModel(),

@@ -9,7 +9,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DeveloperScreenTopBar(
     modifier: Modifier = Modifier,

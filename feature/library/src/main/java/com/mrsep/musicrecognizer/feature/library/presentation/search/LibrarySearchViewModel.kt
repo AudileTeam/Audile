@@ -14,8 +14,10 @@ import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -25,6 +27,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 internal class LibrarySearchViewModel @Inject constructor(
@@ -34,7 +37,8 @@ internal class LibrarySearchViewModel @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    val query = savedStateHandle.getStateFlow(KEY_QUERY, "")
+    private val _query = MutableStateFlow("")
+    val query: StateFlow<String> = _query.asStateFlow()
 
     val searchScope = savedStateHandle.getStateFlow(
         key = KEY_SEARCH_SCOPE,
@@ -47,7 +51,7 @@ internal class LibrarySearchViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val trackSearchResultFlow: StateFlow<SearchResultUi> = query
         .map { query -> if (query.length >= SEARCH_QUERY_MIN_LENGTH) query else "" }
-        .debounce(SEARCH_INPUT_DEBOUNCE_IN_MS)
+        .debounce(SEARCH_INPUT_DEBOUNCE)
         .distinctUntilChanged()
         .combine(searchScope) { query, searchScope -> query to searchScope }
         .flatMapLatest { (query, searchScope) ->
@@ -80,11 +84,7 @@ internal class LibrarySearchViewModel @Inject constructor(
 
     fun submitSearchQuery(query: String) {
         if (query.length > SEARCH_QUERY_MAX_LENGTH) return
-        savedStateHandle[KEY_QUERY] = query
-    }
-
-    fun resetSearchQuery() {
-        savedStateHandle[KEY_QUERY] = ""
+        _query.value = query
     }
 
     fun submitSearchScope(searchScope: Set<TrackDataField>) {
@@ -92,10 +92,9 @@ internal class LibrarySearchViewModel @Inject constructor(
     }
 
     companion object {
-        private const val SEARCH_INPUT_DEBOUNCE_IN_MS = 400L
+        private val SEARCH_INPUT_DEBOUNCE = 400.milliseconds
         private const val SEARCH_QUERY_MIN_LENGTH = 2
-        private const val SEARCH_QUERY_MAX_LENGTH = 30
-        private const val KEY_QUERY = "KEY_QUERY"
+        internal const val SEARCH_QUERY_MAX_LENGTH = 30
         private const val KEY_SEARCH_SCOPE = "KEY_SEARCH_SCOPE"
     }
 }

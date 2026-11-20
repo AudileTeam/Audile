@@ -3,6 +3,9 @@ package com.mrsep.musicrecognizer.feature.recognition.presentation.queuescreen
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.clearText
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -11,10 +14,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,16 +28,16 @@ internal fun RenameRecognitionDialog(
     onConfirmClick: (String) -> Unit,
     onDismissClick: () -> Unit
 ) {
-    var newName by rememberSaveable { mutableStateOf(initialName) }
+    val newName = rememberTextFieldState(initialName)
     AlertDialog(
         modifier = modifier,
         onDismissRequest = onDismissClick,
         confirmButton = {
             TextButton(
                 onClick = {
-                    onConfirmClick(newName)
+                    onConfirmClick(newName.text.toString())
                 },
-                enabled = newName.isNotBlank()
+                enabled = newName.text.isNotBlank()
             ) {
                 Text(text = stringResource(StringsR.string.save))
             }
@@ -58,15 +57,14 @@ internal fun RenameRecognitionDialog(
         },
         text = {
             OutlinedTextField(
-                value = newName,
-                onValueChange = { newName = it },
+                state = newName,
                 trailingIcon = {
                     Crossfade(
-                        targetState = newName.isNotEmpty(),
+                        targetState = newName.text.isNotEmpty(),
                         label = ""
                     ) { visible ->
                         if (visible) {
-                            IconButton(onClick = { newName = "" }) {
+                            IconButton(onClick = { newName.clearText() }) {
                                 Icon(
                                     painter = painterResource(UiR.drawable.outline_close_24),
                                     contentDescription = stringResource(StringsR.string.clear_text_field)
@@ -75,7 +73,7 @@ internal fun RenameRecognitionDialog(
                         }
                     }
                 },
-                singleLine = true,
+                lineLimits = TextFieldLineLimits.SingleLine,
                 shape = MaterialTheme.shapes.small
             )
         }

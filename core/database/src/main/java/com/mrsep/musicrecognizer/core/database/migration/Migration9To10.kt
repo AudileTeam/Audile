@@ -17,7 +17,6 @@ import java.nio.file.AtomicMoveNotSupportedException
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import java.time.Instant
-import kotlin.io.path.ExperimentalPathApi
 
 private data class RecognitionFile(
     val recognitionId: Long,
@@ -28,7 +27,6 @@ private data class RecognitionFile(
 // Migrate samples from ADTS to MP4 container, use UUIDs for new filenames
 internal class Migration9To10(private val appContext: Context) : Migration(9, 10) {
 
-    @OptIn(ExperimentalPathApi::class)
     override suspend fun migrate(connection: SQLiteConnection) {
         val oldSamplesDir = appContext.filesDir.resolve("enqueued_records")
         val newSamplesDir = appContext.filesDir.resolve("audio_samples")

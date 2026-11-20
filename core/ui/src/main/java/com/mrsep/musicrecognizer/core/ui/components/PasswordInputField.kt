@@ -1,10 +1,12 @@
 package com.mrsep.musicrecognizer.core.ui.components
 
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedSecureTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,24 +18,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
 @Composable
 fun PasswordInputField(
-    modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (String) -> Unit,
+    state: TextFieldState,
     label: String,
-    error: String? = null
+    modifier: Modifier = Modifier,
+    error: String? = null,
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    OutlinedTextField(
+    OutlinedSecureTextField(
+        state = state,
         modifier = modifier,
-        value = value,
-        onValueChange = onValueChange,
         label = { Text(text = label) },
         trailingIcon = {
             val iconPainter = painterResource(
@@ -55,12 +53,11 @@ fun PasswordInputField(
         },
         supportingText = error?.let { { Text(error) } },
         isError = (error != null),
-        visualTransformation = if (passwordVisible) {
-            VisualTransformation.None
+        textObfuscationMode = if (passwordVisible) {
+            TextObfuscationMode.Visible
         } else {
-            PasswordVisualTransformation()
+            TextObfuscationMode.Hidden
         },
-        singleLine = true,
         keyboardOptions = KeyboardOptions(
             autoCorrectEnabled = false,
             keyboardType = KeyboardType.Password,

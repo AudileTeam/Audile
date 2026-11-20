@@ -2,6 +2,7 @@ package com.mrsep.musicrecognizer.feature.preferences.presentation.serviceconfig
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -32,8 +33,7 @@ internal fun AuddPreferences(
             onHelpClick = { helpDialogVisible = true }
         )
         PasswordInputField(
-            value = state.apiToken.value,
-            onValueChange = { newApiToken -> state.apiToken.value = newApiToken },
+            state = state.apiToken,
             label = stringResource(R.string.api_token),
             modifier = Modifier.fillMaxWidth()
         )
@@ -42,14 +42,14 @@ internal fun AuddPreferences(
 
 @Stable
 internal class AuddPreferencesState(config: AuddConfig) {
-    val apiToken = mutableStateOf(config.apiToken)
+    val apiToken = TextFieldState(config.apiToken)
 
-    val currentConfig get() = AuddConfig(apiToken = apiToken.value)
+    val currentConfig get() = AuddConfig(apiToken = apiToken.text.toString())
 
     companion object {
         val Saver: Saver<AuddPreferencesState, *> = listSaver(
             save = { state ->
-                listOf(state.apiToken.value)
+                listOf(state.apiToken.text.toString())
             },
             restore = { saved ->
                 AuddPreferencesState(

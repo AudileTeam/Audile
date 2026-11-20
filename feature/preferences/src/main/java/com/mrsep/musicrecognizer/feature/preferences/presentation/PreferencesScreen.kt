@@ -36,7 +36,6 @@ import com.mrsep.musicrecognizer.feature.preferences.presentation.serviceconfig.
 import com.mrsep.musicrecognizer.feature.preferences.presentation.serviceconfig.rememberAuddPreferencesState
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun PreferencesScreen(
     viewModel: PreferencesViewModel = hiltViewModel(),

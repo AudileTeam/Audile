@@ -18,7 +18,6 @@ import com.mrsep.musicrecognizer.core.domain.track.TrackRepository
 import com.mrsep.musicrecognizer.feature.recognition.scheduler.TrackMetadataFetchManagerImpl.Companion.buildWorkTagForTrack
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @HiltWorker
 internal class LyricsFetchWorker @AssistedInject constructor(
@@ -27,7 +26,6 @@ internal class LyricsFetchWorker @AssistedInject constructor(
     private val trackRepository: TrackRepository,
 ) : CoroutineWorker(appContext, workerParams) {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun doWork(): Result {
         Log.d(TAG, "$TAG started with attempt #$runAttemptCount")
         val trackId = inputData.getString(INPUT_KEY_TRACK_ID)

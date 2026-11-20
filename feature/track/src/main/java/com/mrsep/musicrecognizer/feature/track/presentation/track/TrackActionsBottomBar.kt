@@ -52,7 +52,6 @@ import kotlinx.coroutines.launch
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TrackActionsBottomBar(
     modifier: Modifier = Modifier,

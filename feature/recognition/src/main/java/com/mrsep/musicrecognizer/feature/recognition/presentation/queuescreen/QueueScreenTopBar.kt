@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -26,7 +27,6 @@ import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toUpperCase
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
@@ -34,7 +34,6 @@ import com.mrsep.musicrecognizer.core.ui.R as UiR
 
 private enum class TopBarMode { EmptyQueue, Default, MultiSelection }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun QueueScreenTopBar(
     isQueueEmpty: Boolean,
@@ -70,7 +69,7 @@ internal fun QueueScreenTopBar(
                     text = if (selectionTitle) {
                         if (selectedCount == 0) "" else "$selectedCount / $totalCount"
                     } else {
-                        stringResource(StringsR.string.queue).toUpperCase(Locale.current)
+                        stringResource(StringsR.string.queue).toUpperCase(LocalLocale.current)
                     },
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -206,7 +205,6 @@ private fun QueueDropdownMenu(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun QueueScreenLoadingTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
@@ -216,7 +214,7 @@ internal fun QueueScreenLoadingTopBar(
         modifier = modifier,
         title = {
             Text(
-                text = stringResource(StringsR.string.queue).toUpperCase(Locale.current),
+                text = stringResource(StringsR.string.queue).toUpperCase(LocalLocale.current),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

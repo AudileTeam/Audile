@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenu
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
@@ -128,7 +130,6 @@ internal fun AudioSourceDialog(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AudioCaptureModeDropdownMenu(
     modifier: Modifier = Modifier,
@@ -138,23 +139,23 @@ private fun AudioCaptureModeDropdownMenu(
     onSelectMode: (AudioCaptureMode) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val title = selectedMode.getTitle()
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
         modifier = modifier
     ) {
         OutlinedTextField(
-            value = selectedMode.getTitle(),
-            onValueChange = {},
+            state = remember(title) { TextFieldState(title) },
             readOnly = true,
             label = { Text(text = label) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-            singleLine = true,
+            lineLimits = TextFieldLineLimits.SingleLine,
             shape = MaterialTheme.shapes.small,
+            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
             modifier = Modifier
                 .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
         ExposedDropdownMenu(
             expanded = expanded,
