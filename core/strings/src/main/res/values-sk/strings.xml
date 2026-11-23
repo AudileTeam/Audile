@@ -80,7 +80,7 @@
     <string name="filter_sort_by">Triediť podľa</string>
     <string name="filter_recognition_date">Dátum rozpoznania</string>
     <string name="filter_title">Názov</string>
-    <string name="filter_artist">Umelec</string>
+    <string name="filter_artist">Interpret</string>
     <string name="filter_release_date">Dátum vydania</string>
     <string name="filter_order_By">Zoradiť podľa</string>
     <string name="filter_ascending">Vzostupne</string>
@@ -202,7 +202,7 @@
     <string name="track_metadata">Metadata</string>
     <string name="track">Skladba</string>
     <string name="title">Názov</string>
-    <string name="artist">Umelec</string>
+    <string name="artist">Interpret</string>
     <string name="album">Album</string>
     <string name="year">Rok</string>
     <string name="lyrics">Texty piesní</string>
