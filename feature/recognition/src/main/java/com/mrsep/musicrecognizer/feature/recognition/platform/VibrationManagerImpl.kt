@@ -83,6 +83,27 @@ internal class VibrationManagerImpl @Inject constructor(
         }
     }
 
+    override fun vibrateOnNowPlaying() {
+        if (!vibrator.hasVibrator()) return
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (tryPredefined(VibrationEffect.EFFECT_TICK, HapticUsage.RecognitionResult)) return
+        }
+
+        if (vibrator.hasAmplitudeControl()) {
+            vibrateWaveform(
+                usage = HapticUsage.RecognitionResult,
+                timings = longArrayOf(0, 12),
+                amplitudes = intArrayOf(0, 40),
+            )
+        } else {
+            vibrateWaveform(
+                usage = HapticUsage.RecognitionResult,
+                timings = longArrayOf(0, 25),
+            )
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.R)
     private fun trySuccessComposition(): Boolean = when {
         vibrator.areAllPrimitivesSupported(

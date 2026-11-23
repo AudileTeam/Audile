@@ -4,4 +4,5 @@ internal interface VibrationManager {
     fun vibrateSuccess()
     fun vibrateFailure()
     fun vibrateOnTap()
+    fun vibrateOnNowPlaying()
 }

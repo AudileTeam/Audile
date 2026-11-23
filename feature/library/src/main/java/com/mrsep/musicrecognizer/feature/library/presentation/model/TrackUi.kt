@@ -21,7 +21,7 @@ internal fun TrackPreview.toUi(dateTimeFormatter: AppDateTimeFormatter) = TrackU
     title = title,
     artist = artist,
     album = album,
-    artworkThumbUrl = artworkThumbUrl,
+    artworkThumbUrl = artworkThumbUrl ?: artworkUrl,
     recognitionDate = dateTimeFormatter.formatRelativeToToday(
         recognitionDate.atZone(ZoneId.systemDefault())
     ),

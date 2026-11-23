@@ -12,11 +12,13 @@ import com.mrsep.musicrecognizer.core.domain.preferences.PreferencesRepository
 import com.mrsep.musicrecognizer.core.domain.recognition.AutoRecognitionInteractor
 import com.mrsep.musicrecognizer.core.domain.recognition.NetworkMonitor
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionStatus
+import com.mrsep.musicrecognizer.core.domain.track.TrackRepository
 import com.mrsep.musicrecognizer.feature.recognition.di.MainScreenStatusHolder
 import com.mrsep.musicrecognizer.feature.recognition.RecognitionStatusHolder
 import com.mrsep.musicrecognizer.feature.recognition.platform.VibrationManager
 import com.mrsep.musicrecognizer.feature.recognition.service.AudioCaptureServiceMode
 import com.mrsep.musicrecognizer.feature.recognition.service.RecognitionControlService
+import com.mrsep.musicrecognizer.feature.recognition.service.visibleNowPlayingTrackId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
@@ -30,6 +32,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
@@ -44,10 +47,23 @@ internal class RecognitionViewModel @Inject constructor(
     preferencesRepository: PreferencesRepository,
     networkMonitor: NetworkMonitor,
     autoRecognitionInteractor: AutoRecognitionInteractor,
+    trackRepository: TrackRepository,
 ) : ViewModel() {
 
     val recognitionState = statusHolder.status
     val autoRecognitionState = autoRecognitionInteractor.state
+
+    val nowPlayingTrack = autoRecognitionState
+        .map { it.visibleNowPlayingTrackId() }
+        .distinctUntilChanged()
+        .flatMapLatest { trackId ->
+            if (trackId == null) flowOf(null) else trackRepository.getTrackPreviewFlow(trackId)
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = null,
+        )
 
     val preferences = preferencesRepository.userPreferencesFlow.stateIn(
         scope = viewModelScope,
@@ -93,6 +109,10 @@ internal class RecognitionViewModel @Inject constructor(
 
     fun vibrateFailure() {
         vibrationManager.vibrateFailure()
+    }
+
+    fun vibrateOnNowPlaying() {
+        vibrationManager.vibrateOnNowPlaying()
     }
 }
 

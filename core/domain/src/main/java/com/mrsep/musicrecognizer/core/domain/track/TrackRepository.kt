@@ -33,6 +33,8 @@ interface TrackRepository {
 
     fun getTrackFlow(trackId: String): Flow<Track?>
 
+    fun getTrackPreviewFlow(trackId: String): Flow<TrackPreview?>
+
     fun getPreviewsByFilterFlow(filter: TrackFilter): Flow<List<TrackPreview>>
 
     fun getSearchResultFlow(query: String, searchScope: Set<TrackDataField>): Flow<SearchResult>

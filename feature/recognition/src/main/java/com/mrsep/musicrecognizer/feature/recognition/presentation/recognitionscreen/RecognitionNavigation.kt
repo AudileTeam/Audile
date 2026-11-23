@@ -15,6 +15,7 @@ fun EntryProviderScope<NavKey>.recognitionEntry(
     onResetPendingRecognitionRequest: () -> Unit,
     onNavigateToTrack: (trackId: String) -> Unit,
     onNavigateToQueue: () -> Unit,
+    onNavigateToLibrary: () -> Unit,
     onNavigateToPreferences: () -> Unit,
     barHeight: IntState,
     railWidth: IntState,
@@ -38,6 +39,9 @@ fun EntryProviderScope<NavKey>.recognitionEntry(
                 // Queue deep link and in-app navigation ignore the recognition id for now.
                 onNavigateToQueueScreen = { _ ->
                     lifecycle.ifResumed(onNavigateToQueue)
+                },
+                onNavigateToLibrary = {
+                    lifecycle.ifResumed(onNavigateToLibrary)
                 },
                 onNavigateToPreferencesScreen = {
                     lifecycle.ifResumed(onNavigateToPreferences)

@@ -42,6 +42,7 @@ import com.mrsep.musicrecognizer.feature.backup.presentation.BackupRestoreRoute
 import com.mrsep.musicrecognizer.feature.backup.presentation.backupRestoreEntry
 import com.mrsep.musicrecognizer.feature.developermode.presentation.DeveloperRoute
 import com.mrsep.musicrecognizer.feature.developermode.presentation.developerEntry
+import com.mrsep.musicrecognizer.feature.library.presentation.library.LibraryRoute
 import com.mrsep.musicrecognizer.feature.library.presentation.library.libraryEntry
 import com.mrsep.musicrecognizer.feature.library.presentation.search.LibrarySearchRoute
 import com.mrsep.musicrecognizer.feature.library.presentation.search.librarySearchEntry
@@ -129,6 +130,7 @@ internal fun AppNavigation(
                             navigator.navigate(TrackRoute(trackId, allowRetry = true))
                         },
                         onNavigateToQueue = { navigator.navigate(QueueRoute) },
+                        onNavigateToLibrary = { navigator.navigate(LibraryRoute) },
                         onNavigateToPreferences = { navigator.navigate(PreferencesRoute) },
                         barHeight = barHeight,
                         railWidth = railWidth,

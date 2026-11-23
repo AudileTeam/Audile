@@ -89,6 +89,10 @@ interface TrackDao {
     @Query("SELECT * FROM track WHERE id = :trackId")
     fun getTrackFlow(trackId: String): Flow<TrackEntity?>
 
+    @RewriteQueriesToDropUnusedColumns
+    @Query("SELECT * FROM track WHERE id = :trackId")
+    fun getTrackPreviewFlow(trackId: String): Flow<TrackPreviewTuple?>
+
     fun getPreviewsFlowByQuery(
         query: String,
         searchScope: Set<TrackDataField>

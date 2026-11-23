@@ -8,6 +8,7 @@ data class TrackPreview(
     val artist: String,
     val album: String?,
     val artworkThumbUrl: String?,
+    val artworkUrl: String?,
     val recognitionDate: Instant,
     val isViewed: Boolean,
 )

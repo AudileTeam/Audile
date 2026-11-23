@@ -8,7 +8,8 @@ internal fun TrackPreviewTuple.toDomain() = TrackPreview(
     title = title,
     artist = artist,
     album = album,
-    artworkThumbUrl = artworkThumbnail ?: artwork,
+    artworkThumbUrl = artworkThumbnail,
+    artworkUrl = artwork,
     recognitionDate = recognitionDate,
     isViewed = isViewed
 )

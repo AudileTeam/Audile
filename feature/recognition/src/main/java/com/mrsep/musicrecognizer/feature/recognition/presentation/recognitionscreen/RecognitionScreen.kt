@@ -13,28 +13,14 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.onClick
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.toggleableState
-import androidx.compose.ui.state.ToggleableState
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -63,9 +49,7 @@ import com.mrsep.musicrecognizer.feature.recognition.service.createScreenCapture
 import com.mrsep.musicrecognizer.feature.recognition.service.toServiceMode
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.seconds
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
-import com.mrsep.musicrecognizer.core.ui.R as UiR
 
 internal const val animationDurationButton = 200
 internal const val animationDurationShield = 250
@@ -78,6 +62,7 @@ internal fun RecognitionScreen(
     onResetPendingRecognitionRequest: () -> Unit,
     onNavigateToTrackScreen: (trackId: String) -> Unit,
     onNavigateToQueueScreen: (recognitionId: Int?) -> Unit,
+    onNavigateToLibrary: () -> Unit,
     onNavigateToPreferencesScreen: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -86,6 +71,7 @@ internal fun RecognitionScreen(
     val isOffline by viewModel.isOffline.collectAsStateWithLifecycle()
     val preferences by viewModel.preferences.collectAsStateWithLifecycle()
     val autoRecognitionState by viewModel.autoRecognitionState.collectAsStateWithLifecycle()
+    val nowPlayingTrack by viewModel.nowPlayingTrack.collectAsStateWithLifecycle()
     val defaultCaptureMode = preferences?.defaultAudioCaptureMode
     val longClickCaptureMode = preferences?.mainButtonLongPressAudioCaptureMode
     val lastUsedAudioCaptureMode = preferences?.lastUsedAudioCaptureMode
@@ -446,6 +432,7 @@ internal fun RecognitionScreen(
         // optional vibration effect
         if (preferences.vibrateOnResult()) {
             val vibrated = rememberSaveable { mutableStateOf(false) }
+            val vibratedNowPlayingId = rememberSaveable { mutableStateOf<String?>(null) }
             LaunchedEffect(recognizeStatus) {
                 val status = recognizeStatus
                 if (status !is RecognitionStatus.Done) {
@@ -463,6 +450,12 @@ internal fun RecognitionScreen(
                 }
                 vibrated.value = true
             }
+            LaunchedEffect(nowPlayingTrack?.id) {
+                val trackId = nowPlayingTrack?.id
+                if (trackId == vibratedNowPlayingId.value) return@LaunchedEffect
+                if (trackId != null) viewModel.vibrateOnNowPlaying()
+                vibratedNowPlayingId.value = trackId
+            }
         }
         Box(
             modifier = Modifier
@@ -471,10 +464,8 @@ internal fun RecognitionScreen(
                 .padding(horizontal = 16.dp, vertical = 12.dp),
         ) {
             val running = autoRecognitionState.running
-            val expandedOnStart = rememberAutoRecognitionExpandedOnStart(running)
-            val offlinePopupWanted = isOffline && recognizeStatus.isNotDone()
-            val fabExpanded = running && (expandedOnStart || !offlinePopupWanted)
-            val showOfflinePopup = offlinePopupWanted && !fabExpanded
+            // The open bar already says why recognition is waiting.
+            val showOfflinePopup = isOffline && recognizeStatus.isNotDone() && !running
             AnimatedVisibility(
                 visible = showOfflinePopup,
                 enter = enterTransitionBottomPopup,
@@ -483,11 +474,22 @@ internal fun RecognitionScreen(
             ) {
                 OfflineModePopup()
             }
-            AutoRecognitionToggle(
-                running = running,
-                expanded = fabExpanded,
-                onClick = ::toggleAutoRecognition,
-                modifier = Modifier.align(Alignment.CenterEnd),
+            AutoRecognitionBar(
+                state = autoRecognitionState,
+                track = nowPlayingTrack,
+                onToggle = {
+                    if (preferences.vibrateOnTap()) viewModel.vibrateOnTap()
+                    toggleAutoRecognition()
+                },
+                onOpenTrack = { trackId ->
+                    viewModel.resetRecognitionResult()
+                    onNavigateToTrackScreen(trackId)
+                },
+                onOpenLibrary = {
+                    viewModel.resetRecognitionResult()
+                    onNavigateToLibrary()
+                },
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
@@ -550,88 +552,6 @@ private val transitionSpecShield:
 
 private fun RecognitionStatus.isDone() = this is RecognitionStatus.Done
 private fun RecognitionStatus.isNotDone() = !isDone()
-
-@Composable
-private fun AutoRecognitionToggle(
-    running: Boolean,
-    expanded: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val title = stringResource(StringsR.string.quick_tile_auto_recognition)
-    val clickLabel = stringResource(
-        if (running) {
-            StringsR.string.notification_auto_recognition_action_turn_off
-        } else {
-            StringsR.string.notification_auto_recognition_action_turn_on
-        },
-    )
-    Box(
-        modifier = modifier.clearAndSetSemantics {
-            role = Role.Switch
-            contentDescription = title
-            toggleableState = if (running) ToggleableState.On else ToggleableState.Off
-            onClick(label = clickLabel) {
-                onClick()
-                true
-            }
-        },
-    ) {
-        ExtendedFloatingActionButton(
-            expanded = expanded,
-            text = {
-                Text(
-                    text = title,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            },
-            icon = {
-                Icon(
-                    painter = painterResource(UiR.drawable.rounded_autorenew_rotated_24),
-                    contentDescription = null,
-                )
-            },
-            onClick = onClick,
-            modifier = Modifier.widthIn(max = AutoRecognitionFabMaxWidth),
-            containerColor = if (running) {
-                MaterialTheme.colorScheme.tertiaryContainer
-            } else {
-                MaterialTheme.colorScheme.surfaceContainerHigh
-            },
-            contentColor = if (running) {
-                MaterialTheme.colorScheme.onTertiaryContainer
-            } else {
-                MaterialTheme.colorScheme.onSurfaceVariant
-            },
-            elevation = FloatingActionButtonDefaults.elevation(
-                defaultElevation = if (running) 3.dp else 1.dp,
-                pressedElevation = 3.dp,
-                focusedElevation = 3.dp,
-                hoveredElevation = 3.dp,
-            ),
-            shape = CircleShape,
-        )
-    }
-}
-
-@Composable
-private fun rememberAutoRecognitionExpandedOnStart(running: Boolean): Boolean {
-    var expandedOnStart by remember { mutableStateOf(false) }
-    LaunchedEffect(running) {
-        if (!running) {
-            expandedOnStart = false
-            return@LaunchedEffect
-        }
-        expandedOnStart = true
-        delay(AutoRecognitionFabExpandedOnStart)
-        expandedOnStart = false
-    }
-    return expandedOnStart
-}
-
-private val AutoRecognitionFabMaxWidth = 250.dp
-private val AutoRecognitionFabExpandedOnStart = 3.seconds
 
 @Composable
 private fun getButtonTitle(recognitionStatus: RecognitionStatus, skipReady: Boolean): String {

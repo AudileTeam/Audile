@@ -103,6 +103,12 @@ internal class TrackRepositoryImpl @Inject constructor(
             .flowOn(ioDispatcher)
     }
 
+    override fun getTrackPreviewFlow(trackId: String): Flow<TrackPreview?> {
+        return trackDao.getTrackPreviewFlow(trackId)
+            .map { entity -> entity?.toDomain() }
+            .flowOn(ioDispatcher)
+    }
+
     override fun getPreviewsByFilterFlow(
         filter: TrackFilter
     ): Flow<List<TrackPreview>> {
