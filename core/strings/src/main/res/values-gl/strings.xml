@@ -220,7 +220,7 @@
     <string name="pref_title_music_services_links">Ligazóns a servizos de música</string>
     <string name="pref_subtitle_format_more_services">%1$s, e %2$d máis</string>
     <string name="pref_subtitle_no_selected_services">Ningún</string>
-    <string name="music_services_links_dialog">Elixe os servizos de música para os que quererías ver a ligazón web (se estivese dispoñible):</string>
+    <string name="music_services_links_dialog">Elixe os servizos para os que quererías ver a ligazón web:</string>
     <string name="pref_group_misc">Varios</string>
     <string name="pref_title_vibration_feedback">Control da vibración</string>
     <string name="vibration_feedback_dialog_title">Vibración</string>
@@ -399,4 +399,6 @@
     <string name="notification_auto_recognition_action_turn_off">Desactivar</string>
     <string name="notification_auto_recognition_action_turn_on">Activar</string>
     <string name="auto_recognition_battery_unrestricted_required">A auto identificación precisa non restrinxir o uso de batería para esta app</string>
+    <string name="music_services_links_extra_lookup">Activa só os que vaias usar. Algúns engaden unha búsqueda adicional após cada identificación.</string>
+    <string name="music_services_links_order">Orde na que se mostran os botóns na pantalla da canción.</string>
 </resources>
