@@ -218,7 +218,7 @@
     <string name="pref_title_music_services_links">روابط خدمات الموسيقى</string>
     <string name="pref_subtitle_format_more_services">%1$s، و%2$d آخرين</string>
     <string name="pref_subtitle_no_selected_services">لا شيء</string>
-    <string name="music_services_links_dialog">اختر خدمات الموسيقى التي ترغب في رؤية روابطها على الإنترنت (إن وُجِدت):</string>
+    <string name="music_services_links_dialog">اختر الخدمات التي ترغب في رؤية روابط التتبّع الخاصة بها:</string>
     <string name="pref_group_misc">متنوعة</string>
     <string name="pref_title_vibration_feedback">ردود الفعل الاهتزازية</string>
     <string name="vibration_feedback_dialog_title">الاهتزاز</string>
@@ -370,4 +370,5 @@
         <item quantity="many">كل %d يومًا</item>
         <item quantity="other">كل %d يوم</item>
     </plurals>
+    <string name="music_services_links_extra_lookup">فعّل فقط تلك التي تستخدمها. بعضها يضيف عملية بحث إضافية بعد كل عملية تعرّف.</string>
 </resources>
