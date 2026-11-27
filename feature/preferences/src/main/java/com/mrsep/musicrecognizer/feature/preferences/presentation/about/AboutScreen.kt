@@ -48,6 +48,7 @@ private const val SHAZAM_URL = "https://www.shazam.com/company/"
 private const val ODESLI_URL = "https://odesli.co/"
 private const val GITHUB_REPO_URL = "https://github.com/AudileTeam/Audile"
 private const val PRIVACY_POLICY_URL = "https://github.com/AudileTeam/Audile/blob/master/PRIVACY.md"
+private const val WEBLATE_URL = "https://hosted.weblate.org/engage/audile/"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -118,6 +119,12 @@ internal fun AboutScreen(
                     title = stringResource(StringsR.string.about_pref_title_donation),
                     subtitle = stringResource(StringsR.string.about_pref_subtitle_donation),
                     onItemClick = { showDonationBottomSheet = true }
+                )
+                PreferenceClickableItem(
+                    title = stringResource(StringsR.string.about_pref_title_translations),
+                    subtitle = stringResource(StringsR.string.about_pref_subtitle_translations),
+                    onItemClick = { context.openUrlImplicitly(WEBLATE_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(WEBLATE_URL) },
                 )
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.about_pref_title_third_licenses),

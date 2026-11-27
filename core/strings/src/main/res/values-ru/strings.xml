@@ -361,6 +361,8 @@
     <string name="about_pref_title_donation">Пожертвование</string>
     <string name="about_pref_subtitle_donation">Поддержать проект</string>
     <string name="about_pref_donation_message">Это приложение полностью бесплатно, оно не показывает рекламу и не монетизируется никаким другим образом. Чтобы поддержать дальнейшую разработку или просто сказать спасибо разработчику, вы можете сделать пожертвование. Спасибо за вашу поддержку!</string>
+    <string name="about_pref_title_translations">Переводы</string>
+    <string name="about_pref_subtitle_translations">Помочь перевести приложение на ваш язык</string>
     <string name="notification_title_match_found">Песня найдена!</string>
     <string name="notification_button_disable_service">Отключить</string>
     <string name="notification_button_show_lyrics">Текст песни</string>

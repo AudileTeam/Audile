@@ -1,0 +1,6 @@
+* Add support for the JioSaavn music service
+* Improve search for Spotify track links
+* Show an auto recognition bar on the recognition screen
+* Slightly adjust recognition widget layouts
+
+Note: After each recognition, Audile searches the music services you have enabled for track links. If many of them are enabled, that means a lot of extra network requests, so in Preferences → Music service links, enable only the ones you need.

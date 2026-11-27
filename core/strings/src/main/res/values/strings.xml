@@ -378,6 +378,8 @@
     <string name="about_pref_title_donation">Donation</string>
     <string name="about_pref_subtitle_donation">Support the project</string>
     <string name="about_pref_donation_message">This app is completely free. It comes without any ads or other forms of commercial monetization. To support ongoing development or simply say thanks, consider making a donation. Thank you for your support!</string>
+    <string name="about_pref_title_translations">Translations</string>
+    <string name="about_pref_subtitle_translations">Help translate the app into your language</string>
     <string name="about_pref_title_license">License</string>
     <string name="about_pref_title_licenses">Licenses</string>
     <string name="about_pref_subtitle_license">Audile is licensed under GNU GPLv3 or later</string>
