@@ -12,11 +12,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.LocalContext
 import androidx.glance.LocalSize
+import androidx.glance.appwidget.LocalAppWidgetOptions
 import com.mrsep.musicrecognizer.core.ui.util.dpToPx
 import com.mrsep.musicrecognizer.core.ui.util.pxToDp
 import com.mrsep.musicrecognizer.feature.recognition.R
 import com.mrsep.musicrecognizer.feature.recognition.widget.util.ImageUtils
 import com.mrsep.musicrecognizer.feature.recognition.widget.util.ImageUtils.getMaxWidgetMemoryAllowedSizeInBytes
+import com.mrsep.musicrecognizer.feature.recognition.widget.util.ImageUtils.sizeBucketCount
 
 /**
  * Calculate sizes manually due to the lack of flexible size and weight modifiers in Glance
@@ -280,6 +282,7 @@ internal sealed class RecognitionWidgetLayout {
                 aspectRatio = widthPx.toDouble() / heightPx.toDouble(),
                 memoryLimitBytes = context.getMaxWidgetMemoryAllowedSizeInBytes(),
                 maxImages = 1,
+                sizeBuckets = LocalAppWidgetOptions.current.sizeBucketCount(),
             )
             val scale = minOf(
                 1f,
