@@ -1,6 +1,6 @@
 package com.mrsep.musicrecognizer.core.ui.components.preferences
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,16 +16,18 @@ fun PreferenceClickableItem(
     modifier: Modifier = Modifier,
     subtitle: String? = null,
     enabled: Boolean = true,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
+    onItemLongClick: (() -> Unit)? = null,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 80.dp)
-            .clickable(
+            .combinedClickable(
                 enabled = enabled,
                 onClick = onItemClick,
+                onLongClick = onItemLongClick,
                 role = Role.Button,
             )
             .padding(16.dp)

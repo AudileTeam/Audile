@@ -138,10 +138,9 @@ internal fun PreferencesScreen(
                         var showPolicyDialog by rememberSaveable { mutableStateOf(false) }
                         PreferenceClickableItem(
                             title = stringResource(StringsR.string.pref_title_fallback_policy),
-                            subtitle = stringResource(StringsR.string.pref_subtitle_fallback_policy)
-                        ) {
-                            showPolicyDialog = true
-                        }
+                            subtitle = stringResource(StringsR.string.pref_subtitle_fallback_policy),
+                            onItemClick = { showPolicyDialog = true }
+                        )
                         if (showPolicyDialog) {
                             FallbackPolicyDialog(
                                 fallbackPolicy = uiState.preferences.fallbackPolicy,
@@ -154,10 +153,9 @@ internal fun PreferencesScreen(
                         var showAudioSourceDialog by rememberSaveable { mutableStateOf(false) }
                         PreferenceClickableItem(
                             title = stringResource(StringsR.string.pref_title_audio_source),
-                            subtitle = stringResource(StringsR.string.pref_subtitle_audio_source)
-                        ) {
-                            showAudioSourceDialog = true
-                        }
+                            subtitle = stringResource(StringsR.string.pref_subtitle_audio_source),
+                            onItemClick = { showAudioSourceDialog = true }
+                        )
                         if (showAudioSourceDialog) {
                             AudioSourceDialog(
                                 defaultAudioCaptureMode = uiState.preferences.defaultAudioCaptureMode,

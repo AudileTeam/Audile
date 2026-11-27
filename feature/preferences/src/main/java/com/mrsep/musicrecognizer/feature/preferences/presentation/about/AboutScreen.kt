@@ -37,6 +37,7 @@ import com.mrsep.musicrecognizer.core.common.util.getAppVersionCode
 import com.mrsep.musicrecognizer.core.common.util.getAppVersionName
 import com.mrsep.musicrecognizer.core.ui.components.preferences.PreferenceClickableItem
 import com.mrsep.musicrecognizer.core.ui.components.preferences.PreferenceGroup
+import com.mrsep.musicrecognizer.core.ui.util.copyTextToClipboard
 import com.mrsep.musicrecognizer.core.ui.util.openUrlImplicitly
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
@@ -104,12 +105,14 @@ internal fun AboutScreen(
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.about_pref_title_github_repo),
                     subtitle = stringResource(StringsR.string.about_pref_subtitle_github_repo),
-                    onItemClick = { context.openUrlImplicitly(GITHUB_REPO_URL) }
+                    onItemClick = { context.openUrlImplicitly(GITHUB_REPO_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(GITHUB_REPO_URL) },
                 )
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.about_pref_title_privacy_policy),
                     subtitle = stringResource(StringsR.string.about_pref_subtitle_privacy_policy),
-                    onItemClick = { context.openUrlImplicitly(PRIVACY_POLICY_URL) }
+                    onItemClick = { context.openUrlImplicitly(PRIVACY_POLICY_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(PRIVACY_POLICY_URL) },
                 )
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.about_pref_title_donation),
@@ -133,22 +136,26 @@ internal fun AboutScreen(
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.audd),
                     subtitle = stringResource(StringsR.string.about_purpose_recognition_service),
-                    onItemClick = { context.openUrlImplicitly(AUDD_URL) }
+                    onItemClick = { context.openUrlImplicitly(AUDD_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(AUDD_URL) },
                 )
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.acr_cloud),
                     subtitle = stringResource(StringsR.string.about_purpose_recognition_service),
-                    onItemClick = { context.openUrlImplicitly(ACR_CLOUD_URL) }
+                    onItemClick = { context.openUrlImplicitly(ACR_CLOUD_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(ACR_CLOUD_URL) },
                 )
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.shazam),
                     subtitle = stringResource(StringsR.string.about_purpose_recognition_service),
-                    onItemClick = { context.openUrlImplicitly(SHAZAM_URL) }
+                    onItemClick = { context.openUrlImplicitly(SHAZAM_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(SHAZAM_URL) },
                 )
                 PreferenceClickableItem(
                     title = stringResource(StringsR.string.odesli),
                     subtitle = stringResource(StringsR.string.about_purpose_track_links_service),
-                    onItemClick = { context.openUrlImplicitly(ODESLI_URL) }
+                    onItemClick = { context.openUrlImplicitly(ODESLI_URL) },
+                    onItemLongClick = { context.copyTextToClipboard(ODESLI_URL) },
                 )
             }
         }
