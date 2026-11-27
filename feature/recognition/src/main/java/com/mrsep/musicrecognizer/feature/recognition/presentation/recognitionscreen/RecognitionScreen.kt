@@ -474,23 +474,30 @@ internal fun RecognitionScreen(
             ) {
                 OfflineModePopup()
             }
-            AutoRecognitionBar(
-                state = autoRecognitionState,
-                track = nowPlayingTrack,
-                onToggle = {
-                    if (preferences.vibrateOnTap()) viewModel.vibrateOnTap()
-                    toggleAutoRecognition()
-                },
-                onOpenTrack = { trackId ->
-                    viewModel.resetRecognitionResult()
-                    onNavigateToTrackScreen(trackId)
-                },
-                onOpenLibrary = {
-                    viewModel.resetRecognitionResult()
-                    onNavigateToLibrary()
-                },
+            AnimatedVisibility(
+                visible = recognizeStatus == RecognitionStatus.Ready,
+                enter = enterTransitionAutoRecognitionBar,
+                exit = exitTransitionAutoRecognitionBar,
                 modifier = Modifier.fillMaxWidth(),
-            )
+            ) {
+                AutoRecognitionBar(
+                    state = autoRecognitionState,
+                    track = nowPlayingTrack,
+                    onToggle = {
+                        if (preferences.vibrateOnTap()) viewModel.vibrateOnTap()
+                        toggleAutoRecognition()
+                    },
+                    onOpenTrack = { trackId ->
+                        viewModel.resetRecognitionResult()
+                        onNavigateToTrackScreen(trackId)
+                    },
+                    onOpenLibrary = {
+                        viewModel.resetRecognitionResult()
+                        onNavigateToLibrary()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
     }
 }
@@ -528,6 +535,18 @@ private val exitTransitionBottomPopup = fadeOut(
     animationSpec = tween(durationMillis = animationDurationButton / 2),
     targetScale = 0.2f
 )
+
+private val enterTransitionAutoRecognitionBar = fadeIn(
+    tween(durationMillis = animationDurationButton)
+) + slideInVertically(
+    tween(durationMillis = animationDurationButton)
+) { fullHeight -> fullHeight }
+
+private val exitTransitionAutoRecognitionBar = fadeOut(
+    tween(durationMillis = animationDurationButton)
+) + slideOutVertically(
+    tween(durationMillis = animationDurationButton)
+) { fullHeight -> fullHeight }
 
 private val transitionSpecShield:
     AnimatedContentTransitionScope<RecognitionStatus>.() -> ContentTransform = {

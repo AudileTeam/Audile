@@ -104,21 +104,21 @@ internal fun AutoRecognitionBar(
 
     val collapsedContainer = MaterialTheme.colorScheme.surfaceContainerHigh
     val containerColor = lerp(
-        MaterialTheme.colorScheme.primaryContainer,
+        MaterialTheme.colorScheme.secondaryContainer,
         collapsedContainer,
         closed,
     )
     val toggleColor = lerp(
-        MaterialTheme.colorScheme.primary,
+        MaterialTheme.colorScheme.secondary,
         collapsedContainer,
         closed
     )
     val iconColor = lerp(
-        MaterialTheme.colorScheme.onPrimary,
+        MaterialTheme.colorScheme.onSecondary,
         MaterialTheme.colorScheme.onSurfaceVariant,
         closed,
     )
-    val contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+    val contentColor = MaterialTheme.colorScheme.onSecondaryContainer
     val density = LocalDensity.current
     val bubblePx = with(density) { BarHeight.roundToPx() }
 
