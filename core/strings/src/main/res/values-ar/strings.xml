@@ -371,4 +371,5 @@
         <item quantity="other">كل %d يوم</item>
     </plurals>
     <string name="music_services_links_extra_lookup">فعّل فقط تلك التي تستخدمها. بعضها يضيف عملية بحث إضافية بعد كل عملية تعرّف.</string>
+    <string name="pref_title_backup_retention">النسخ الاحتياطية التي يجب الاحتفاظ بها</string>
 </resources>
