@@ -397,4 +397,6 @@
     <string name="app_shortcut_start_auto_recognition_long">自动识别</string>
     <string name="music_services_links_extra_lookup">仅启用你使用的服务。一些服务在每次识别后添加额外的查询。</string>
     <string name="music_services_links_order">歌曲屏幕上的按钮以该顺序显示。</string>
+    <string name="about_pref_title_translations">翻译</string>
+    <string name="about_pref_subtitle_translations">帮助将本应用翻译为你的语言</string>
 </resources>
