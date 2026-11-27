@@ -192,7 +192,7 @@
     <string name="pref_title_music_services_links">Liens vers les services musicaux</string>
     <string name="pref_subtitle_format_more_services">"%1$s, et %2$d de plus"</string>
     <string name="pref_subtitle_no_selected_services">Aucun</string>
-    <string name="music_services_links_dialog">Choisissez les services musicaux pour lesquels vous souhaiteriez voir des liens web (si disponibles) :</string>
+    <string name="music_services_links_dialog">Sélectionnez les services pour lesquels vous souhaitez afficher les liens de suivi :</string>
     <string name="pref_group_misc">Divers</string>
     <string name="pref_title_vibration_feedback">Retour par vibration</string>
     <string name="vibration_feedback_dialog_title">Vibration</string>
@@ -409,4 +409,8 @@
     <string name="notification_auto_recognition_action_turn_on">Activer</string>
     <string name="auto_recognition_battery_unrestricted_required">Pour que la reconnaissance automatique fonctionne, la consommation de batterie de cette application doit être réglée sur « Sans restriction ».</string>
     <string name="quick_tile_auto_recognition_now_playing">En cours de lecture</string>
+    <string name="app_shortcut_start_auto_recognition_short">Reconnaissance Auto</string>
+    <string name="app_shortcut_start_auto_recognition_long">Reconnaissance Automatique</string>
+    <string name="music_services_links_extra_lookup">N\'activez que celles que vous utilisez. Certaines effectuent une recherche supplémentaire après chaque reconnaissance.</string>
+    <string name="music_services_links_order">Les boutons de l\'écran de titre s\'affichent dans cet ordre.</string>
 </resources>
