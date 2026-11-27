@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.glance.ColorFilter
 import androidx.glance.GlanceModifier
@@ -35,18 +36,18 @@ import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionResult
 import com.mrsep.musicrecognizer.core.domain.recognition.model.RecognitionStatus
 import com.mrsep.musicrecognizer.feature.recognition.R
 import com.mrsep.musicrecognizer.feature.recognition.widget.WidgetUiState
-import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.shouldIncludeFontPadding
-import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.squareWidgetBorderWidth
+import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.buttonScaleFactor
+import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.tileOverlayButtonSize
+import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.tileWidgetBorderWidth
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.subtitleTextSize
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.subtitleTopPadding
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.titleTextSize
-import com.mrsep.musicrecognizer.feature.recognition.widget.util.FontUtils.measureTextExtraPaddings
 import com.mrsep.musicrecognizer.core.strings.R as StringsR
 import com.mrsep.musicrecognizer.core.ui.R as UiR
 
 @Composable
-internal fun SquareLayoutContent(
-    layout: RecognitionWidgetLayout.Square,
+internal fun TileLayoutContent(
+    layout: RecognitionWidgetLayout.Tile,
     uiState: WidgetUiState,
     onLaunchRecognition: Action,
     onCancelRecognition: Action,
@@ -57,16 +58,16 @@ internal fun SquareLayoutContent(
     // it's better when it is not placed on root view, so wrap it in extra box
     Box(
         modifier = GlanceModifier
-            .size(layout.widgetSize)
+            .fillMaxSize()
             .roundedWidgetBackground(
-                transparent = squareWidgetBorderWidth == 0.dp && uiState.artwork != null
+                transparent = tileWidgetBorderWidth == 0.dp && uiState.artwork != null
             ),
     ) {
         Box(
             modifier = GlanceModifier
                 .fillMaxSize()
                 .clickable(rippleOverride = -1, onClick = onWidgetClick)
-                .padding(squareWidgetBorderWidth),
+                .padding(tileWidgetBorderWidth),
             contentAlignment = Alignment.Center,
         ) {
             when (val status = uiState.status) {
@@ -75,25 +76,26 @@ internal fun SquareLayoutContent(
                     uiState = uiState,
                     onLaunchRecognition = onLaunchRecognition,
                     onCancelRecognition = onCancelRecognition,
-                    scaledButtonSize = layout.recognitionButtonMaxSize,
+                    layout = layout,
                 )
 
                 is RecognitionStatus.Done -> {
                     when (val result = status.result) {
                         is RecognitionResult.Success -> Box(
-                            modifier = GlanceModifier.size(layout.artworkSize),
+                            modifier = GlanceModifier.fillMaxSize(),
                             contentAlignment = Alignment.BottomStart
                         ) {
                             if (uiState.artwork != null) {
                                 Image(
                                     provider = ImageProvider(uiState.artwork),
                                     contentDescription = null,
-                                    contentScale = ContentScale.Fit
+                                    contentScale = ContentScale.Crop,
+                                    modifier = GlanceModifier.fillMaxSize(),
                                 )
                             } else {
                                 Box(
                                     modifier = GlanceModifier
-                                        .size(layout.artworkSize)
+                                        .fillMaxSize()
                                         .padding(8.dp),
                                     contentAlignment = Alignment.Center
                                 ) {
@@ -110,7 +112,7 @@ internal fun SquareLayoutContent(
                                 Image(
                                     provider = ImageProvider(R.drawable.widget_artwork_fade_gradient),
                                     contentDescription = null,
-                                    contentScale = ContentScale.Fit,
+                                    contentScale = ContentScale.FillBounds,
                                     modifier = GlanceModifier.fillMaxSize(),
                                 )
                             }
@@ -118,6 +120,7 @@ internal fun SquareLayoutContent(
                                 title = result.track.title,
                                 artist = result.track.artist,
                                 onLaunchRecognition = onLaunchRecognition,
+                                buttonSize = tileOverlayButtonSize,
                             )
                         }
 
@@ -126,14 +129,14 @@ internal fun SquareLayoutContent(
                             uiState = uiState,
                             onLaunchRecognition = onRetryRecognition,
                             onCancelRecognition = onCancelRecognition,
-                            scaledButtonSize = layout.recognitionButtonMaxSize,
+                            layout = layout,
                         )
 
                         is RecognitionResult.ScheduledOffline,
                         is RecognitionResult.Error -> IconWithStatus(
                             uiState = uiState,
                             iconResId = UiR.drawable.rounded_priority_high_48,
-                            iconSize = layout.recognitionButtonMaxSize,
+                            layout = layout,
                         )
                     }
                 }
@@ -148,6 +151,7 @@ private fun TrackInfoWithButton(
     title: String,
     artist: String,
     onLaunchRecognition: Action,
+    buttonSize: Dp,
 ) {
     val context = LocalContext.current
     Row(
@@ -180,11 +184,7 @@ private fun TrackInfoWithButton(
                 maxLines = 1,
                 modifier = GlanceModifier.fillMaxWidth()
             )
-            if (shouldIncludeFontPadding) {
-                val paddingForCentering = measureTextExtraPaddings(context, titleTextSize).first -
-                        measureTextExtraPaddings(context, subtitleTextSize).second
-                Spacer(GlanceModifier.height(paddingForCentering))
-            }
+            TextCenteringPadding(artist)
         }
         Spacer(GlanceModifier.width(12.dp))
         StaticRecognitionButton(
@@ -192,7 +192,7 @@ private fun TrackInfoWithButton(
             onClick = onLaunchRecognition,
             onClickLabel = context.getString(StringsR.string.action_recognize),
             filledStyle = true,
-            buttonSize = 48.dp,
+            buttonSize = buttonSize,
         )
     }
 }
@@ -202,17 +202,19 @@ private fun ButtonWithStatus(
     uiState: WidgetUiState,
     onLaunchRecognition: Action,
     onCancelRecognition: Action,
-    scaledButtonSize: Dp,
+    layout: RecognitionWidgetLayout.Tile,
 ) {
     val context = LocalContext.current
+    val buttonSize = layout.recognitionButtonMaxSize
     Column(
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = GlanceModifier
             .fillMaxSize()
-            .padding(8.dp)
+            .padding(horizontal = 16.dp)
     ) {
         val isRecognizing = uiState.status is RecognitionStatus.Recognizing
+        Spacer(GlanceModifier.height(layout.statusButtonTopPadding))
         AnimatedRecognitionButton(
             isRecognizing = isRecognizing,
             onClick = if (isRecognizing) onCancelRecognition else onLaunchRecognition,
@@ -221,9 +223,10 @@ private fun ButtonWithStatus(
                 else StringsR.string.action_recognize
             ),
             filledStyle = true,
-            scaledButtonSize = scaledButtonSize
+            scaledButtonSize = buttonSize,
+            iconPadding = (buttonSize / buttonScaleFactor() * 0.16f).coerceAtLeast(8.dp),
         )
-        Spacer(GlanceModifier.height(scaledButtonSize / 3))
+        Spacer(GlanceModifier.height(layout.statusLabelTopPadding))
         Text(
             text = context.getWidgetTitleForStatus(uiState.status),
             style = TextStyle(
@@ -233,7 +236,6 @@ private fun ButtonWithStatus(
                 textAlign = TextAlign.Center,
             ),
             maxLines = 2,
-            modifier = GlanceModifier.padding(horizontal = 8.dp)
         )
     }
 }
@@ -242,24 +244,28 @@ private fun ButtonWithStatus(
 private fun IconWithStatus(
     uiState: WidgetUiState,
     @DrawableRes iconResId: Int,
-    iconSize: Dp,
+    layout: RecognitionWidgetLayout.Tile,
 ) {
     val context = LocalContext.current
+    val iconSize = layout.recognitionButtonMaxSize
     Column(
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = GlanceModifier
             .fillMaxSize()
-            .padding(8.dp)
+            .padding(horizontal = 16.dp)
     ) {
+        Spacer(GlanceModifier.height(layout.statusButtonTopPadding))
         Image(
             provider = ImageProvider(iconResId),
             contentDescription = null,
             contentScale = ContentScale.Fit,
             colorFilter = ColorFilter.tint(GlanceTheme.colors.onSurface),
-            modifier = GlanceModifier.size(iconSize).padding(4.dp)
+            modifier = GlanceModifier
+                .size(iconSize)
+                .padding((iconSize * 0.16f).coerceAtLeast(8.dp))
         )
-        Spacer(GlanceModifier.height(iconSize / 3))
+        Spacer(GlanceModifier.height(layout.statusLabelTopPadding))
         Text(
             text = context.getWidgetTitleForStatus(uiState.status),
             style = TextStyle(
@@ -269,7 +275,6 @@ private fun IconWithStatus(
                 textAlign = TextAlign.Center,
             ),
             maxLines = 2,
-            modifier = GlanceModifier.padding(horizontal = 8.dp)
         )
     }
 }

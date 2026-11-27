@@ -32,6 +32,7 @@ internal fun AnimatedRecognitionButton(
     onClickLabel: String,
     filledStyle: Boolean = true,
     scaledButtonSize: Dp,
+    iconPadding: Dp? = null,
 ) {
     val context = LocalContext.current
     val buttonScaleFactor = buttonScaleFactor()
@@ -60,6 +61,7 @@ internal fun AnimatedRecognitionButton(
                         isRecognizing = true,
                         contentSize = scaledButtonSize / buttonScaleFactor,
                         filledStyle = filledStyle,
+                        iconPadding = iconPadding,
                     )
                 }
                 Box {} // Used to change flipper states
@@ -69,6 +71,7 @@ internal fun AnimatedRecognitionButton(
                 isRecognizing = false,
                 contentSize = scaledButtonSize / buttonScaleFactor,
                 filledStyle = filledStyle,
+                iconPadding = iconPadding,
             )
         }
     }
@@ -100,7 +103,9 @@ private fun RecognitionButtonContent(
     isRecognizing: Boolean,
     contentSize: Dp,
     filledStyle: Boolean = true,
+    iconPadding: Dp? = null,
 ) {
+    val padding = iconPadding ?: if (contentSize >= 40.dp) 8.dp else 6.dp
     Box(
         modifier = GlanceModifier
             .size(contentSize)
@@ -118,7 +123,7 @@ private fun RecognitionButtonContent(
             contentDescription = null,
             modifier = GlanceModifier
                 .fillMaxSize()
-                .padding(if (contentSize >= 40.dp) 8.dp else 6.dp),
+                .padding(padding),
             colorFilter = if (filledStyle) {
                 ColorFilter.tint(GlanceTheme.colors.onPrimary)
             } else {

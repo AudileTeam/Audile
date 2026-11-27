@@ -26,10 +26,9 @@ import com.mrsep.musicrecognizer.core.ui.theme.lightColorScheme
 import com.mrsep.musicrecognizer.feature.recognition.scheduler.TrackArtworkPrefetchWorker
 import com.mrsep.musicrecognizer.feature.recognition.service.RecognitionControlService
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.CircleLayoutContent
-import com.mrsep.musicrecognizer.feature.recognition.widget.ui.HorizontalLayoutContent
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout
-import com.mrsep.musicrecognizer.feature.recognition.widget.ui.SquareLayoutContent
-import com.mrsep.musicrecognizer.feature.recognition.widget.ui.VerticalLayoutContent
+import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RowLayoutContent
+import com.mrsep.musicrecognizer.feature.recognition.widget.ui.TileLayoutContent
 import com.mrsep.musicrecognizer.feature.recognition.widget.util.ImageUtils.getWidgetArtworkOrNull
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.CoroutineScope
@@ -84,7 +83,11 @@ class RecognitionWidget : GlanceAppWidget() {
                             return@flow
                         }
 
-                        val minRequiredArtworkSizePx = (widgetLayout.artworkSizePx / 1.25f).toInt()
+                        val longestArtworkSidePx = maxOf(
+                            widgetLayout.artworkWidthPx,
+                            widgetLayout.artworkHeightPx,
+                        )
+                        val minRequiredArtworkSizePx = (longestArtworkSidePx / 1.25f).toInt()
                         val isHiResRequired = minRequiredArtworkSizePx > 400 // Typical thumb is about 400x400
 
                         val initialArtwork = context.resolveWidgetArtworkOrNull(
@@ -163,7 +166,7 @@ class RecognitionWidget : GlanceAppWidget() {
                         onCancelRecognition = onCancelRecognition,
                         onWidgetClick = onWidgetClick
                     )
-                    is RecognitionWidgetLayout.Square -> SquareLayoutContent(
+                    is RecognitionWidgetLayout.Tile -> TileLayoutContent(
                         layout = widgetLayout,
                         uiState = widgetUiState,
                         onLaunchRecognition = onLaunchRecognition,
@@ -171,17 +174,7 @@ class RecognitionWidget : GlanceAppWidget() {
                         onRetryRecognition = onRetryRecognition,
                         onWidgetClick = onWidgetClick
                     )
-
-                    is RecognitionWidgetLayout.Horizontal -> HorizontalLayoutContent(
-                        layout = widgetLayout,
-                        uiState = widgetUiState,
-                        onLaunchRecognition = onLaunchRecognition,
-                        onCancelRecognition = onCancelRecognition,
-                        onRetryRecognition = onRetryRecognition,
-                        onWidgetClick = onWidgetClick
-                    )
-
-                    is RecognitionWidgetLayout.Vertical -> VerticalLayoutContent(
+                    is RecognitionWidgetLayout.Row -> RowLayoutContent(
                         layout = widgetLayout,
                         uiState = widgetUiState,
                         onLaunchRecognition = onLaunchRecognition,
@@ -208,8 +201,8 @@ class RecognitionWidget : GlanceAppWidget() {
         for (url in urlsInPriorityOrder) {
             val artwork = getWidgetArtworkOrNull(
                 url = url,
-                widthPx = widgetLayout.artworkSizePx,
-                heightPx = widgetLayout.artworkSizePx,
+                widthPx = widgetLayout.artworkWidthPx,
+                heightPx = widgetLayout.artworkHeightPx,
                 artworkStyle = widgetLayout.artworkStyle
             )
             if (artwork != null) return artwork

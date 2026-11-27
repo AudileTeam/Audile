@@ -8,14 +8,13 @@ import coil3.imageLoader
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
 import coil3.request.transformations
+import coil3.size.Scale
 import coil3.toBitmap
 import coil3.transform.CircleCropTransformation
 import coil3.transform.RoundedCornersTransformation
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.WidgetArtworkStyle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.math.max
-import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 internal object ImageUtils {
@@ -34,16 +33,14 @@ internal object ImageUtils {
     }
 
     /**
-     * Returns maximum possible size for each image in the widget when provided as bitmap.
+     * Largest bitmap of [aspectRatio] (width / height) that stays inside the widget memory budget.
      */
     fun getMaxPossibleImageSize(aspectRatio: Double, memoryLimitBytes: Int, maxImages: Int): Size {
         // for each orientation (landscape, portrait, +2 for fold).
-        val limit = (memoryLimitBytes / 4) / maxImages
-        val maxSizeAllowedPerPixel: Int = limit / BYTES_PER_PIXEL
-
-        val side = sqrt(maxSizeAllowedPerPixel.toDouble()).toInt()
-        val width = if (aspectRatio > 1) side else max(1, (side * aspectRatio).roundToInt())
-        val height = if (aspectRatio > 1) max(1, (side / aspectRatio).roundToInt()) else side
+        val maxPixels = ((memoryLimitBytes / 4) / maxImages) / BYTES_PER_PIXEL
+        // Truncate both axes. Rounding both up can push w * h over the budget.
+        val width = sqrt(maxPixels.toDouble() * aspectRatio).toInt().coerceAtLeast(1)
+        val height = sqrt(maxPixels.toDouble() / aspectRatio).toInt().coerceAtLeast(1)
         return Size(width, height)
     }
 
@@ -58,6 +55,7 @@ internal object ImageUtils {
             val request = ImageRequest.Builder(this@getWidgetArtworkOrNull)
                 .data(url)
                 .size(widthPx, heightPx)
+                .scale(Scale.FILL)
                 .networkCachePolicy(CachePolicy.DISABLED)
                 .transformations(
                     when (artworkStyle) {

@@ -2,12 +2,13 @@ package com.mrsep.musicrecognizer.feature.recognition.widget.ui
 
 import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.LocalContext
+import androidx.glance.LocalSize
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
@@ -25,20 +26,36 @@ import androidx.glance.text.TextStyle
 import com.mrsep.musicrecognizer.core.domain.track.model.Track
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.artworkToTextPadding
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.contentPadding
-import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.shouldIncludeFontPadding
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.subtitleTextSize
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.subtitleTopPadding
 import com.mrsep.musicrecognizer.feature.recognition.widget.ui.RecognitionWidgetLayout.Companion.titleTextSize
-import com.mrsep.musicrecognizer.feature.recognition.widget.util.FontUtils.measureTextExtraPaddings
+import com.mrsep.musicrecognizer.feature.recognition.widget.util.rowLineCounts
 
 // Assume that the bitmap is loaded with appropriate (pre-calculated) size
 @Composable
-internal fun RowScope.TrackInfoHorizontal(
+internal fun RowScope.TrackInfo(
     track: Track,
     artwork: Bitmap?,
-    layout: RecognitionWidgetLayout.Horizontal,
+    layout: RecognitionWidgetLayout.Row,
 ) {
     val context = LocalContext.current
+    val size = LocalSize.current
+    val reservedArtworkWidth = if (layout.showArtwork) {
+        layout.artworkSize + artworkToTextPadding
+    } else {
+        0.dp
+    }
+    val lines = rowLineCounts(
+        context = context,
+        widgetWidth = size.width,
+        widgetHeight = size.height,
+        buttonSize = layout.recognitionButtonMaxSize,
+        title = track.title,
+        subtitle = track.artist,
+        subtitleMaxLines = 1,
+        reservedArtworkWidth = reservedArtworkWidth,
+    )
+    val artist = track.artist.takeIf { lines.subtitleLines > 0 }
     Row(
         modifier = GlanceModifier
             .defaultWeight()
@@ -72,92 +89,24 @@ internal fun RowScope.TrackInfoHorizontal(
                     fontWeight = FontWeight.Medium,
                     textAlign = TextAlign.Start,
                 ),
-                maxLines = if (layout.isNarrow) 1 else 2,
+                maxLines = lines.titleLines,
                 modifier = GlanceModifier.fillMaxWidth()
             )
-            if (!layout.isNarrow) {
+            if (artist != null) {
                 Spacer(GlanceModifier.height(subtitleTopPadding))
                 Text(
-                    text = track.artist,
+                    text = artist,
                     style = TextStyle(
                         color = GlanceTheme.colors.onSurfaceVariant,
                         fontSize = subtitleTextSize,
                         fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Start,
                     ),
-                    maxLines = 1,
+                    maxLines = lines.subtitleLines,
                     modifier = GlanceModifier.fillMaxWidth()
                 )
             }
-            if (shouldIncludeFontPadding) {
-                val paddingForCentering = measureTextExtraPaddings(context, titleTextSize).first -
-                        measureTextExtraPaddings(context, subtitleTextSize).second
-                Spacer(GlanceModifier.height(paddingForCentering))
-            }
-        }
-    }
-}
-
-// Assume that the bitmap is loaded with appropriate (pre-calculated) size
-@Composable
-internal fun RowScope.TrackInfoVertical(
-    track: Track,
-    artwork: Bitmap?,
-    layout: RecognitionWidgetLayout.Vertical,
-) {
-    val context = LocalContext.current
-    Column(
-        modifier = GlanceModifier
-            .defaultWeight()
-            .fillMaxHeight()
-            .padding(contentPadding),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        if (layout.showArtwork) {
-            if (artwork != null) {
-                Image(
-                    provider = ImageProvider(artwork),
-                    contentDescription = null,
-                )
-            } else {
-                ArtworkRoundedPlaceholder(layout.artworkSize)
-            }
-            Spacer(GlanceModifier.height(artworkToTextPadding))
-        }
-        Column(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = GlanceModifier.fillMaxWidth()
-        ) {
-            Text(
-                text = track.title,
-                style = TextStyle(
-                    color = GlanceTheme.colors.onSurface,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Center,
-                ),
-                maxLines = 2,
-                modifier = GlanceModifier.fillMaxWidth()
-            )
-            Spacer(GlanceModifier.height(subtitleTopPadding))
-            Text(
-                text = track.artist,
-                style = TextStyle(
-                    color = GlanceTheme.colors.onSurfaceVariant,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
-                    textAlign = TextAlign.Center,
-                ),
-                maxLines = 1,
-                modifier = GlanceModifier.fillMaxWidth()
-            )
-            if (shouldIncludeFontPadding) {
-                val paddingForCentering = measureTextExtraPaddings(context, titleTextSize).first -
-                        measureTextExtraPaddings(context, subtitleTextSize).second
-                Spacer(GlanceModifier.height(paddingForCentering))
-            }
+            TextCenteringPadding(artist)
         }
     }
 }
