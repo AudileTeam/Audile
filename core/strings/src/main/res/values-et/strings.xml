@@ -401,4 +401,6 @@
     <string name="app_shortcut_start_auto_recognition_long">Automaatne tuvastus</string>
     <string name="music_services_links_extra_lookup">Lülita sisse vaid need, mida sa kasutad. Mõnede puhul lisandub peale tuvastust täiendav viiteaeg.</string>
     <string name="music_services_links_order">Loo infovaates kuvatavad nupud kuvatakse selles järjekorras.</string>
+    <string name="about_pref_title_translations">Tõlked</string>
+    <string name="about_pref_subtitle_translations">Aita meil seda rakendust tõlkida oma keelde</string>
 </resources>
