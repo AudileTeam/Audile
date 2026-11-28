@@ -401,4 +401,6 @@
     <string name="app_shortcut_start_auto_recognition_long">Automatische herkenning</string>
     <string name="music_services_links_extra_lookup">Schakel alleen de diensten in die je gebruikt. Sommige voeren na elke herkenning een extra zoekopdracht uit.</string>
     <string name="music_services_links_order">Knoppen onder het nummer worden in deze volgorde weergegeven.</string>
+    <string name="about_pref_title_translations">Vertalingen</string>
+    <string name="about_pref_subtitle_translations">Help mee de app in jouw taal te vertalen</string>
 </resources>

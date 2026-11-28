@@ -376,4 +376,29 @@
     <string name="recognition_queue_low_battery_allow">Dieses Mal zulassen</string>
     <string name="recognition_queue_offline_paused">Die Warteschlange ist pausiert, solange kein Zugang zum Internet besteht</string>
     <string name="recognition_queue_low_battery_paused">Die Warteschlange ist pausiert, solange der Akkustand niedrig ist</string>
+    <string name="about_pref_subtitle_translations">Hilf mit, die App in deine Sprache zu übersetzen</string>
+    <string name="quick_tile_auto_recognition">Automatische Erkennung</string>
+    <string name="quick_tile_auto_recognition_now_playing">Aktuell läuft</string>
+    <string name="app_shortcut_start_auto_recognition_short">Automatische Erkennung</string>
+    <string name="app_shortcut_start_auto_recognition_long">Automatische Erkennung</string>
+    <string name="about_pref_title_translations">Übersetzungen</string>
+    <string name="notification_channel_name_auto_recognition_status">Automatische Erkennung</string>
+    <string name="notification_channel_desc_auto_recognition_status">Status der automatischen Erkennung</string>
+    <string name="notification_channel_name_auto_recognition_result">Durch automatische Erkennung gefundene Song-Ergebnisse</string>
+    <string name="notification_channel_desc_auto_recognition_result">Zeigt Songs an, die durch automatische Erkennung gefunden wurden</string>
+    <string name="notification_auto_recognition_status_title_on">Automatische Erkennung ist eingeschaltet</string>
+    <string name="notification_auto_recognition_status_title_off">Automatische Erkennung ist ausgeschaltet</string>
+    <string name="notification_auto_recognition_status_waiting_network">Warten auf eine Netzwerkverbindung</string>
+    <string name="notification_auto_recognition_status_during_call">Während eines Anrufs pausiert</string>
+    <string name="notification_auto_recognition_status_low_battery">Bei niedrigem Akkustand pausiert</string>
+    <string name="notification_auto_recognition_status_time_limit">Zeitbeschränkung für die Sitzung ist erreicht</string>
+    <string name="notification_auto_recognition_now_playing">Aktuell läuft %1$s von %2$s</string>
+    <plurals name="notification_auto_recognition_songs_found">
+        <item quantity="one">%d Song gefunden</item>
+        <item quantity="other">%d Songs gefunden</item>
+    </plurals>
+    <string name="notification_auto_recognition_action_turn_off">Ausschalten</string>
+    <string name="notification_auto_recognition_action_turn_on">Einschalten</string>
+    <string name="notification_auto_recognition_status_subtitle_on">Erkennt kontinuierlich Musik in deiner Umgebung</string>
+    <string name="auto_recognition_battery_unrestricted_required">Für die automatische Erkennung muss der Akkuverbrauch dieser App auf Uneingeschränkt eingestellt sein</string>
 </resources>
