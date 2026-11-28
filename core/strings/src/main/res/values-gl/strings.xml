@@ -401,4 +401,6 @@
     <string name="auto_recognition_battery_unrestricted_required">A auto identificación precisa non restrinxir o uso de batería para esta app</string>
     <string name="music_services_links_extra_lookup">Activa só os que vaias usar. Algúns engaden unha búsqueda adicional após cada identificación.</string>
     <string name="music_services_links_order">Orde na que se mostran os botóns na pantalla da canción.</string>
+    <string name="about_pref_title_translations">Traducións</string>
+    <string name="about_pref_subtitle_translations">Axuda a traducir a app ao teu idioma</string>
 </resources>
